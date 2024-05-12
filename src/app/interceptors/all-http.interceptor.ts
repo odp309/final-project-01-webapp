@@ -6,6 +6,10 @@ import { catchError, throwError } from 'rxjs';
 export const allHttpInterceptor: HttpInterceptorFn = (request, next) => {
   const token = localStorage.getItem('token') ?? '';
 
+  if (request.headers.get('No-Auth') === 'True') {
+    return next(request.clone());
+  }
+
   // clone the request and add the authorization header
   const authRequest = request.clone({
     setHeaders: {
