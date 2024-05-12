@@ -5,27 +5,29 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { allHttpInterceptor } from './interceptors/all-http.interceptor';
-import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-export const routes: Routes = [
-  // { path: 'account/register', component: RegisterComponent },
-  // { path: 'account/login', component: LoginComponent },
-  // { path: 'chair', component: ChairLocationComponent },
-  // // { path: 'home', component: HomeComponent },
-  // { path: 'home', component: ContentComponent },
-  // { path: '', redirectTo: '/home', pathMatch: 'full' },
-  // { path: '**', redirectTo: '/home', pathMatch: 'full' },
-];
+import { HomeComponent } from './components/home/home.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { UserComponent } from './components/user/user.component';
+import { LoginComponent } from './components/login/login.component';
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
+import { HeaderComponent } from './components/header/header.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    AdminComponent,
+    UserComponent,
+    LoginComponent,
+    ForbiddenComponent,
+    HeaderComponent
   ],
   imports: [
-    RouterModule.forRoot(routes),
     BrowserModule,
     AppRoutingModule,
+    RouterModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

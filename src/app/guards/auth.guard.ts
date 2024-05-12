@@ -7,6 +7,8 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 
+// check if user is authenticated route can be accessed, if not redirect to welcome or login page
+
 export const authGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot
