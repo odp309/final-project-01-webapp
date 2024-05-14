@@ -3,7 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withInterceptors,
+} from '@angular/common/http';
 import { allHttpInterceptor } from './interceptors/all-http.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
@@ -13,6 +17,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,7 @@ import { RouterModule } from '@angular/router';
     UserComponent,
     LoginComponent,
     ForbiddenComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,10 +36,9 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule
   ],
-  providers: [
-    provideHttpClient(withInterceptors([allHttpInterceptor])),
-  ],
-  bootstrap: [AppComponent]
+  providers: [provideHttpClient(withInterceptors([allHttpInterceptor]))],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
