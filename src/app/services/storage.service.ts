@@ -12,7 +12,7 @@ export class StorageService {
   }
 
   public getRoles(): [] {
-    return JSON.parse(localStorage.getItem('roles') ?? '');
+    return JSON.parse(localStorage.getItem('roles')!);
   }
 
   public setToken(jwtToken: string) {
@@ -20,7 +20,7 @@ export class StorageService {
   }
 
   public getToken(): string {
-    return localStorage.getItem('jwtToken') ?? '';
+    return localStorage.getItem('jwtToken')!;
   }
 
   public clear() {

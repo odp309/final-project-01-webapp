@@ -1,17 +1,19 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { JwtDecoderService } from '../../services/jwt-decoder.service';
 import { StorageService } from '../../services/storage.service';
 import { Router } from '@angular/router';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { InstanceOptions, Modal, ModalInterface, ModalOptions } from 'flowbite';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export class LoginComponent implements AfterViewInit {
+  // Form variable block //
   form!: FormGroup;
   passwordValidationStyle = {};
   emailValidationStyle = {};
@@ -21,6 +23,12 @@ export class LoginComponent {
   displayHidden = { display: 'none' };
   validCounter: number = 0;
   loadingIcon = faCircleNotch;
+
+  // Modal variable block //
+  $modalElement!: HTMLElement;
+  modalOptions!: ModalOptions;
+  instanceOptions!: InstanceOptions;
+  modal!: ModalInterface;
 
   constructor(
     private fb: FormBuilder,
@@ -35,12 +43,35 @@ export class LoginComponent {
     });
   }
 
-  get email() {
-    return this.form.get('email');
-  }
+  ngAfterViewInit(): void {
+    this.$modalElement = document.querySelector('#authentication-modal')!;
 
-  get password() {
-    return this.form.get('password');
+    this.modalOptions = {
+      placement: 'center',
+      backdrop: 'dynamic',
+      backdropClasses: 'bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40',
+      closable: true,
+      onHide: () => {
+        this.clearForm();
+      },
+      onShow: () => {
+        this.clearForm();
+      },
+      onToggle: () => {
+        console.log('modal has been toggled');
+      },
+    };
+
+    this.instanceOptions = {
+      id: 'authentication-modal',
+      override: true,
+    };
+
+    this.modal = new Modal(
+      this.$modalElement,
+      this.modalOptions,
+      this.instanceOptions
+    );
   }
 
   onSubmitLogin() {
@@ -68,12 +99,8 @@ export class LoginComponent {
       this.authService.login(this.form.value).subscribe({
         next: (response: any) => {
           const user: any = this.jwtService.decodeToken(response.token);
-          const closeButton: any = document.querySelector(
-            '[data-modal-hide="authentication-modal"]'
-          );
 
           this.errorMessageStyle = this.displayHidden;
-
           this.validCounter = 0;
 
           this.storageService.setRoles(user.role);
@@ -87,7 +114,7 @@ export class LoginComponent {
             this.router.navigate(['/user']);
           }
 
-          closeButton.click();
+          this.closeModal();
         },
         error: (error) => {
           this.errorMessageStyle = this.displayBlock;
@@ -108,5 +135,13 @@ export class LoginComponent {
     this.errorMessageStyle = this.displayHidden;
     this.loadingStyle = this.displayHidden;
     this.validCounter = 0;
+  }
+
+  openModal() {
+    this.modal.show();
+  }
+
+  closeModal() {
+    this.modal.hide();
   }
 }

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, shareReplay } from 'rxjs';
 import Login from '../models/login';
+import { StorageService } from './storage.service';
 
 const AUTH_API = 'http://localhost:8080/api/v1/public/user';
 
@@ -18,7 +19,11 @@ const HTTP_NO_AUTH = {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private storageService: StorageService
+  ) {}
 
   public login(login: Login) {
     // no need to pass token in header
@@ -31,31 +36,29 @@ export class AuthService {
   //   });
   // }
 
-
   // public forAdmin() {
   //   return this.httpclient.get(this.PATH_OF_API + '/forAdmin', {
   //     responseType: 'text',
   //   });
   // }
 
-  // public roleMatch(allowedRoles): boolean {
-  //   let isMatch = false;
-  //   const userRoles: any = this.userAuthService.getRoles();
+  public roleMatch(allowedRoles: string | any[]): boolean {
+    let isMatch = false;
+    const userRoles: any = this.storageService.getRoles();
 
-  //   if (userRoles != null && userRoles) {
-  //     for (let i = 0; i < userRoles.length; i++) {
-  //       for (let j = 0; j < allowedRoles.length; j++) {
-  //         if (userRoles[i].roleName === allowedRoles[j]) {
-  //           isMatch = true;
-  //           return isMatch;
-  //         } else {
-  //           return isMatch;
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
+    if (userRoles != null && userRoles) {
+      for (let i = 0; i < userRoles.length; i++) {
+        for (let j = 0; j < allowedRoles.length; j++) {
+          if (userRoles[i].roleName === allowedRoles[j]) {
+            isMatch = true;
+            return isMatch;
+          }
+        }
+      }
+    }
 
+    return isMatch;
+  }
 
   // login(login: Login) {
   //   this.http
