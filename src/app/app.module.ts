@@ -18,6 +18,8 @@ import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { authGuard } from './guards/auth.guard';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     UserComponent,
     LoginComponent,
     ForbiddenComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,9 +38,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
-  providers: [provideHttpClient(withInterceptors([allHttpInterceptor]))],
+  providers: [
+    provideHttpClient(withInterceptors([allHttpInterceptor])),
+    AuthService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
