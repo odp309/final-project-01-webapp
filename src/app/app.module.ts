@@ -25,6 +25,7 @@ import { PageNotFoundComponent } from './shared/pages/page-not-found/page-not-fo
 import { DashboardNavbarComponent } from './shared/components/dashboard-navbar/dashboard-navbar.component';
 import { DashboardContainerComponent } from './shared/components/dashboard-container/dashboard-container.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
+import { DashboardComponent } from './modules/dashboard/page/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { FooterComponent } from './shared/components/footer/footer.component';
     PageNotFoundComponent,
     DashboardNavbarComponent,
     DashboardContainerComponent,
-    FooterComponent
+    FooterComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

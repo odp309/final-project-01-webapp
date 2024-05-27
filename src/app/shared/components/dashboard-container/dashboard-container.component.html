@@ -1,1 +1,13 @@
-<p>dashboard-container works!</p>
+<div
+  id="main-content"
+  class="relative overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900"
+>
+  <main>
+    <div
+      class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900"
+    >
+      <ng-content></ng-content>
+    </div>
+  </main>
+  <app-footer></app-footer>
+</div>
