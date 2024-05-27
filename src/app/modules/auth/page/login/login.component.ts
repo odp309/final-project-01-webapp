@@ -1,21 +1,20 @@
-import { AfterViewInit, Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule  } from '@angular/forms';
-import { AuthService } from '../../core/services/auth/auth.service';
-import { JwtDecoderService } from '../../core/services/jwt/jwt-decoder.service';
-import { StorageService } from '../../core/services/storage/storage.service';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import { InstanceOptions, Modal, ModalInterface, ModalOptions } from 'flowbite';
+import { AuthService } from '../../../../core/services/auth/auth.service';
+import { StorageService } from '../../../../core/services/storage/storage.service';
+import { JwtDecoderService } from '../../../../core/services/jwt/jwt-decoder.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
+export class LoginComponent implements OnInit {
 
-export class LoginComponent implements AfterViewInit {
-  // Form variable block //
-  form: FormGroup;
+  form!:FormGroup;
   passwordValidationStyle = {};
   emailValidationStyle = {};
   errorMessageStyle = {};
@@ -24,12 +23,6 @@ export class LoginComponent implements AfterViewInit {
   displayHidden = { display: 'none' };
   validCounter: number = 0;
   loadingIcon = faCircleNotch;
-
-  // Modal variable block //
-  $modalElement!: HTMLElement;
-  modalOptions!: ModalOptions;
-  instanceOptions!: InstanceOptions;
-  modal!: ModalInterface;
 
   constructor(
     private fb: FormBuilder,
@@ -43,36 +36,9 @@ export class LoginComponent implements AfterViewInit {
       password: ['', Validators.required],
     });
   }
-
-  ngAfterViewInit(): void {
-    this.$modalElement = document.querySelector('#authentication-modal')!;
-
-    this.modalOptions = {
-      placement: 'center',
-      backdrop: 'dynamic',
-      backdropClasses: 'bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40',
-      closable: true,
-      onHide: () => {
-        this.clearForm();
-      },
-      onShow: () => {
-        this.clearForm();
-      },
-      onToggle: () => {
-        console.log('modal has been toggled');
-      },
-    };
-
-    this.instanceOptions = {
-      id: 'authentication-modal',
-      override: true,
-    };
-
-    this.modal = new Modal(
-      this.$modalElement,
-      this.modalOptions,
-      this.instanceOptions
-    );
+  
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
   }
 
   onSubmitLogin() {
@@ -107,15 +73,15 @@ export class LoginComponent implements AfterViewInit {
           this.storageService.setRoles(user.role);
           this.storageService.setToken(response.token);
 
-          const role = user.role[0].roleName;
+          // const role = user.role[0].roleName;
 
-          if (role === 'Admin') {
-            this.router.navigate(['/admin']);
-          } else {
-            this.router.navigate(['/user']);
-          }
+          // if (role === 'Admin') {
+          //   this.router.navigate(['/admin']);
+          // } else {
+          //   this.router.navigate(['/user']);
+          // }
 
-          this.closeModal();
+          this.router.navigate(['/dashboard']);
         },
         error: (error) => {
           this.errorMessageStyle = this.displayBlock;
@@ -137,12 +103,5 @@ export class LoginComponent implements AfterViewInit {
     this.loadingStyle = this.displayHidden;
     this.validCounter = 0;
   }
-
-  openModal() {
-    this.modal.show();
-  }
-
-  closeModal() {
-    this.modal.hide();
-  }
+  
 }

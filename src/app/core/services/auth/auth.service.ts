@@ -2,10 +2,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, shareReplay } from 'rxjs';
-import Login from '../models/login';
-import { StorageService } from './storage.service';
+import Login from '../../dto/auth/login.dto';
+import { StorageService } from '../storage/storage.service';
 
-const AUTH_API = 'http://localhost:8080/api/v1/public/user';
+const AUTH_API = 'http://156.67.214.127:8080/api/v1/public/user';
 
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

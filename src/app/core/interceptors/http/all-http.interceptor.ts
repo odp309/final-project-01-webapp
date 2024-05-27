@@ -1,6 +1,6 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
-import { StorageService } from '../services/storage.service';
+import { StorageService } from '../../services/storage/storage.service';
 import { Router } from '@angular/router';
 import { inject } from '@angular/core';
 

@@ -2,10 +2,10 @@ import {
   Component,
   ViewChild,
 } from '@angular/core';
-import { LoginComponent } from '../login/login.component';
-import { StorageService } from '../../services/storage.service';
+import { LoginComponent } from '../../components/login/login.component';
+import { StorageService } from '../../core/services/storage/storage.service';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
