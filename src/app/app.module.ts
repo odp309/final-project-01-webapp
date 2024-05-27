@@ -10,12 +10,6 @@ import {
 } from '@angular/common/http';
 import { allHttpInterceptor } from './core/interceptors/http/all-http.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HomeComponent } from './components/home/home.component';
-import { AdminComponent } from './components/admin/admin.component';
-import { UserComponent } from './components/user/user.component';
-// import { LoginComponent } from './components/login/login.component';
-import { ForbiddenComponent } from './components/forbidden/forbidden.component';
-import { HeaderComponent } from './components/header/header.component';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { authGuard } from './core/guards/auth/auth.guard';
@@ -30,12 +24,6 @@ import { DashboardComponent } from './modules/dashboard/page/dashboard/dashboard
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    AdminComponent,
-    UserComponent,
-    // LoginComponent,
-    ForbiddenComponent,
-    HeaderComponent,
     LoginComponent,
     PageNotFoundComponent,
     DashboardNavbarComponent,
