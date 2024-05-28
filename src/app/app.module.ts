@@ -20,6 +20,7 @@ import { DashboardNavbarComponent } from './shared/components/dashboard-navbar/d
 import { DashboardContainerComponent } from './shared/components/dashboard-container/dashboard-container.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { DashboardComponent } from './modules/dashboard/page/dashboard/dashboard.component';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { DashboardComponent } from './modules/dashboard/page/dashboard/dashboard
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    DataTablesModule,
   ],
   providers: [
     provideHttpClient(withInterceptors([allHttpInterceptor])),

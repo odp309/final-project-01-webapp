@@ -1,8 +1,21 @@
 <app-dashboard-navbar></app-dashboard-navbar>
 <app-dashboard-container>
     <div class="container flex-auto">
-        <div class="flex justify-center">
-            <p>Ini Dashboard</p>
-        </div>
+        <table datatable [dtOptions]="dtoptions" [dtTrigger]="dttrigger" class="row-border hover" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th> Currency Name </th>
+                    <th> Rate </th>
+                    <th> Sell Rate </th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr *ngFor="let item of rateTable" >
+                        <td>{{item.currency}}</td>
+                        <td>{{item.rate}}</td>
+                        <td>{{item.sellRate}}</td>
+                    </tr>
+            </tbody>
+        </table>
     </div>
 </app-dashboard-container>
