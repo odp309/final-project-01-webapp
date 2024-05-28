@@ -6,9 +6,9 @@ import { PageNotFoundComponent } from './shared/pages/page-not-found/page-not-fo
 import { DashboardComponent } from './modules/dashboard/page/dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
-  { path: 'page-not-found', component: PageNotFoundComponent },
+  { path: 'login', component: LoginComponent, title: 'Login' },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard], title: 'Dashboard' },
+  { path: 'page-not-found', component: PageNotFoundComponent, title: 'Page not found!' },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/page-not-found', pathMatch: 'full' },
 ];
