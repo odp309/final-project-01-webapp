@@ -4,7 +4,7 @@
   >
     <div class="px-3 lg:px-5 lg:pl-3">
       <div class="flex items-center justify-between">
-        <div class="flex items-center justify-start py-3 ">
+        <div class="flex items-center justify-start py-3">
           <button
             id="toggleSidebarMobile"
             aria-expanded="true"
@@ -78,7 +78,9 @@
             </div>
           </form>
         </div>
-        <div class="flex items-center py-3 px-4 hover:bg-gray-100 dark:hover:bg-slate-700">
+        <div
+          class="flex items-center py-3 px-4 hover:bg-gray-100 dark:hover:bg-slate-700"
+        >
           <div class="flex items-center">
             <div>
               <button
@@ -119,25 +121,39 @@
               "
               data-popper-placement="bottom"
             >
-              <div class="px-4 py-3" role="none">
-                <p class="text-sm text-gray-900 dark:text-white" role="none">
-                  {{ user.name | titlecase }}
-                </p>
+            <!-- uncomment this code to show email -->
+              <!-- <div class="px-4 py-3" role="none">
                 <p
                   class="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
                   role="none"
                 >
-                  {{ user.email }}
+                  {{ user.sub }}
                 </p>
-              </div>
+              </div> -->
               <ul class="py-1" role="none">
                 <li>
                   <button
                     (click)="onLogoutSubmit()"
-                    class="block px-16 py-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                    class=" px-14 py-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white flex items-center"
                     role="menuitem"
                   >
-                    Logout
+                    <svg
+                      class="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <
+                      <path
+                        fill-rule="evenodd"
+                        d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"
+                      />
+                      <path
+                        fill-rule="evenodd"
+                        d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"
+                      />
+                    </svg>
+                    <span>Logout</span>
                   </button>
                 </li>
               </ul>
@@ -193,13 +209,19 @@
               </li>
               <li>
                 <a
-                  routerLink="/Dashboard"
-                  routerLinkActive="active"
-                  ariaCurrentWhenActive="page"
-                  class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700"
+                  routerLink="/dashboard"
+                  class="flex items-center p-2 text-base rounded-lg {{
+                    currentRoute === '/dashboard'
+                      ? 'text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 shadow-lg shadow-orange-500/50 dark:shadow-lg dark:shadow-orange-800/80'
+                      : 'text-gray-900 hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700'
+                  }}"
                 >
                   <svg
-                    class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                    class="w-6 h-6 transition duration-  {{
+                      currentRoute === '/dashboard'
+                        ? 'text-white group-hover:text-white dark:text-white dark:group-hover:text-white'
+                        : 'text-gray-900 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white'
+                    }}"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
@@ -214,11 +236,19 @@
               </li>
               <li>
                 <a
-                  href="https://flowbite-admin-dashboard.vercel.app/"
-                  class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700"
+                  routerLink="/users"
+                  class="flex items-center p-2 text-base rounded-lg {{
+                    currentRoute === '/users'
+                      ? 'text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 shadow-lg shadow-orange-500/50 dark:shadow-lg dark:shadow-orange-800/80'
+                      : 'text-gray-900 hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700'
+                  }}"
                 >
                   <svg
-                    class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                    class="w-6 h-6 transition duration-75  {{
+                      currentRoute === '/users'
+                        ? 'text-white group-hover:text-white dark:text-white dark:group-hover:text-white'
+                        : 'text-gray-900 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white'
+                    }}"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"

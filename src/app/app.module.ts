@@ -20,6 +20,8 @@ import { DashboardNavbarComponent } from './shared/components/dashboard-navbar/d
 import { DashboardContainerComponent } from './shared/components/dashboard-container/dashboard-container.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { DashboardComponent } from './modules/dashboard/page/dashboard/dashboard.component';
+import { UsersRoutingModule } from './modules/users/users-routing.module';
+import { UsersComponent } from './modules/users/page/users/users.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { DashboardComponent } from './modules/dashboard/page/dashboard/dashboard
     DashboardNavbarComponent,
     DashboardContainerComponent,
     FooterComponent,
-    DashboardComponent
+    DashboardComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import { DashboardComponent } from './modules/dashboard/page/dashboard/dashboard
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    UsersRoutingModule,
   ],
   providers: [
     provideHttpClient(withInterceptors([allHttpInterceptor])),

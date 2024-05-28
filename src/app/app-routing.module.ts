@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, title: 'Login' },
   { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard], title: 'Dashboard' },
   { path: 'page-not-found', component: PageNotFoundComponent, title: 'Page not found!' },
+  { path: 'users', loadChildren: () => import('./modules/users/users.module').then(m => m.UsersModule) },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/page-not-found', pathMatch: 'full' },
 ];

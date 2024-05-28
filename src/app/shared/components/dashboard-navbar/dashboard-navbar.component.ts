@@ -13,9 +13,12 @@ export class DashboardNavbarComponent implements OnInit {
   user?: any;
   role?: any;
   token?: any;
+  currentRoute?: any;
 
   constructor(private jwtDecoderService: JwtDecoderService, private router: Router) {
     this.token = localStorage.getItem('jwtToken')?.toString();
+    this.currentRoute = this.router.url;
+    console.log(this.currentRoute);
   }
 
   ngOnInit(): void {
