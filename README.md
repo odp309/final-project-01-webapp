@@ -2,6 +2,14 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.1.
 
+## Cloning or pulling the project
+
+Don't forget to use 'npm install' after cloning the project or pulling the project to make sure all dependencies are installed correctly.
+
+## File structure is based on Nisar Ahmed medium page
+
+Here's the medium page to check the file structure (https://medium.com/@mahmednisar/angular-architecture-best-practices-8e5a21e8056). the image of the file structure is here (https://miro.medium.com/v2/resize:fit:1400/format:webp/1*I4yan540n_ZMkDPWTo5Wwg.png)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
