@@ -21,6 +21,8 @@ import { DashboardContainerComponent } from './shared/components/dashboard-conta
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { DashboardComponent } from './modules/dashboard/page/dashboard/dashboard.component';
 import { DataTablesModule } from 'angular-datatables';
+import { UsersRoutingModule } from './modules/users/users-routing.module';
+import { UsersComponent } from './modules/users/page/users/users.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { DataTablesModule } from 'angular-datatables';
     DashboardNavbarComponent,
     DashboardContainerComponent,
     FooterComponent,
-    DashboardComponent
+    DashboardComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +43,7 @@ import { DataTablesModule } from 'angular-datatables';
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    UsersRoutingModule,
     DataTablesModule,
   ],
   providers: [

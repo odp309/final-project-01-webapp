@@ -15,6 +15,6 @@ export interface Rates {
 // Define an interface for the main response
 export interface ExchangeRates {
     base: string;
-    rates: Rates;
+    buyRates: Rates;
     sellRates: Rates;
 }

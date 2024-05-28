@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit {
       info: false,
       paging: false,
       autoWidth: true,
+      pagingType: 'full',
     };
     this.loadData();
   }
@@ -30,15 +31,23 @@ export class DashboardComponent implements OnInit {
   loadData() {
     this.service.LoadData().subscribe((item) => {
       this.exchangeRateData = item;
-      this.populateRateTable(item.rates, item.sellRates);
-      this.dttrigger.next(null);
-    });
-  }
+      if (item && item.buyRates && item.sellRates) {
+        this.populateRateTable(item.buyRates, item.sellRates);
+        this.dttrigger.next(null);
+      } else {
+        console.error('Invalid data received from the API', item);
+      }
+    },
+    (error) => {
+      console.error('Error loading data', error);
+    }
+  );
+}
 
-  populateRateTable(rates: Rates, sellRates: Rates): void {
-    this.rateTable = Object.keys(rates).map((key) => ({
+  populateRateTable(buyRates: Rates, sellRates: Rates): void {
+    this.rateTable = Object.keys(buyRates).map((key) => ({
       currency: key,
-      rate: rates[key as keyof Rates],
+      rate: buyRates[key as keyof Rates],
       sellRate: sellRates[key as keyof Rates],
     }));
   }
