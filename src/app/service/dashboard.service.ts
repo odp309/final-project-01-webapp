@@ -11,7 +11,7 @@ export class DashboardService {
   constructor(private http:HttpClient) { }
 
   LoadData(): Observable<ExchangeRates> {
-    return this.http.get<ExchangeRates>("http://156.67.214.127:8080/api/v1/public/getCurrency")
+    return this.http.get<ExchangeRates>("")
   }
 
 }

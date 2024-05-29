@@ -23,6 +23,9 @@ import { DashboardComponent } from './modules/dashboard/page/dashboard/dashboard
 import { DataTablesModule } from 'angular-datatables';
 import { UsersRoutingModule } from './modules/users/users-routing.module';
 import { UsersComponent } from './modules/users/page/users/users.component';
+import { BalancesComponent } from './modules/balances/page/balances/balances.component';
+import { ExchangeRatesComponent } from './modules/exchange-rates/page/exchange-rates/exchange-rates.component';
+import { BranchReservationsComponent } from './modules/branch-reservations/page/branch-reservations/branch-reservations.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { UsersComponent } from './modules/users/page/users/users.component';
     DashboardContainerComponent,
     FooterComponent,
     DashboardComponent,
-    UsersComponent
+    UsersComponent,
+    BalancesComponent,
+    ExchangeRatesComponent,
+    BranchReservationsComponent
   ],
   imports: [
     BrowserModule,
