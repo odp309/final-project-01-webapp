@@ -5,7 +5,7 @@ import { BehaviorSubject, shareReplay } from 'rxjs';
 import Login from '../../dto/auth/login.dto';
 import { StorageService } from '../storage/storage.service';
 
-const AUTH_API = 'http://156.67.214.127:8080/api/v1/public/user';
+const AUTH_API = 'http://156.67.214.127:8080/api/v1/public/employee';
 
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
