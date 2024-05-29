@@ -6,12 +6,11 @@ import { RateTableEntry } from '../../model/RateTableEntry';
 @Injectable({
   providedIn: 'root'
 })
-export class DashboardService {
+export class RatesService {
 
   constructor(private http:HttpClient) { }
 
-  LoadData(): Observable<RateTableEntry> {
-    return this.http.get<RateTableEntry>("")
+  LoadData(): Observable<RateTableEntry[]> {
+    return this.http.get<RateTableEntry[]>("http://156.67.214.127:8080/api/v1/public/get/exchange-rate")
   }
-
 }
