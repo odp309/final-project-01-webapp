@@ -20,6 +20,7 @@ import { DashboardNavbarComponent } from './shared/components/dashboard-navbar/d
 import { DashboardContainerComponent } from './shared/components/dashboard-container/dashboard-container.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { DashboardComponent } from './modules/dashboard/page/dashboard/dashboard.component';
+import { DataTablesModule } from 'angular-datatables';
 import { UsersRoutingModule } from './modules/users/users-routing.module';
 import { UsersComponent } from './modules/users/page/users/users.component';
 
@@ -43,6 +44,7 @@ import { UsersComponent } from './modules/users/page/users/users.component';
     ReactiveFormsModule,
     FontAwesomeModule,
     UsersRoutingModule,
+    DataTablesModule,
   ],
   providers: [
     provideHttpClient(withInterceptors([allHttpInterceptor])),
