@@ -24,4 +24,12 @@ ngOnInit(): void {
   addNewUser():void{
     console.log("navigate to add user page")
   }
+
+  deleteUser():void {
+    console.log("delete this user")
+  }
+  
+  generatePassword():void {
+    console.log("request generate user password")
+  }
 }
