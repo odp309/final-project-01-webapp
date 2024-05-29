@@ -1,8 +1,8 @@
 <app-dashboard-navbar></app-dashboard-navbar>
 <app-dashboard-container>
-    <div class="container flex-auto">
-        <table datatable [dtOptions]="dtoptions" [dtTrigger]="dttrigger" class="row-border hover" style="width: 100%;">
-            <thead>
+    <div class="container flex-auto bg-white w-11/12 rounded-xl shadow-md" >
+        <table class="w-auto row-border hover font-body" datatable [dtOptions]="dtoptions" [dtTrigger]="dttrigger">
+            <thead class="thead">
                 <tr>
                     <th> Currency Name </th>
                     <th> Rate </th>

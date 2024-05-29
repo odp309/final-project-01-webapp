@@ -23,7 +23,9 @@ export class DashboardComponent implements OnInit {
       info: false,
       paging: false,
       autoWidth: true,
-      pagingType: 'full',
+      language:{
+        searchPlaceholder:"Search Exchange Rate"
+      }
     };
     this.loadData();
   }

@@ -5,3 +5,7 @@
 .active-link {
   @apply md:text-blue-700 md:dark:text-blue-500;
 }
+
+.thead {
+  @apply bg-slate-200 text-left text-white font-semibold font-body
+}
