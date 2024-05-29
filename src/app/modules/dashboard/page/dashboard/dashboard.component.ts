@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardService } from '../../../../service/dashboard.service';
+import { DashboardService } from '../../../../service/dashboard/dashboard.service';
 import { ExchangeRates, Rates } from '../../../../model/ExchangeRates';
 import { Config } from 'datatables.net';
 import { Subject } from 'rxjs';

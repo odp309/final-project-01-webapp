@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ExchangeRates } from '../model/ExchangeRates';
+import { ExchangeRates } from '../../model/ExchangeRates';
 import { Observable } from 'rxjs';
 
 @Injectable({
