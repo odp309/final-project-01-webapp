@@ -26,6 +26,7 @@ import { UsersComponent } from './modules/users/page/users/users.component';
 import { BalancesComponent } from './modules/balances/page/balances/balances.component';
 import { ExchangeRatesComponent } from './modules/exchange-rates/page/exchange-rates/exchange-rates.component';
 import { BranchReservationsComponent } from './modules/branch-reservations/page/branch-reservations/branch-reservations.component';
+import { ChartsComponent } from './modules/dashboard/components/charts/charts.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { BranchReservationsComponent } from './modules/branch-reservations/page/
     UsersComponent,
     BalancesComponent,
     ExchangeRatesComponent,
-    BranchReservationsComponent
+    BranchReservationsComponent,
+    ChartsComponent
   ],
   imports: [
     BrowserModule,

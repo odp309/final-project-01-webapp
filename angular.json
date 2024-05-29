@@ -40,7 +40,8 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/datatables.net/js/dataTables.min.js"
+              "node_modules/datatables.net/js/dataTables.min.js",
+              "node_modules/chart.js/dist/chart.min.js"
             ]
           },
           "configurations": {
@@ -100,7 +101,11 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/datatables.net/js/dataTables.min.js",
+              "node_modules/chart.js/dist/chart.min.js"
+            ]
           }
         }
       }
