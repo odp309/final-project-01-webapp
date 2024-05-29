@@ -2,25 +2,57 @@
 <app-dashboard-container>
     <div class="container flex-auto bg-white dark:bg-slate-800 rounded-xl shadow-md" >
         <div class="px-10 py-10 relative overflow-x-auto">
-            <!-- <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400" datatable [dtOptions]="dtoptions" [dtTrigger]="dttrigger">
+            <div class="flex justify-end p-4">
+                <button class="button-table px-4 py-2" (click)="addNewUser()">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M7.50008 9.16667C5.65913 9.16667 4.16675 7.67428 4.16675 5.83333C4.16675 3.99238 5.65913 2.5 7.50008 2.5C9.34103 2.5 10.8334 3.99238 10.8334 5.83333C10.8334 7.67428 9.34103 9.16667 7.50008 9.16667ZM15.8334 9.16667C15.3732 9.16667 15.0001 8.79358 15.0001 8.33334V6.66667H13.3334C12.8732 6.66667 12.5001 6.29358 12.5001 5.83334C12.5001 5.3731 12.8732 5.00001 13.3334 5.00001H15.0001V3.33334C15.0001 2.8731 15.3732 2.50001 15.8334 2.50001C16.2936 2.50001 16.6667 2.8731 16.6667 3.33334V5.00001H18.3334C18.7936 5.00001 19.1667 5.3731 19.1667 5.83334C19.1667 6.29358 18.7936 6.66667 18.3334 6.66667H16.6667V8.33334C16.6667 8.79358 16.2936 9.16667 15.8334 9.16667Z" fill="white"/>
+                        <path d="M0.00054307 16.8326C0.323549 12.8553 3.55159 10.8333 7.48612 10.8333C11.476 10.8333 14.7541 12.7442 14.9983 16.8333C15.008 16.9961 14.9983 17.4999 14.3722 17.4999C11.2843 17.4999 6.6956 17.4999 0.606252 17.4999C0.39726 17.4999 -0.0170515 17.0492 0.00054307 16.8326Z" fill="white"/>
+                    </svg>
+                     New User 
+                </button>
+            </div>
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400" datatable [dtOptions]="dtoptions">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" class="px-6 py-3"> Currency Code </th>
-                        <th scope="col" class="px-6 py-3"> Currency Name </th>
-                        <th scope="col" class="px-6 py-3"> Rate </th>
-                        <th scope="col" class="px-6 py-3"> Sell Rate </th>
+                        <th scope="col" class="px-6 py-3"> User ID </th>
+                        <th scope="col" class="px-6 py-3"> Email </th>
+                        <th scope="col" class="px-6 py-3"> Full Name </th>
+                        <th scope="col" class="px-6 py-3"> Last Name </th>
+                        <th scope="col" class="px-6 py-3"> ID Employee </th>
+                        <th scope="col" class="px-6 py-3"> Action </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <tr *ngFor="let item of rateTable" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" >
-                            <td class="px-6 py-4">{{ item.currency }}</td>
-                            <td class="px-6 py-4">{{ item.currency }}</td>
-                            <td class="px-6 py-4">{{ item.buyRate | number }}</td>
-                            <td class="px-6 py-4">{{ item.sellRate | number }}</td>
+                        <tr scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" >
+                            <th class="px-6 py-3"> 1 </th>
+                            <th class="px-6 py-3"> try&#64;mail.com </th>
+                            <th class="px-6 py-3"> Try </th>
+                            <th class="px-6 py-3"> Pane </th>
+                            <th class="px-6 py-3"> 1234567 </th>
+                            <th class="px-6 py-3">
+                                <tr>
+                                    <th>
+                                        <button class="iconButton" (click)="generatePassword()"> 
+                                            <svg width="24" height="24" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M11.1287 12.3909L11.3406 12.179L11.2536 11.8921C10.8552 10.58 10.7697 9.19287 11.004 7.84181C11.2383 6.49074 11.7858 5.21333 12.6026 4.11195C13.4194 3.01057 14.4829 2.11584 15.7078 1.49946C16.9327 0.883076 18.2849 0.562186 19.6561 0.5625L19.6564 0.5625C20.9186 0.562208 22.1661 0.834035 23.3137 1.35946C24.4614 1.88488 25.4823 2.65155 26.3069 3.60721C27.1315 4.56288 27.7403 5.68508 28.092 6.89734C28.4436 8.10959 28.5298 9.38341 28.3446 10.632C28.1595 11.8806 27.7073 13.0745 27.0189 14.1326C26.3306 15.1906 25.4222 16.0878 24.3558 16.763C23.2893 17.4382 22.0899 17.8755 20.8391 18.0453C19.5883 18.215 18.3157 18.1131 17.1079 17.7464L16.821 17.6594L16.6091 17.8713L6.04289 28.4375H0.5625V22.9571L11.1287 12.3909ZM8.02565 24.2455L6.95711 23.1769L7.70819 22.4259L8.77673 23.4944L9.13028 23.8479L9.48384 23.4944L11.1194 21.8588L11.4729 21.5053L11.1194 21.1517L10.0509 20.0832L10.8021 19.332L11.8706 20.3997L12.2242 20.753L12.5776 20.3996L15.858 17.1192L16.5195 16.4577L17.4155 16.7295C17.4155 16.7295 17.4155 16.7295 17.4156 16.7295C18.142 16.9501 18.897 17.0623 19.6561 17.0625H19.6562C21.2798 17.0626 22.8621 16.5508 24.178 15.5998C25.4939 14.6488 26.4765 13.3071 26.9859 11.7654C27.4953 10.2238 27.5056 8.56083 27.0153 7.01302C26.525 5.46521 25.5592 4.11141 24.2552 3.14418C22.9511 2.17695 21.3753 1.64556 19.7518 1.62558C18.1283 1.60561 16.5399 2.09808 15.2125 3.03293C13.885 3.96778 12.8862 5.29742 12.358 6.83269C11.8298 8.36797 11.7992 10.0307 12.2705 11.5844L12.2705 11.5844L12.5423 12.4803L11.88 13.1418L11.8798 13.142L1.77145 23.2503L1.625 23.3968V23.6039V26.875V27.375H2.125H5.39612H5.60323L5.74968 27.2286L8.02565 24.9526L8.3792 24.599L8.02565 24.2455Z" fill="#FFFFFF"/>
+                                                <path d="M22.25 8.3125C22.25 9.17545 21.5504 9.875 20.6875 9.875C19.8246 9.875 19.125 9.17545 19.125 8.3125C19.125 7.44956 19.8246 6.75 20.6875 6.75C21.5504 6.75 22.25 7.44956 22.25 8.3125Z" fill="#FFFFFF"/>
+                                            </svg>                                                                                 
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button class="iconButton" (click)="deleteUser()"> 
+                                            <svg width="24" height="24" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12.5963 -0.0393066C10.1111 -0.0393066 8.11461 2.02573 8.11461 4.52231V5.07696H3.07704C2.37769 5.07696 1.8078 5.64685 1.8078 6.34619V7.61542H0.538574V10.1539H3.07704V29.1923C3.07704 31.2802 4.79684 33 6.88473 33H22.1155C24.2034 33 25.9232 31.2802 25.9232 29.1923V10.1539H28.4617V7.61542H27.1924V6.34619C27.1924 5.64685 26.6225 5.07696 25.9232 5.07696H20.8856V4.52104C20.8856 2.02573 18.8891 -0.0393066 16.404 -0.0393066H12.5963ZM12.5963 2.57785H16.404C17.4244 2.57785 18.2685 3.41046 18.2685 4.52104V5.07696H10.7305V4.52104C10.7305 3.41046 11.5745 2.57912 12.595 2.57912L12.5963 2.57785ZM5.6155 10.1539H12.1203C12.2777 10.1704 12.4338 10.1932 12.5963 10.1932H16.404C16.5664 10.1932 16.7213 10.1704 16.8799 10.1539H23.3847V29.1923C23.3847 29.9069 22.8301 30.4616 22.1155 30.4616H6.88473C6.17015 30.4616 5.6155 29.9069 5.6155 29.1923V10.1539ZM8.15396 12.6923V27.9231H10.6924V12.6923H8.15396ZM13.2309 12.6923V27.9231H15.7693V12.6923H13.2309ZM18.3078 12.6923V27.9231H20.8463V12.6923H18.3078Z" fill="#FFFFFF"/>
+                                            </svg>                                                                                                                                                       
+                                        </button>
+                                    </th>
+                                </tr>
+                            </th>
                         </tr>
                 </tbody>
-            </table> -->
-            <p class="text-center">Users Component Works</p>
+            </table>
+            <!-- <p class="text-center">Users Component Works</p> -->
         </div>
     </div>
 </app-dashboard-container>
+

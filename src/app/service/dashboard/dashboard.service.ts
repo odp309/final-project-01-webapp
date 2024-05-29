@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ExchangeRates } from '../model/ExchangeRates';
 import { Observable } from 'rxjs';
+import { RateTableEntry } from '../../model/RateTableEntry';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,8 @@ export class DashboardService {
 
   constructor(private http:HttpClient) { }
 
-  LoadData(): Observable<ExchangeRates> {
-    return this.http.get<ExchangeRates>("")
+  LoadData(): Observable<RateTableEntry> {
+    return this.http.get<RateTableEntry>("")
   }
 
 }
