@@ -24,6 +24,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "angular-datatables": "^17.1.0",
+    "chart.js": "^4.4.3",
     "datatables.net": "^2.0.3",
     "datatables.net-dt": "^2.0.3",
     "flowbite": "^2.3.0",
