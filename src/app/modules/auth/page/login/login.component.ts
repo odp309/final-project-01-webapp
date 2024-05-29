@@ -65,13 +65,13 @@ export class LoginComponent implements OnInit {
 
       this.authService.login(this.form.value).subscribe({
         next: (response: any) => {
-          const user: any = this.jwtService.decodeToken(response.token);
+          const user: any = this.jwtService.decodeToken(response.accessToken);
 
           this.errorMessageStyle = this.displayHidden;
           this.validCounter = 0;
 
           this.storageService.setRoles(user.role);
-          this.storageService.setToken(response.token);
+          this.storageService.setToken(response.accessToken);
 
           // const role = user.role[0].roleName;
 

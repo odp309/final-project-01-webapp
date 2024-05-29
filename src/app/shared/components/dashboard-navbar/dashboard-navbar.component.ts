@@ -12,11 +12,11 @@ export class DashboardNavbarComponent implements OnInit {
 
   user?: any;
   role?: any;
-  token?: any;
+  accessToken?: any;
   currentRoute?: any;
 
   constructor(private jwtDecoderService: JwtDecoderService, private router: Router) {
-    this.token = localStorage.getItem('jwtToken')?.toString();
+    this.accessToken = localStorage.getItem('jwtToken')?.toString();
     this.currentRoute = this.router.url;
     console.log(this.currentRoute);
   }
@@ -88,8 +88,8 @@ export class DashboardNavbarComponent implements OnInit {
       }
     });
     
-    if (this.token) {
-      this.user = this.jwtDecoderService.decodeToken(this.token);
+    if (this.accessToken) {
+      this.user = this.jwtDecoderService.decodeToken(this.accessToken);
       const roles = localStorage.getItem('roles');
       const getRoleName = roles ? JSON.parse(roles) : null;
       this.role = getRoleName[0].roleName;
