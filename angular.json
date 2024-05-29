@@ -40,8 +40,8 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/datatables.net/js/dataTables.min.js",
-              "node_modules/chart.js/dist/chart.min.js"
+              "node_modules/datatables.net/js/dataTables.min.js"
+              
             ]
           },
           "configurations": {
@@ -103,8 +103,8 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/datatables.net/js/dataTables.min.js",
-              "node_modules/chart.js/dist/chart.min.js"
+              "node_modules/datatables.net/js/dataTables.min.js"
+             
             ]
           }
         }
