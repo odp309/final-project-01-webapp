@@ -14,11 +14,12 @@ export class DashboardNavbarComponent implements OnInit {
   role?: any;
   accessToken?: any;
   currentRoute?: any;
+  currentRouteName?: any;
 
   constructor(private jwtDecoderService: JwtDecoderService, private router: Router) {
     this.accessToken = localStorage.getItem('jwtToken')?.toString();
     this.currentRoute = this.router.url;
-    console.log(this.currentRoute);
+    this.currentRouteName = this.currentRoute.replace("/", "");
   }
 
   ngOnInit(): void {
@@ -92,7 +93,7 @@ export class DashboardNavbarComponent implements OnInit {
       this.user = this.jwtDecoderService.decodeToken(this.accessToken);
       const roles = localStorage.getItem('roles');
       const getRoleName = roles ? JSON.parse(roles) : null;
-      this.role = getRoleName[0].roleName;
+      this.role = getRoleName.name;
     }
 
   }

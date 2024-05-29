@@ -20,8 +20,8 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.dtoptions = {
-      info: false,
-      paging: false,
+      info: true,
+      paging: true,
       autoWidth: true,
       language:{
         searchPlaceholder:"Search Exchange Rate"
@@ -49,7 +49,7 @@ export class DashboardComponent implements OnInit {
   populateRateTable(buyRates: Rates, sellRates: Rates): void {
     this.rateTable = Object.keys(buyRates).map((key) => ({
       currency: key,
-      rate: buyRates[key as keyof Rates],
+      buyRate: buyRates[key as keyof Rates],
       sellRate: sellRates[key as keyof Rates],
     }));
   }

@@ -1,21 +1,25 @@
 <app-dashboard-navbar></app-dashboard-navbar>
 <app-dashboard-container>
-    <div class="container flex-auto bg-white w-11/12 rounded-xl shadow-md" >
-        <table class="w-auto row-border hover font-body" datatable [dtOptions]="dtoptions" [dtTrigger]="dttrigger">
-            <thead class="thead">
-                <tr>
-                    <th> Currency Name </th>
-                    <th> Rate </th>
-                    <th> Sell Rate </th>
-                </tr>
-            </thead>
-            <tbody>
-                    <tr *ngFor="let item of rateTable" >
-                        <td>{{item.currency}}</td>
-                        <td>{{item.rate}}</td>
-                        <td>{{item.sellRate}}</td>
+    <div class="container flex-auto bg-white dark:bg-slate-800 rounded-xl shadow-md" >
+        <div class="px-10 py-10 relative overflow-x-auto">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400" datatable [dtOptions]="dtoptions" [dtTrigger]="dttrigger">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3"> Currency Code </th>
+                        <th scope="col" class="px-6 py-3"> Currency Name </th>
+                        <th scope="col" class="px-6 py-3"> Rate </th>
+                        <th scope="col" class="px-6 py-3"> Sell Rate </th>
                     </tr>
-            </tbody>
-        </table>
+                </thead>
+                <tbody class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <tr *ngFor="let item of rateTable" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" >
+                            <td class="px-6 py-4">{{ item.currency }}</td>
+                            <td class="px-6 py-4">{{ item.currency }}</td>
+                            <td class="px-6 py-4">{{ item.buyRate | number }}</td>
+                            <td class="px-6 py-4">{{ item.sellRate | number }}</td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </app-dashboard-container>

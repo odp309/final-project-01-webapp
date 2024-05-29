@@ -1,5 +1,5 @@
 export interface RateTableEntry {
     currency: string;
-    rate: number;
+    buyRate: number;
     sellRate: number;
   }
