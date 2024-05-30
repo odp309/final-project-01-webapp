@@ -7,21 +7,13 @@
 }
 
 .thead {
-  @apply bg-slate-200 text-left text-white font-semibold font-body
+  @apply text-base font-semibold text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 capitalize
 }
 
 .iconButton {
-  @apply text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:focus:ring-orange-600
-}
-
-.dt-head-center {
-  @apply items-center
-}
-
-.dt-body-left {
-  @apply items-center
+  @apply text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 rounded-lg inline-flex items-center me-2 dark:focus:ring-orange-600 px-1 py-1 h-max w-max
 }
 
 .button-table {
-  @apply bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:ring-orange-300 rounded-lg text-white text-center text-sm font-semibold p-2.5 inline-flex font-body
+  @apply bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:ring-orange-300 rounded-lg text-white w-max h-max justify-center flex items-center font-semibold px-2 py-2
 }

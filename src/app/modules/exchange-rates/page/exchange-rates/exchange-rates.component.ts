@@ -19,11 +19,11 @@ export class ExchangeRatesComponent implements OnInit{
   ngOnInit(): void {
     this.dtoptions = {
       info: true,
-      paging: true,
+      paging: false,
       autoWidth: true,
       language:{
         searchPlaceholder:"Search Exchange Rate"
-      }
+      },      
     };
     this.loadData();
   }
