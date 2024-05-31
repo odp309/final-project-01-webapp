@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Config } from 'datatables.net';
 import { Subject } from 'rxjs';
-import { RateTableEntry } from '../../../../model/RateTableEntry';
-import { RatesService } from '../../../../service/rates/rates.service';
+import { RateTable } from '../../../../core/dto/datatable/rateTable.dto';
+import { RatesService } from '../../../../core/services/datatable/rates/rates.service';
 
 @Component({
   selector: 'app-exchange-rates',
@@ -10,7 +10,7 @@ import { RatesService } from '../../../../service/rates/rates.service';
   styleUrl: './exchange-rates.component.css'
 })
 export class ExchangeRatesComponent implements OnInit{
-  rateTable: RateTableEntry[] = [];
+  rateTable: RateTable[] = [];
   dtoptions: Config = {};
   dttrigger: Subject<any> = new Subject<any>();
 

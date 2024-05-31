@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserList } from '../../model/UserList';
+import { UserTable } from '../../../dto/datatable/userTable.dto';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,7 +10,7 @@ export class AlluserService {
 
   constructor( private http:HttpClient) {}
 
-    LoadData(): Observable <UserList[]>{
-      return this.http.get<UserList[]>("")
+    LoadData(): Observable <UserTable[]>{
+      return this.http.get<UserTable[]>("")
     }
 }

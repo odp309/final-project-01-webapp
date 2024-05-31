@@ -1,4 +1,4 @@
-export interface UserList {
+export interface UserTable {
     id: number,
     email: string,
     first_name : string,

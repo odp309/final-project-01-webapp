@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Config } from 'datatables.net';
-import { AlluserService } from '../../../../service/all-users/alluser.service';
-import { UserList } from '../../../../model/UserList';
+import { AlluserService } from '../../../../core/services/datatable/users/alluser.service';
+import { UserTable } from '../../../../core/dto/datatable/userTable.dto';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
   styleUrl: './users.component.css'
 })
 export class UsersComponent implements OnInit{
-  userTable: UserList[] = [];
+  userTable: UserTable[] = [];
   dtoptions:Config={}
   dttrigger: Subject<any> = new Subject<any>();
 
