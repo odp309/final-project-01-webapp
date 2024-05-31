@@ -15,5 +15,17 @@
 }
 
 .button-table {
-  @apply bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:ring-orange-300 rounded-lg text-white w-max h-max justify-center flex items-center font-semibold px-2 py-2
+  @apply bg-customColor-button hover:bg-orange-600 focus:ring-4 focus:ring-orange-300 rounded-lg text-white w-max h-max justify-center flex items-center font-semibold px-2 py-2
+}
+
+.scheduled{
+  @apply bg-customColor-schedule rounded-xl text-white h-8 w-24 font-normal flex justify-center items-center
+}
+
+.expired{
+  @apply bg-customColor-expired rounded-xl text-white h-8 w-24 font-normal flex justify-center items-center
+}
+
+.done{
+  @apply bg-customColor-done rounded-xl text-white h-8 w-24 font-normal flex justify-center items-center
 }

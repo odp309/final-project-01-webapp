@@ -2,25 +2,75 @@
 <app-dashboard-container>
     <div class="container flex-auto bg-white dark:bg-slate-800 rounded-xl shadow-md" >
         <div class="px-10 py-10 relative overflow-x-auto">
-            <!-- <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400" datatable [dtOptions]="dtoptions" [dtTrigger]="dttrigger">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400" datatable [dtOptions]="dtoptions" [dtTrigger]="dttrigger">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" class="px-6 py-3"> Currency Code </th>
-                        <th scope="col" class="px-6 py-3"> Currency Name </th>
-                        <th scope="col" class="px-6 py-3"> Rate </th>
-                        <th scope="col" class="px-6 py-3"> Sell Rate </th>
+                        <th scope="col" class="px-6 py-3"> Order ID </th>
+                        <th scope="col" class="px-6 py-3"> Customer Name </th>
+                        <th scope="col" class="px-6 py-3"> Buy Currency </th>
+                        <th scope="col" class="px-6 py-3"> Sell Currency </th>
+                        <th scope="col" class="px-6 py-3"> Reservation Date </th>
+                        <th scope="col" class="px-6 py-3"> Status </th>
+                        <th scope="col" class="px-6 py-3"> Action </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <tr *ngFor="let item of rateTable" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" >
-                            <td class="px-6 py-4">{{ item.currency }}</td>
-                            <td class="px-6 py-4">{{ item.currency }}</td>
-                            <td class="px-6 py-4">{{ item.buyRate | number }}</td>
-                            <td class="px-6 py-4">{{ item.sellRate | number }}</td>
+                        <!-- <tr *ngFor="let item of reservationTable" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" > -->
+                            <!-- <td class="px-6 py-4">{{ item.orderID }}</td>
+                            <td class="px-6 py-4">{{ item.customerName }}</td>
+                            <td class="px-6 py-4">{{ item.buyCurrency }}</td>
+                            <td class="px-6 py-4">{{ item.sellCurrency}}</td>
+                            <td class="px-6 py-4">{{ item.reservationDate}}</td>
+                            <td class="px-6 py-4 [ngClass]="getStatusClass(item.status)" ">{{ item.status}}</td> -->
+                        
+                        <tr scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" >    
+                            <td class="px-6 py-4">1</td>
+                            <td class="px-6 py-4">Try</td>
+                            <td class="px-6 py-4">IDR</td>
+                            <td class="px-6 py-4">SGD</td>
+                            <td class="px-6 py-4">2004-29-12</td>
+                            <td class="px-6 py-4 ">
+                                <div class="scheduled"> 
+                                    <p>Terjadwal</p>
+                                </div>
+                            </td>
+
+                            <td> <button class="button-table" (click)="reservationDetails()"> Detail </button>
+                            </td>
+                        </tr>
+                        <tr scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" >    
+                            <td class="px-6 py-4">1</td>
+                            <td class="px-6 py-4">Try</td>
+                            <td class="px-6 py-4">IDR</td>
+                            <td class="px-6 py-4">SGD</td>
+                            <td class="px-6 py-4">2004-29-12</td>
+                            <td class="px-6 py-4 ">
+                                <div class="done"> 
+                                    <p>Terjadwal</p>
+                                </div>
+                            </td>
+
+                            <td> <button class="button-table" (click)="reservationDetails()"> Detail </button>
+                            </td>
+                        </tr>
+                        <tr scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" >    
+                            <td class="px-6 py-4">1</td>
+                            <td class="px-6 py-4">Try</td>
+                            <td class="px-6 py-4">IDR</td>
+                            <td class="px-6 py-4">SGD</td>
+                            <td class="px-6 py-4">2004-29-12</td>
+                            <td class="px-6 py-4 ">
+                                <div class="expired"> 
+                                    <p>Terjadwal</p>
+                                </div>
+                            </td>
+
+                            <td> <button class="button-table" (click)="reservationDetails()"> Detail </button>
+                            </td>
                         </tr>
                 </tbody>
-            </table> -->
-            <p class="text-center">Branch Reservations Component Works</p>
+            </table>
+            <!-- <p class="text-center">Branch Reservations Component Works</p> -->
         </div>
     </div>
 </app-dashboard-container>
