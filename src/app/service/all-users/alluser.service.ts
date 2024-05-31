@@ -10,7 +10,7 @@ export class AlluserService {
 
   constructor( private http:HttpClient) {}
 
-    LoadData(): Observable <UserList>{
-      return this.http.get<UserList>("")
+    LoadData(): Observable <UserList[]>{
+      return this.http.get<UserList[]>("")
     }
 }

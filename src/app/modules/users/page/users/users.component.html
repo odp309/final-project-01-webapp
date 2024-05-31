@@ -22,12 +22,12 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <tr scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" >
-                            <th class="px-6 py-3"> 1 </th>
-                            <th class="px-6 py-3"> try&#64;mail.com </th>
-                            <th class="px-6 py-3"> Try </th>
-                            <th class="px-6 py-3"> Pane </th>
-                            <th class="px-6 py-3"> 1234567 </th>
+                        <tr *ngFor="let item of userTable" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" >
+                            <th class="px-6 py-3"> {{item.id}} </th>
+                            <th class="px-6 py-3"> {{item.email}} </th>
+                            <th class="px-6 py-3"> {{item.first_name}} </th>
+                            <th class="px-6 py-3"> {{item.last_name}} </th>
+                            <th class="px-6 py-3"> {{item.id_employee}} </th>
                             <th class="px-6 py-3">
                                 <tr class="flex items-center">
                                     <th>
