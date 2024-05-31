@@ -6,6 +6,7 @@
                 <thead class="thead">
                     <tr>
                         <th scope="col" class="px-6 py-3"> Currency Code </th>
+                        <th scope="col" class="px-6 py-3"> Currency Name </th>
                         <th scope="col" class="px-6 py-3"> Rate </th>
                         <th scope="col" class="px-6 py-3"> Sell Rate </th>
                     </tr>
@@ -13,6 +14,7 @@
                 <tbody class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <tr *ngFor="let item of rateTable" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" >
                             <td class="px-6 py-4">{{ item.currencyCode }}</td>
+                            <td class="px-6 py-4">{{ item.currencyName }}</td>
                             <td class="px-6 py-4">{{ item.buyRate | number }}</td>
                             <td class="px-6 py-4">{{ item.sellRate | number }}</td>
                         </tr>
