@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
-import { InstanceOptions, Modal, ModalInterface, ModalOptions } from 'flowbite';
+import { initFlowbite } from 'flowbite';
 import { AuthService } from '../../../../core/services/auth/auth.service';
 import { StorageService } from '../../../../core/services/storage/storage.service';
 import { JwtDecoderService } from '../../../../core/services/jwt/jwt-decoder.service';
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    initFlowbite();
   }
 
   onSubmitLogin() {

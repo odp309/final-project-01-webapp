@@ -1,6 +1,6 @@
 export interface BalanceTable {
     currencyCode: string;
     currencyName: string;
-    buyRate: number;
-    sellRate: number;
+    balance: number;
+    updatedAt: number;
 }

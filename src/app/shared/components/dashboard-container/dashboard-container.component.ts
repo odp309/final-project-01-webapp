@@ -15,7 +15,7 @@ export class DashboardContainerComponent {
     const getCurrentRoute = this.router.url;
     this.currentRoute = getCurrentRoute.replace("/", " / ");
     this.currentRouteName = getCurrentRoute.replace("/", "");
-    console.log(this.currentRoute, this.currentRouteName);
+    // console.log(this.currentRoute, this.currentRouteName);
   }
 
 }

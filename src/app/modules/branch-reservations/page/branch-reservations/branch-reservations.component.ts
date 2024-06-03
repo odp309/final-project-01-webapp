@@ -16,10 +16,14 @@ export class BranchReservationsComponent implements OnInit {
 
   constructor(private service: ReservationService) {}
 
+  // get today date, delete this if the api response is valid
+  reservationDate: Date = new Date();
+
   ngOnInit(): void {
     this.dtoptions = {
+      columnDefs: [{ targets: '_all', className: 'dt-head-center' }],
       info: true,
-      paging: false,
+      paging: true,
       autoWidth: true,
       language: {
         searchPlaceholder: 'Search Exchange Rate',

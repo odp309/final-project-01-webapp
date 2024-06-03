@@ -103,9 +103,12 @@
                     {{ user.firstName | titlecase }}
                     {{ user.lastName | titlecase }}
                     <br />
-                    <span class="text-gray-400">
+                    <span *ngIf="role !== 'ADMIN_MGR'; else adminManager" class="text-gray-400">
                       {{ role | titlecase }}
                     </span>
+                    <ng-template #adminManager>
+                      <span class="text-gray-400">Admin Manager</span>
+                    </ng-template>
                   </span>
                 </div>
               </button>

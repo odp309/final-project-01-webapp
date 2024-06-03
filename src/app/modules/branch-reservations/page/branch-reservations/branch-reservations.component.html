@@ -5,28 +5,22 @@
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400" datatable [dtOptions]="dtoptions" [dtTrigger]="dttrigger">
                 <thead class="thead">
                     <tr>
-                        <th scope="col" class="px-6 py-3"> # </th>
-                        <th scope="col" class="px-6 py-3"> Reservation No </th>
-                        <th scope="col" class="px-6 py-3"> Wallet ID </th>
-                        <th scope="col" class="px-6 py-3"> Customer ID </th>
+                        <th scope="col" class="px-6 py-3"> #</th>
+                        <th scope="col" class="px-6 py-3"> Reservation No</th>
                         <th scope="col" class="px-6 py-3"> Customer Name </th>
                         <th scope="col" class="px-6 py-3"> Amount </th>
-                        <th scope="col" class="px-6 py-3"> Created At </th>
                         <th scope="col" class="px-6 py-3"> Reservation Date </th>
                         <th scope="col" class="px-6 py-3"> Status </th>
                         <th scope="col" class="px-6 py-3"> Action </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <!-- <tr *ngFor="let item of reservationTable ; let i = index" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" > -->
-                            <!-- <td class="px-6 py-4">{{ i + 1 }}</td>
-                            <td class="px-6 py-4">{{ item.reservation_number}}</td>
-                            <td class="px-6 py-4">{{ item.wallet_id }}</td>
-                            <td class="px-6 py-4">{{ item.user_id }}</td>
-                            <td class="px-6 py-4">{{ item.user_name }}</td>
-                            <td class="px-6 py-4">{{ item.amount}}</td>
-                            <td class="px-6 py-4">{{ item.created_at}}</td>
-                            <td class="px-6 py-4">{{ item.reservation_date}}</td>
+                        <!-- <tr *ngFor="let item of reservationTable ; let i = index" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" >
+                            <td class="px-6 py-4">{{ i + 1 }}</td>
+                            <td class="px-6 py-4">{{ item.reservationNumber}}</td>
+                            <td class="px-6 py-4">{{ item.userName }}</td>
+                            <td class="px-6 py-4">{{ item.amount }}</td>
+                            <td class="px-6 py-4">{{ item.reservationDate}}</td>
                             <td class="px-6 py-4 [ngClass]="getStatusClass(item.status)" ">{{ item.status}}</td>
                             <td> 
                                 <button 
@@ -38,17 +32,14 @@
                         
                         <tr scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center" >    
                             <td class="px-6 py-4">1</td>
-                            <td class="px-6 py-4">ABC - 001</td>
-                            <td class="px-6 py-4">SGD - 001</td>
-                            <td class="px-6 py-4">1234567</td>
-                            <td class="px-6 py-4">Song Hye Kyo</td>
-                            <td class="px-6 py-4">10500</td>
-                            <td class="px-6 py-4">2004-29-12</td>
-                            <td class="px-6 py-4">2004-29-12</td>
-                            <td class="px-6 py-4 ">
-                                <div class="scheduled"> 
-                                    <p>Terjadwal</p>
-                                </div>
+                            <td class="px-6 py-4">USD_1234567890_123456</td>
+                            <td class="px-6 py-4">{{ 'putra negara' | titlecase }}</td>
+                            <td class="px-6 py-4">$ 1,000.00</td>
+                            <td class="px-6 py-4">{{ reservationDate | date:'fullDate' }}</td>
+                            <td class="px-6 py-4">
+                              <div class="scheduled">
+                                <span class="leading-none">Terjadwal</span>
+                              </div>
                             </td>
 
                             <td> 
@@ -60,16 +51,16 @@
                                 </button>
                             </td>
                         </tr>
-                        <!-- <tr scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" >    
-                            <td class="px-6 py-4">1</td>
-                            <td class="px-6 py-4">Try</td>
-                            <td class="px-6 py-4">IDR</td>
-                            <td class="px-6 py-4">SGD</td>
-                            <td class="px-6 py-4">2004-29-12</td>
-                            <td class="px-6 py-4 ">
-                                <div class="done"> 
-                                    <p>Terjadwal</p>
-                                </div>
+                        <tr scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center" >    
+                            <td class="px-6 py-4">2</td>
+                            <td class="px-6 py-4">USD_1234567890_123456</td>
+                            <td class="px-6 py-4">{{ 'putra negara' | titlecase }}</td>
+                            <td class="px-6 py-4">$ 1,000.00</td>
+                            <td class="px-6 py-4">{{ reservationDate | date:'fullDate' }}</td>
+                            <td class="px-6 py-4">
+                              <div class="expired">
+                                <span class="leading-none">Terjadwal</span>
+                              </div>
                             </td>
 
                             <td> 
@@ -79,19 +70,18 @@
                                     data-modal-toggle="viewReservationDetail" 
                                     > Detail 
                                 </button>
-                            </td>
                             </td>
                         </tr>
-                        <tr scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" >    
-                            <td class="px-6 py-4">1</td>
-                            <td class="px-6 py-4">Try</td>
-                            <td class="px-6 py-4">IDR</td>
-                            <td class="px-6 py-4">SGD</td>
-                            <td class="px-6 py-4">2004-29-12</td>
-                            <td class="px-6 py-4 ">
-                                <div class="expired"> 
-                                    <p>Terjadwal</p>
-                                </div>
+                        <tr scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center" >    
+                            <td class="px-6 py-4">3</td>
+                            <td class="px-6 py-4">USD_1234567890_123456</td>
+                            <td class="px-6 py-4">{{ 'putra negara' | titlecase }}</td>
+                            <td class="px-6 py-4">$ 1,000.00</td>
+                            <td class="px-6 py-4">{{ reservationDate | date:'fullDate' }}</td>
+                            <td class="px-6 py-4">
+                              <div class="done">
+                                <span class="leading-none">Terjadwal</span>
+                              </div>
                             </td>
 
                             <td> 
@@ -102,8 +92,7 @@
                                     > Detail 
                                 </button>
                             </td>
-                            </td>
-                        </tr> -->
+                        </tr>
                 </tbody>
             </table>
         </div>
@@ -293,7 +282,7 @@
                   data-modal-target="viewReservationDetail"
                   data-modal-toggle="viewReservationDetail"
                   type="button"
-                  class="all-button"
+                  class="all-button mt-10"
                 >
                   Process
                 </button>

@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class BalancesComponent {
 
+  // get today date, delete this if the api response is valid
+  updatedAt: Date = new Date();
+
 }

@@ -23,13 +23,13 @@
 }
 
 .scheduled{
-  @apply bg-customColor-schedule rounded-xl text-white h-8 w-24 font-normal flex justify-center items-center
+  @apply bg-yellow-300 rounded-xl text-white h-8 w-full font-normal flex justify-center items-center
 }
 
 .expired{
-  @apply bg-customColor-expired rounded-xl text-white h-8 w-24 font-normal flex justify-center items-center
+  @apply bg-red-500 rounded-xl text-white h-8 w-full font-normal flex justify-center items-center
 }
 
 .done{
-  @apply bg-customColor-done rounded-xl text-white h-8 w-24 font-normal flex justify-center items-center
+  @apply bg-green-400 rounded-xl text-white h-8 w-full font-normal flex justify-center items-center
 }
