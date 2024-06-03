@@ -7,7 +7,7 @@
 }
 
 .thead {
-  @apply text-base font-semibold text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 capitalize
+  @apply text-sm text-center font-normal text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 capitalize
 }
 
 .iconButton {
@@ -15,7 +15,7 @@
 }
 
 .button-table {
-  @apply bg-customColor-button hover:bg-orange-600 focus:ring-4 focus:ring-orange-300 rounded-lg text-white w-max h-max justify-center flex items-center font-semibold px-2 py-2
+  @apply w-max h-max px-2 py-2 text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 shadow-lg shadow-orange-500/50 dark:shadow-lg dark:shadow-orange-800/80 font-medium rounded-xl justify-center flex items-center  
 }
 
 .all-button {

@@ -3,8 +3,9 @@
     <div class="container flex-auto bg-white dark:bg-slate-800 rounded-xl shadow-md" >
         <div class="px-10 py-10 relative overflow-x-auto">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400" datatable [dtOptions]="dtoptions" [dtTrigger]="dttrigger">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <thead class="thead">
                     <tr>
+                        <th scope="col" class="px-6 py-3"> # </th>
                         <th scope="col" class="px-6 py-3"> Reservation No </th>
                         <th scope="col" class="px-6 py-3"> Wallet ID </th>
                         <th scope="col" class="px-6 py-3"> Customer ID </th>
@@ -17,8 +18,9 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <!-- <tr *ngFor="let item of reservationTable" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" > -->
-                            <!-- <td class="px-6 py-4">{{ item.reservation_number}}</td>
+                        <!-- <tr *ngFor="let item of reservationTable ; let i = index" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" > -->
+                            <!-- <td class="px-6 py-4">{{ i + 1 }}</td>
+                            <td class="px-6 py-4">{{ item.reservation_number}}</td>
                             <td class="px-6 py-4">{{ item.wallet_id }}</td>
                             <td class="px-6 py-4">{{ item.user_id }}</td>
                             <td class="px-6 py-4">{{ item.user_name }}</td>
@@ -34,8 +36,9 @@
                                 </button>
                             </td>  -->
                         
-                        <tr scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" >    
+                        <tr scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center" >    
                             <td class="px-6 py-4">1</td>
+                            <td class="px-6 py-4">ABC - 001</td>
                             <td class="px-6 py-4">SGD - 001</td>
                             <td class="px-6 py-4">1234567</td>
                             <td class="px-6 py-4">Song Hye Kyo</td>
