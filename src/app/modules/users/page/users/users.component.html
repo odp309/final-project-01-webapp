@@ -3,7 +3,10 @@
     <div class="container flex-auto bg-white dark:bg-slate-800 rounded-xl shadow-md" >
         <div class="px-10 py-10 relative overflow-x-auto">
             <div class="flex justify-end p-4">
-                <button type="button" class="button-table" (click)="addNewUser()">
+                <button 
+                type="button" 
+                class="button-table" 
+                data-modal-toggle="addNewUserModal">
                     <svg class="w-[26px] h-[26px] " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" d="M9 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4H7Zm8-1a1 1 0 0 1 1-1h1v-1a1 1 0 1 1 2 0v1h1a1 1 0 1 1 0 2h-1v1a1 1 0 1 1-2 0v-1h-1a1 1 0 0 1-1-1Z" clip-rule="evenodd"/>
                     </svg>                      
@@ -15,9 +18,10 @@
                     <tr>
                         <th scope="col" class="px-6 py-3"> User ID </th>
                         <th scope="col" class="px-6 py-3"> Email </th>
-                        <th scope="col" class="px-6 py-3"> Full Name </th>
+                        <th scope="col" class="px-6 py-3"> First Name </th>
                         <th scope="col" class="px-6 py-3"> Last Name </th>
-                        <th scope="col" class="px-6 py-3"> ID Employee </th>
+                        <th scope="col" class="px-6 py-3"> NPP </th>
+                        <th scope="col" class="px-6 py-3"> Status </th>
                         <th scope="col" class="px-6 py-3"> Action </th>
                     </tr>
                 </thead>
@@ -27,7 +31,9 @@
                             <th class="px-6 py-3"> {{item.email}} </th>
                             <th class="px-6 py-3"> {{item.first_name}} </th>
                             <th class="px-6 py-3"> {{item.last_name}} </th>
-                            <th class="px-6 py-3"> {{item.id_employee}} </th>
+                            <th class="px-6 py-3"> {{item.npp}} </th>
+                            <th class="px-6 py-3"> {{item.role}} </th>
+                            <th class="px-6 py-3"> {{item.status}} </th>
                             <th class="px-6 py-3">
                                 <tr class="flex items-center">
                                     <th>
@@ -61,4 +67,89 @@
         </div>
     </div>
 </app-dashboard-container>
+<div   
+    id="addNewUserModal"
+    tabindex="-1"
+    aria-hidden="true"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)]3 max-h-full">
+    <div class="relative p-4 w-full max-w-4xl max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 pb-10">
+            <!-- Modal header -->
+            <div
+              class="flex items-center justify-between p-4 md:p-5 rounded-t dark:border-gray-600"
+            >
+              <h3
+                class="text-lg font-semibold font-sans text-gray-900 dark:text-white"
+              >
+                Add New User
+              </h3>
+              <button
+                type="button"
+                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                data-modal-toggle="addNewUserModal"
+              >
+                <svg
+                  class="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
+                <span class="sr-only">Close modal</span>
+              </button>
+            </div>
+            <!-- Modal body -->
+            <form [formGroup]="addNewUserForm" (ngSubmit)="onSubmitNewUser()" class="p-4 md:p-5" id="formAddNewUser">
+                <div class="grid gap-4 mb-4 grid-cols-2">
+                  <div class="col-span-2">
+                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
+                    <input formControlName="first_name" type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Input First Name" />
+                    <div *ngIf="addNewUserForm.controls['first_name'].invalid && addNewUserForm.controls['first_name'].touched" class="text-red-600 text-xs">First Name is required</div>
+                  </div>
+                  <div class="col-span-2">
+                    <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
+                    <input formControlName="last_name" type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Input Last Name" />
+                    <div *ngIf="addNewUserForm.controls['last_name'].invalid && addNewUserForm.controls['last_name'].touched" class="text-red-600 text-xs">Last Name is required</div>
+                  </div>
+                  <div class="col-span-2">
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                    <input formControlName="email" type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Input Email" />
+                    <div *ngIf="addNewUserForm.controls['email'].invalid && addNewUserForm.controls['email'].touched" class="text-red-600 text-xs">Valid Email is required</div>
+                  </div>
+                  <div class="col-span-2">
+                    <label for="npp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NPP</label>
+                    <input formControlName="npp" type="text" id="npp" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Input NPP" />
+                    <div *ngIf="addNewUserForm.controls['npp'].invalid && addNewUserForm.controls['npp'].touched" class="text-red-600 text-xs">NPP is required</div>
+                  </div>
+                  <div class="col-span-2">
+                    <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
+                    <select formControlName="role" id="role" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" required>
+                      <option value="" disabled>Select Role</option>
+                      <option value="option1">Teller</option>
+                      <option value="option2">Admin</option>
+                    </select>
+                    <div *ngIf="addNewUserForm.controls['role'].invalid && addNewUserForm.controls['role'].touched" class="text-red-600 text-xs">Role is required</div>
+                  </div>
+                </div>
+                <button 
+                    data-modal-target="addNewUserModal"
+                    data-modal-toggle="addNewUserModal"
+                    type="submit" 
+                    [disabled]="addNewUserForm.invalid"
+                    [ngClass]="{'bg-gray-400 cursor-not-allowed': addNewUserForm.invalid, 'bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 shadow-lg shadow-orange-500/50 dark:shadow-lg dark:shadow-orange-800/80': !addNewUserForm.invalid}"
+                    class="mt-10 w-full px-5 py-3 text-white font-medium rounded-xl text-center">
+                  Save
+                </button>
+              </form>
+          </div>
+    </div>
+</div>
 

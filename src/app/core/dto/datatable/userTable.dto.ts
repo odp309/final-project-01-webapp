@@ -3,5 +3,7 @@ export interface UserTable {
     email: string,
     first_name : string,
     last_name: string,
-    id_employee : string
+    npp : string,
+    role : string,
+    status : string
 }
