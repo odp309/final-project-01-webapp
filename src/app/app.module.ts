@@ -27,6 +27,7 @@ import { BalancesComponent } from './modules/balances/page/balances/balances.com
 import { ExchangeRatesComponent } from './modules/exchange-rates/page/exchange-rates/exchange-rates.component';
 import { BranchReservationsComponent } from './modules/branch-reservations/page/branch-reservations/branch-reservations.component';
 import { ChartsComponent } from './modules/dashboard/components/charts/charts.component';
+import { AmountPipe } from './core/services/pipe/amount/amount.pipe';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ChartsComponent } from './modules/dashboard/components/charts/charts.co
     BalancesComponent,
     ExchangeRatesComponent,
     BranchReservationsComponent,
-    ChartsComponent
+    ChartsComponent,
+    AmountPipe
   ],
   imports: [
     BrowserModule,

@@ -18,6 +18,7 @@ export class ExchangeRatesComponent implements OnInit{
 
   ngOnInit(): void {
     this.dtoptions = {
+      columnDefs: [{ targets: '_all', className: 'dt-head-center' }],
       info: true,
       paging: false,
       autoWidth: true,
