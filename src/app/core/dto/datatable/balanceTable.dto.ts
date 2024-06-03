@@ -1,4 +1,4 @@
-export interface RateTable {
+export interface BalanceTable {
     currencyCode: string;
     currencyName: string;
     buyRate: number;
