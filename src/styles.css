@@ -18,6 +18,10 @@
   @apply bg-customColor-button hover:bg-orange-600 focus:ring-4 focus:ring-orange-300 rounded-lg text-white w-max h-max justify-center flex items-center font-semibold px-2 py-2
 }
 
+.all-button {
+  @apply w-full px-5 py-3 text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 shadow-lg shadow-orange-500/50 dark:shadow-lg dark:shadow-orange-800/80 font-medium rounded-xl text-center
+}
+
 .scheduled{
   @apply bg-customColor-schedule rounded-xl text-white h-8 w-24 font-normal flex justify-center items-center
 }
