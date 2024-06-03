@@ -63,7 +63,6 @@ export class AmountPipe implements PipeTransform {
       default:
         formattedValue = value.toFixed(2); // Default formatting
     }
-    formattedValue = ' ' + formattedValue + ' ';
 
     return formattedValue;
   }
