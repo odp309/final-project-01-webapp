@@ -47,16 +47,21 @@ export class DashboardComponent implements OnInit {
 
   loadData() {
     this.service.LoadData().subscribe(
-      // (item) => {
-      //   this.dashboardTable = item;
       (item: DashboardTable) => {
-        this.dashboardTable.push(item)
-        this.dttrigger.next(null);
+        // Check if the response is valid JSON
+        try {
+          const parsedItem = JSON.parse(JSON.stringify(item));
+          this.dashboardTable.push(parsedItem);
+          this.dttrigger.next(null);
+        } catch (error) {
+          console.error('Invalid JSON response:', error);
+        }
       },
       (error) => {
         console.error('Error loading data', error);
       }
     );
   }
+  
 
 }

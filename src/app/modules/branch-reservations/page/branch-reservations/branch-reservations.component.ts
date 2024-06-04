@@ -43,6 +43,7 @@ export class BranchReservationsComponent implements OnInit {
       }
     );
   }
+  
 
   reservationDetails(){
     console.log("open reservation details page")

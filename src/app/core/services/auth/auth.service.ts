@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, shareReplay } from 'rxjs';
 import Login from '../../dto/auth/login.dto';
 import { StorageService } from '../storage/storage.service';
+import { env } from '../../../env';
 
-const AUTH_API = 'https://valasplus.cloud/api/v1/public/employee';
+const AUTH_API = env.base_url + '/api/v1/public/employee';
 
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
