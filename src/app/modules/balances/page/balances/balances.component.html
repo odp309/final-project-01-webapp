@@ -4,6 +4,11 @@
     class="container flex-auto bg-white dark:bg-slate-800 rounded-xl shadow-md"
   >
     <div class="px-10 py-10 relative overflow-x-auto">
+      <p
+        class="text-center text-3xl py-8 font-sans font-medium text-gray-950 dark:text-white"
+      >
+        Balance Information
+      </p>
       <table
         class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
       >
@@ -20,7 +25,7 @@
           </tr>
         </thead>
         <tbody class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            <!-- <tr *ngFor="let item of reservationTable ; let i = index" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" >
+          <!-- <tr *ngFor="let item of reservationTable ; let i = index" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" >
                             <td class="px-6 py-4">{{ i + 1 }}</td>
                             <td class="px-6 py-4">{{ item.currencyCode}}</td>
                             <td class="px-6 py-4">{{ item.currencyName }}</td>
@@ -36,7 +41,7 @@
                               Add Stock
                             </button>
                           </td>  -->
-          
+
           <tr
             scope="row"
             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -45,7 +50,7 @@
             <td class="px-6 py-4">USD</td>
             <td class="px-6 py-4">United States dollar</td>
             <td class="px-6 py-4">$ 1,000.00</td>
-            <td class="px-6 py-4">{{ updatedAt | date:'fullDate' }}</td>
+            <td class="px-6 py-4">{{ updatedAt | date : "fullDate" }}</td>
             <td class="px-6 py-4">
               <button
                 data-modal-target="addStockModal"
@@ -65,7 +70,7 @@
             <td class="px-6 py-4">SGD</td>
             <td class="px-6 py-4">Singapore dollar</td>
             <td class="px-6 py-4">$ 1,000.00</td>
-            <td class="px-6 py-4">{{ updatedAt | date:'fullDate' }}</td>
+            <td class="px-6 py-4">{{ updatedAt | date : "fullDate" }}</td>
             <td class="px-6 py-4">
               <button
                 data-modal-target="addStockModal"
@@ -85,7 +90,7 @@
             <td class="px-6 py-4">EUR</td>
             <td class="px-6 py-4">Euro</td>
             <td class="px-6 py-4">1,000.00 €</td>
-            <td class="px-6 py-4">{{ updatedAt | date:'fullDate' }}</td>
+            <td class="px-6 py-4">{{ updatedAt | date : "fullDate" }}</td>
             <td class="px-6 py-4">
               <button
                 data-modal-target="addStockModal"
@@ -188,7 +193,7 @@
               >Number of Stock</label
             >
             <input
-            min="0"
+              min="0"
               type="number"
               name="balance"
               id="balance"
@@ -199,13 +204,13 @@
           </div>
         </div>
         <button
-                data-modal-target="addStockModal"
-                data-modal-toggle="addStockModal"
-                type="button"
-                class="mt-10 w-full px-5 py-3 text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 shadow-lg shadow-orange-500/50 dark:shadow-lg dark:shadow-orange-800/80 font-medium rounded-xl text-center"
-              >
-                Save
-              </button>
+          data-modal-target="addStockModal"
+          data-modal-toggle="addStockModal"
+          type="button"
+          class="mt-10 w-full px-5 py-3 text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 shadow-lg shadow-orange-500/50 dark:shadow-lg dark:shadow-orange-800/80 font-medium rounded-xl text-center"
+        >
+          Save
+        </button>
       </form>
     </div>
   </div>

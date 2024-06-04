@@ -11,6 +11,6 @@ export class RatesService {
   constructor(private http:HttpClient) { }
 
   LoadData(): Observable<RateTable[]> {
-    return this.http.get<RateTable[]>("http://156.67.214.127:8080/api/v1/public/exchange-rate/get-all")
+    return this.http.get<RateTable[]>("https://valasplus.cloud/api/v1/public/exchange-rate/get-all")
   }
 }
