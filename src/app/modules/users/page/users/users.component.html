@@ -42,8 +42,8 @@
             <td class="px-6 py-3"> 
               <span 
                 [ngClass]="{
-                  'bg-green-100 text-green-800': item.status === 'Active',
-                  'bg-gray-100 text-gray-800': item.status === 'Inactive'
+                  'bg-green-100 text-green-800  h-8 w-full font-normal flex justify-center items-center rounded-xl': item.status === 'Active',
+                  'bg-gray-100 text-gray-800  h-8 w-full font-normal flex justify-center items-center rounded-xl': item.status === 'Inactive'
                 }"
                 class="px-2 py-1 rounded-full"
                 >
@@ -105,7 +105,7 @@
             <td class="px-6 py-3"> P123123 </td>
             <td class="px-6 py-3"> Teller </td>
             <td class="px-6 py-3 flow justify-center ">
-              <div class="inactive">
+              <div class="bg-gray-100 text-gray-800  h-8 w-full font-normal flex justify-center items-center rounded-xl">
                 <span class="leading-none">Inactive</span>
               </div>
             </td>
@@ -113,7 +113,7 @@
           <tr flex justify-center items-center>
             <td>
               <button data-modal-target="editUserStatusModal" data-modal-toggle="editUserStatusModal"
-                data-tooltip-target="tooltip-edit-status" type="button" class="action-btn tooltip-btn"
+                data-tooltip-target="tooltip-edit-status" type="button" class="edit-status-btn tooltip-btn"
                 >
                 <svg class="text-white w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                   viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -132,7 +132,62 @@
             </td>
             <td>
               <button data-modal-target="generateUserPasswordModal" data-modal-toggle="generateUserPasswordModal"
-                data-tooltip-target="tooltip-generate-password" type="button" class="action-btn tooltip-btn"
+                data-tooltip-target="tooltip-generate-password" type="button" class="generate-password-btn tooltip-btn"
+                (click)="generateUserPassword()">
+                <svg class="text-white w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                  viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v2H2v-4l4.257-4.257A6 6 0 1118 8zm-6-4a1 1 0 100 2 2 2 0 012 2 1 1 0 102 0 4 4 0 00-4-4z"
+                    clip-rule="evenodd" />
+                </svg>
+              </button>
+              <div id="tooltip-generate-password" role="tooltip"
+                class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                Generate Password
+                <div class="tooltip-arrow" data-popper-arrow></div>
+              </div>
+            </td>
+          </tr>
+          </td>
+          </tr>
+
+          <tr scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <td class="px-6 py-4"> 1 </td>
+            <td class="px-6 py-3"> USER-001 </td>
+            <td class="px-6 py-3"> test&#64;mail.com </td>
+            <td class="px-6 py-3"> Song </td>
+            <td class="px-6 py-3"> Hye Kyo </td>
+            <td class="px-6 py-3"> P123123 </td>
+            <td class="px-6 py-3"> Teller </td>
+            <td class="px-6 py-3 flow justify-center ">
+              <div class="bg-green-100 text-green-800  h-8 w-full font-normal flex justify-center items-center rounded-xl">
+                <span class="leading-none">Active</span>
+              </div>
+            </td>
+            <td class="px-6 py-3">
+          <tr flex justify-center items-center>
+            <td>
+              <button data-modal-target="editUserStatusModal" data-modal-toggle="editUserStatusModal"
+                data-tooltip-target="tooltip-edit-status" type="button" class="edit-status-btn tooltip-btn"
+                >
+                <svg class="text-white w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" />
+                  <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
+                  <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
+                  <line x1="16" y1="5" x2="19" y2="8" />
+                </svg>
+              </button>
+              <div id="tooltip-edit-status" role="tooltip"
+                class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                Edit Status
+                <div class="tooltip-arrow" data-popper-arrow></div>
+              </div>
+            </td>
+            <td>
+              <button data-modal-target="generateUserPasswordModal" data-modal-toggle="generateUserPasswordModal"
+                data-tooltip-target="tooltip-generate-password" type="button" class="generate-password-btn tooltip-btn"
                 (click)="generateUserPassword()">
                 <svg class="text-white w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                   viewBox="0 0 20 20" fill="currentColor">
@@ -263,7 +318,14 @@
           data-modal-hide="editUserStatusModal" type="button"
           class="text-white bg-orange-600 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-orange-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
           (click)="editUserStatus()">
-          Yes, I'm sure
+          <span *ngIf="!isLoading">Yes, I'm sure</span>
+          <span *ngIf="isLoading" class="flex items-center">
+            <svg aria-hidden="true" class="w-4 h-4 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9765 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9765 100 50.5908ZM9.08115 50.5908C9.08115 73.4859 27.1049 91.5097 50 91.5097C72.8951 91.5097 90.9189 73.4859 90.9189 50.5908C90.9189 27.6957 72.8951 9.67192 50 9.67192C27.1049 9.67192 9.08115 27.6957 9.08115 50.5908Z" fill="currentColor"/>
+              <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5533C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7234 75.2124 7.41289C69.5422 4.10251 63.2754 1.94025 56.7082 1.05131C51.7663 0.367181 46.7738 0.446289 41.8821 1.27842C39.3972 1.69303 37.8995 4.19778 38.5366 6.62326C39.1737 9.04874 41.6503 10.4297 44.1228 10.0607C47.851 9.48707 51.6392 9.48828 55.3497 10.1628C60.8787 11.1628 66.0928 13.1356 70.6331 16.0017C75.1734 18.8677 78.9432 22.5619 81.7198 26.8892C83.882 30.1234 85.4087 33.6092 86.2281 37.2586C86.8345 39.6179 89.5422 40.0162 93.9676 39.0409Z" fill="currentFill"/>
+            </svg>
+            Loading...
+          </span>
         </button>
         <button data-modal-hide="editUserStatusModal" type="button"
           class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No,

@@ -15,6 +15,8 @@ export class UsersComponent implements OnInit{
   dtoptions:Config={}
   dttrigger: Subject<any> = new Subject<any>();
   addNewUserForm!: FormGroup;
+  isLoading = false;
+
 
   constructor(private service:AlluserService , private formBuilder: FormBuilder){}
 
@@ -63,5 +65,23 @@ export class UsersComponent implements OnInit{
   
   generateUserPassword():void {
     console.log("request generate user password")
+  }
+
+  onConfirm(): void {
+    this.isLoading = true;
+
+    // Simulate an asynchronous operation (e.g., HTTP request)
+    setTimeout(() => {
+      // Perform the action (e.g., delete the product)
+      console.log("Product deleted");
+
+      // Hide the modal after the action is complete
+      const modal = document.getElementById('editUserStatusModal');
+      if (modal) {
+        modal.classList.add('hidden');
+      }
+
+      this.isLoading = false;
+    }, 2000); // Replace this with the actual duration of your operation
   }
 }

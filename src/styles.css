@@ -25,11 +25,3 @@
 .done{
   @apply bg-green-400 rounded-xl text-white h-8 w-full font-normal flex justify-center items-center
 }
-
-.active{
-  @apply text-green-700 border border-green-500 font-medium rounded-xl h-7 w-full flex justify-center items-center
-}
-
-.inactive{
-  @apply text-red-700 border border-red-500 font-medium rounded-xl h-7 w-full flex justify-center items-center
-}
