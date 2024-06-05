@@ -21,8 +21,11 @@
                             <td class="px-6 py-4">{{ item.userName }}</td>
                             <td class="px-6 py-4">{{ item.amount }}</td>
                             <td class="px-6 py-4">{{ item.reservationDate}}</td>
-                            <td class="px-6 py-4 [ngClass]="getStatusClass(item.status)" ">{{ item.status}}</td>
-                            <td> 
+                            <td class="px-6 py-4">
+                              <div [ngClass]="getStatusClass(item.status)>
+                                <span class="leading-none">{{ item.status}}</span>
+                              </div>
+                            </td>
                                 <button 
                                     type="button"
                                     class="all-button" 

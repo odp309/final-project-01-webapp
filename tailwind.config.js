@@ -17,13 +17,7 @@ module.exports = {
           800: "#1e40af",
           900: "#1e3a8a",
           950: "#172554",
-        },
-        customColor: {
-          done: "#22bb33",
-          expired: "#bb2124",
-          schedule: "#FFB302",
-          button: "#EF5C26"
-        },
+        }
       },
     },
     fontFamily: {

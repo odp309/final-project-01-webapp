@@ -7,15 +7,7 @@
 }
 
 .thead {
-  @apply text-sm text-center font-normal text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 capitalize
-}
-
-.iconButton {
-  @apply text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 rounded-lg inline-flex items-center me-2 dark:focus:ring-orange-600 px-1 py-1 h-max w-max
-}
-
-.button-table {
-  @apply w-max h-max px-2 py-2 text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 shadow-lg shadow-orange-500/50 dark:shadow-lg dark:shadow-orange-800/80 font-medium rounded-xl justify-center flex items-center  
+  @apply text-sm text-center font-normal text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400
 }
 
 .all-button {
@@ -32,4 +24,12 @@
 
 .done{
   @apply bg-green-400 rounded-xl text-white h-8 w-full font-normal flex justify-center items-center
+}
+
+.active{
+  @apply text-green-700 border border-green-500 font-medium rounded-xl h-7 w-full flex justify-center items-center
+}
+
+.inactive{
+  @apply text-red-700 border border-red-500 font-medium rounded-xl h-7 w-full flex justify-center items-center
 }

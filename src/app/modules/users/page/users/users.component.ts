@@ -57,11 +57,11 @@ export class UsersComponent implements OnInit{
     }
   }
 
-  deleteUser():void {
-    console.log("delete this user")
+  editUserStatus():void {
+    console.log("edit user status")
   }
   
-  generatePassword():void {
+  generateUserPassword():void {
     console.log("request generate user password")
   }
 }
