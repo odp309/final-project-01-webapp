@@ -29,6 +29,7 @@ import { BranchReservationsComponent } from './modules/branch-reservations/page/
 import { ChartsComponent } from './modules/dashboard/components/charts/charts.component';
 import { AmountPipe } from './core/services/pipe/amount/amount.pipe';
 import { AlertComponent } from './shared/components/alert/alert.component';
+import { StatusPipe } from './core/services/pipe/status/status.pipe';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { AlertComponent } from './shared/components/alert/alert.component';
     BranchReservationsComponent,
     ChartsComponent,
     AmountPipe,
-    AlertComponent
+    AlertComponent,
+    StatusPipe
   ],
   imports: [
     BrowserModule,

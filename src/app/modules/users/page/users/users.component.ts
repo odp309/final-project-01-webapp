@@ -23,12 +23,13 @@ export class UsersComponent implements OnInit {
   alertType: 'success' | 'error' = 'success';
   alertTitle: string = '';
   alertMessage: string = '';
+  statusFilter: string = '';
+  filteredUsers:UserTable[] = [];
 
 
   constructor(
     private service: AlluserService,
     private formBuilder: FormBuilder,
-    private router: Router,
     private usersService: UsersService
   ) {}
 
@@ -48,14 +49,17 @@ export class UsersComponent implements OnInit {
         email: ['', [Validators.required, Validators.email]],
         nip: ['', Validators.required],
         role: ['', Validators.required],
-      }));
-    this.getRoles();
+      })),
+      this.filterUsers(),
+      this.resetFilter();
+      this.getRoles();
   }
 
-  loadData(): void {
+
+  loadData() {
     this.service.LoadData().subscribe(
       (item) => {
-        this.userTable = item;
+        // this.userTable = item;
         this.dttrigger.next(null);
       },
       (error) => {
@@ -108,8 +112,26 @@ export class UsersComponent implements OnInit {
     console.log('edit user status');
   }
 
-  generateUserPassword(): void {
-    console.log('request generate user password');
+  generateUserPassword():void {
+    console.log("request generate user password")
+  }
+
+  ngOnChanges() {
+    this.filterUsers();
+  }
+
+  filterUsers() {
+    if (this.statusFilter === '') {
+      this.filteredUsers = [...this.userTable];
+    } else {
+      const isActive = this.statusFilter === 'active';
+      this.filteredUsers = this.userTable.filter(user => user.status === isActive);
+    }
+  }
+
+  resetFilter() {
+    this.statusFilter = '';
+    this.filteredUsers = [...this.userTable];
   }
 
   private getRoles(): void {
@@ -131,5 +153,4 @@ export class UsersComponent implements OnInit {
     this.alertType = type;
     this.alertMessage = message;
   }
-  
 }
