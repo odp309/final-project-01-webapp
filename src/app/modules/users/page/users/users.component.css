@@ -1,7 +1,0 @@
-.edit-status-btn{
-    @apply text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 shadow-lg shadow-orange-500/50 dark:shadow-lg dark:shadow-orange-800/80 rounded-lg inline-flex items-center me-2 px-2.5 py-2 h-max
-}
-
-.generate-password-btn{
-    @apply text-white bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 rounded-lg inline-flex items-center me-2 px-2.5 py-2 h-max
-}
