@@ -238,7 +238,7 @@
                   <span class="ml-3" sidebar-toggle-item="">Dashboard</span>
                 </a>
               </li>
-              <li>
+              <li *ngIf="role !== 'ADMIN' && role !== 'TELLER'">
                 <a
                   routerLink="/users"
                   class="flex items-center p-2 text-base rounded-lg {{

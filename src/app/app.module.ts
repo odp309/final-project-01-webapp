@@ -28,6 +28,7 @@ import { ExchangeRatesComponent } from './modules/exchange-rates/page/exchange-r
 import { BranchReservationsComponent } from './modules/branch-reservations/page/branch-reservations/branch-reservations.component';
 import { ChartsComponent } from './modules/dashboard/components/charts/charts.component';
 import { AmountPipe } from './core/services/pipe/amount/amount.pipe';
+import { AlertComponent } from './shared/components/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { AmountPipe } from './core/services/pipe/amount/amount.pipe';
     ExchangeRatesComponent,
     BranchReservationsComponent,
     ChartsComponent,
-    AmountPipe
+    AmountPipe,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
