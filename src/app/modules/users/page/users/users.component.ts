@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Config } from 'datatables.net';
 import { AlluserService } from '../../../../core/services/datatable/users/alluser.service';
 import { UserTable } from '../../../../core/dto/datatable/userTable.dto';
@@ -10,12 +10,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })
-export class UsersComponent implements OnInit, AfterViewInit{
+export class UsersComponent implements OnInit{
   userTable: UserTable[] = [];
   dtoptions:Config={}
   dttrigger: Subject<any> = new Subject<any>();
   addNewUserForm!: FormGroup;
-  @ViewChild('statusFilter', { static: false }) statusFilter!: ElementRef;
+
+  statusFilter: string = '';
+  filteredUsers:UserTable[] = [];
 
   constructor(private service:AlluserService , private formBuilder: FormBuilder){}
 
@@ -35,14 +37,16 @@ export class UsersComponent implements OnInit, AfterViewInit{
         email: ['', [Validators.required, Validators.email]],
         npp: ['', Validators.required],
         role: ['', Validators.required],
-      }));
+      })),
+      this.filterUsers(),
+      this.resetFilter();
   }
 
 
   loadData() {
     this.service.LoadData().subscribe(
       (item) => {
-        this.userTable = item;
+        // this.userTable = item;
         this.dttrigger.next(null);
       },
       (error) => {
@@ -69,33 +73,21 @@ export class UsersComponent implements OnInit, AfterViewInit{
     console.log("request generate user password")
   }
 
-  ngAfterViewInit(): void {
-    this.dttrigger.subscribe(() => {
-      const table = $('userTable').DataTable();
-  
-      // Custom filter for the status column
-      $.fn.dataTable.ext.search.push((_settings: any, data: any[], dataIndex: any) => {
-        const statusFilter = this.statusFilter.nativeElement.value;
-        const status = data[6]; // Assuming the status column is index 6
-  
-        if (!statusFilter || status === statusFilter) {
-          return true;
-        }
-  
-        return false;
-      });
-  
-      // Trigger initial filter
-      $(this.statusFilter.nativeElement).trigger('change');
-    });
+  ngOnChanges() {
+    this.filterUsers();
   }
 
-  initStatusFilter(): void {
-    $(this.statusFilter.nativeElement).on('change', () => {
-      const filterValue = this.statusFilter.nativeElement.value;
-      const table = $('userTable').DataTable();
-      table.column(7).search(filterValue).draw();
-    });
+  filterUsers() {
+    if (this.statusFilter === '') {
+      this.filteredUsers = [...this.userTable];
+    } else {
+      const isActive = this.statusFilter === 'active';
+      this.filteredUsers = this.userTable.filter(user => user.status === isActive);
+    }
   }
-  
+
+  resetFilter() {
+    this.statusFilter = '';
+    this.filteredUsers = [...this.userTable];
+  }
 }
