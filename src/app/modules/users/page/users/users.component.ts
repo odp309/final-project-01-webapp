@@ -19,34 +19,37 @@ export class UsersComponent implements OnInit{
   constructor(private service:AlluserService , private formBuilder: FormBuilder){}
 
   ngOnInit(): void {
-    this.dtoptions = {
+    (this.dtoptions = {
       paging: true,
-      pagingType: "full_number",
+      pagingType: 'full_number',
       autoWidth: true,
-      language:{
-        searchPlaceholder:"Search User"
-      }
-    }, 
-    this.loadData(),
-    this.addNewUserForm = this.formBuilder.group({
-      first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      npp: ['', Validators.required],
-      role: ['', Validators.required]
-    });
+      language: {
+        searchPlaceholder: 'Search User',
+      },
+    }),
+      this.loadData(),
+      (this.addNewUserForm = this.formBuilder.group({
+        first_name: ['', Validators.required],
+        last_name: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        npp: ['', Validators.required],
+        role: ['', Validators.required],
+      }));
   }
 
+
   loadData() {
-    this.service.LoadData().subscribe((item) => {
-      this.userTable = item;
-      this.dttrigger.next(null);
-    },
-    (error) => {
-      console.error('Error loading data', error);
-    }
-  );
-}
+    this.service.LoadData().subscribe(
+      (item) => {
+        this.userTable = item;
+        this.dttrigger.next(null);
+      },
+      (error) => {
+        console.error('Error loading data', error);
+      }
+    );
+  }
+
 
   onSubmitNewUser(): void {
     if (this.addNewUserForm.valid) {
@@ -57,10 +60,10 @@ export class UsersComponent implements OnInit{
     }
   }
 
-  editUserStatus():void {
-    console.log("edit user status")
+  editUserStatus(): void {
+    console.log('edit user status');
   }
-  
+
   generateUserPassword():void {
     console.log("request generate user password")
   }

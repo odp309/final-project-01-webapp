@@ -2,19 +2,31 @@
 <app-dashboard-container>
   <div class="container flex-auto bg-white dark:bg-slate-800 rounded-xl shadow-md">
     <div class="px-10 py-10 relative overflow-x-auto">
-      <div class="flex justify-end p-4">
-        <button type="button"
-          class="w-max h-max px-2 py-2 text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 shadow-lg shadow-orange-500/50 dark:shadow-lg dark:shadow-orange-800/80 font-medium rounded-xl justify-center flex items-center"
-          data-modal-toggle="addNewUserModal">
-          <svg class="w-[26px] h-[26px] " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-            fill="currentColor" viewBox="0 0 24 24">
-            <path fill-rule="evenodd"
-              d="M9 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4H7Zm8-1a1 1 0 0 1 1-1h1v-1a1 1 0 1 1 2 0v1h1a1 1 0 1 1 0 2h-1v1a1 1 0 1 1-2 0v-1h-1a1 1 0 0 1-1-1Z"
-              clip-rule="evenodd" />
-          </svg>
-          <span class="ml-3 font-normal text-base"> New User </span>
-        </button>
+      <div class="flex justify-between mb-3">
+        <div >
+          <label for="status" class="text-stone-600 text-sm font-medium pr-2"> Filter : </label>
+          <select id="statusFilter"
+          class="w-56 p-3 bg-white rounded-lg dark:bg-blue-500 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+            <option value="">All</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+        </div>
+        <div>
+          <button type="button"
+            class="w-full h-max px-4 py-2.5 text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 shadow-lg shadow-orange-500/50 dark:shadow-lg dark:shadow-orange-800/80 font-medium rounded-xl justify-center flex items-center"
+            data-modal-toggle="addNewUserModal">
+            <svg class="w-[26px] h-[26px] " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd"
+                d="M9 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4H7Zm8-1a1 1 0 0 1 1-1h1v-1a1 1 0 1 1 2 0v1h1a1 1 0 1 1 0 2h-1v1a1 1 0 1 1-2 0v-1h-1a1 1 0 0 1-1-1Z"
+                clip-rule="evenodd" />
+            </svg>
+            <span class="ml-3 font-normal text-base"> New User </span>
+          </button>
+        </div>
       </div>
+
       <table class="w-full text-sm text-left rtl:text-right row-border hover text-gray-500 dark:text-gray-400" datatable
         [dtOptions]="dtoptions">
         <thead class="thead">
@@ -22,8 +34,7 @@
             <th scope="col" class="px-6 py-3"> # </th>
             <th scope="col" class="px-6 py-3"> User ID </th>
             <th scope="col" class="px-6 py-3"> Email </th>
-            <th scope="col" class="px-6 py-3"> First Name </th>
-            <th scope="col" class="px-6 py-3"> Last Name </th>
+            <th scope="col" class="px-6 py-3"> Full Name </th>
             <th scope="col" class="px-6 py-3"> NPP </th>
             <th scope="col" class="px-6 py-3"> Role </th>
             <th scope="col" class="px-6 py-3"> Status </th>
@@ -31,23 +42,21 @@
           </tr>
         </thead>
         <tbody class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-          <!-- <tr *ngFor="let item of reservationTable ; let i = index" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          <!-- <tr *ngFor="let item of userTable ; let i = index" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
             <td class="px-6 py-3"> {{i+1}} </td>
-            <td class="px-6 py-3"> {{item.id}} </td>
             <td class="px-6 py-3"> {{item.email}} </td>
-            <td class="px-6 py-3"> {{item.first_name}} </td>
+            <td class="px-6 py-3"> {{item.first_name &&" "&& item.last_name }} </td>
             <td class="px-6 py-3"> {{item.last_name}} </td>
             <td class="px-6 py-3"> {{item.npp}} </td>
             <td class="px-6 py-3"> {{item.role}} </td>
             <td class="px-6 py-3"> 
-              <span 
-                [ngClass]="{
-                  'bg-green-100 text-green-800  h-8 w-full font-normal flex justify-center items-center rounded-xl': item.status === 'Active',
-                  'bg-gray-100 text-gray-800  h-8 w-full font-normal flex justify-center items-center rounded-xl': item.status === 'Inactive'
-                }"
-                class="px-2 py-1 rounded-full"
-                >
-                {{item.status}}
+              <div [ngClass]="item.status === true ?
+              'bg-green-300 text-green-800  h-8 w-full font-normal flex justify-center items-center rounded-xl':
+              'bg-gray-300 text-gray-800  h-8 w-full font-normal flex justify-center items-center rounded-xl'"
+              class="px-2 py-1 rounded-full">
+              </div>
+              <span>
+                {{item.status | status}}
               </span>
             </td>
             <td class="px-6 py-3">
@@ -100,13 +109,12 @@
             <td class="px-6 py-4"> 1 </td>
             <td class="px-6 py-3"> USER-001 </td>
             <td class="px-6 py-3"> test&#64;mail.com </td>
-            <td class="px-6 py-3"> Song </td>
-            <td class="px-6 py-3"> Hye Kyo </td>
+            <td class="px-6 py-3"> Song Hye Kyo </td>
             <td class="px-6 py-3"> P123123 </td>
             <td class="px-6 py-3"> Teller </td>
             <td class="px-6 py-3 flow justify-center ">
-              <div class="bg-gray-100 text-gray-800  h-8 w-full font-normal flex justify-center items-center rounded-xl">
-                <span class="leading-none">Inactive</span>
+              <div class="bg-gray-300 text-gray-800  h-8 w-full font-normal flex justify-center items-center rounded-xl">
+                <span class="leading-none" value="inactive">Inactive</span>
               </div>
             </td>
             <td class="px-6 py-3">
@@ -152,19 +160,18 @@
           </tr>
 
           <tr scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            <td class="px-6 py-4"> 1 </td>
-            <td class="px-6 py-3"> USER-001 </td>
-            <td class="px-6 py-3"> test&#64;mail.com </td>
-            <td class="px-6 py-3"> Song </td>
-            <td class="px-6 py-3"> Hye Kyo </td>
-            <td class="px-6 py-3"> P123123 </td>
-            <td class="px-6 py-3"> Teller </td>
-            <td class="px-6 py-3 flow justify-center ">
-              <div class="bg-green-100 text-green-800  h-8 w-full font-normal flex justify-center items-center rounded-xl">
-                <span class="leading-none">Active</span>
+            <td class="px-6 py-4"> 2 </td>
+            <td class="px-6 py-4"> USER-002 </td>
+            <td class="px-6 py-4"> test&#64;mail.com </td>
+            <td class="px-6 py-4"> Lee Min Ho </td>
+            <td class="px-6 py-4"> P123123 </td>
+            <td class="px-6 py-4"> Teller </td>
+            <td class="px-6 py-4 flow justify-center ">
+              <div class="bg-green-300 text-green-800  h-8 w-full font-normal flex justify-center items-center rounded-xl">
+                <span class="leading-none" value="active">Active</span>
               </div>
             </td>
-            <td class="px-6 py-3">
+            <td class="px-6 py-4">
           <tr flex justify-center items-center>
             <td>
               <button data-modal-target="editUserStatusModal" data-modal-toggle="editUserStatusModal"
@@ -208,6 +215,7 @@
         </tbody>
       </table>
     </div>
+    
   </div>
 </app-dashboard-container>
 
