@@ -36,23 +36,24 @@ export class UsersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    (this.dtoptions = {
+    this.dtoptions = {
       info: true,
       paging: true,
-      pagingType: 'full_number',
+      pageLength: 10,
+      pagingType: 'full_numbers',
       autoWidth: true,
       language: {
         searchPlaceholder: 'Search User',
       },
-    }),
+    },
       this.loadData(),
-      (this.addNewUserForm = this.formBuilder.group({
+      this.addNewUserForm = this.formBuilder.group({
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         nip: ['', Validators.required],
         role: ['', Validators.required],
-      })),
+      }),
       this.getRoles();
 
     const editUserStatusModal = document.getElementById('editUserStatusModal');

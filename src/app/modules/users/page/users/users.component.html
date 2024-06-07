@@ -1,8 +1,6 @@
 <app-dashboard-navbar></app-dashboard-navbar>
 <app-dashboard-container>
-  <div
-    class="container flex-auto bg-white dark:bg-slate-800 rounded-xl shadow-md"
-  >
+  <div class="container flex-auto bg-white dark:bg-slate-800 rounded-xl shadow-md">
     <div class="px-10 py-10 relative overflow-x-auto">
       <app-alert 
         [isVisible]="showAlert" 
@@ -11,7 +9,7 @@
         [message]="alertMessage">
       </app-alert>
       <div class="flex justify-between mb-3 mt-5">
-        <div>
+        <div id="filter-status">
           <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
           class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
           type="button" [ngClass]="">
@@ -44,15 +42,15 @@
             <label for="active" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Active</label>
           </li>
           <li class="flex items-center">
-            <input id="inactive" type="radio" value="Inactive" name="status" [(ngModel)]="selectedStatus"
+            <input id="disabled" type="radio" value="Disabled" name="status" [(ngModel)]="selectedStatus"
               (change)="filterStatus()"
               class="w-4 h-4 text-orange-600 bg-gray-100 border-gray-300 focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-            <label for="inactive" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Inactive</label>
+            <label for="disabled" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Disabled</label>
           </li>
         </ul>
       </div>
         </div>
-        <div>
+        <div id="add-user">
           <button type="button"
             class="w-full h-max px-4 py-2.5 text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 shadow-lg shadow-orange-500/50 dark:shadow-lg dark:shadow-orange-800/80 font-medium rounded-xl justify-center flex items-center"
             data-modal-toggle="addNewUserModal">
@@ -66,9 +64,9 @@
           </button>
         </div>
       </div>
-
       <table id="userTable"
-        class="w-full text-sm text-left rtl:text-right row-border hover text-gray-500 dark:text-gray-400" datatable
+        class="w-full text-sm text-left rtl:text-right row-border hover text-gray-500 dark:text-gray-400" 
+        datatable
         [dtOptions]="dtoptions"
         [dtTrigger]="dttrigger">
         <thead class="thead">
@@ -105,9 +103,9 @@
               <tr class="flex justify-center items-center">
                 <td>
                   <button 
-                    (click)="editUserStatus()"
+                    type="button"
                     data-modal-target="editUserStatusModal" data-modal-toggle="editUserStatusModal"
-                    data-tooltip-target="tooltip-edit-status" type="button" 
+                    data-tooltip-target="tooltip-edit-status"  
                     class="inline-flex items-center me-2 px-2.5 py-2 h-max tooltip-btn"
                     >
                     <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -115,28 +113,28 @@
                       <path d="M19.5239 15V18C19.5239 18.5304 19.3132 19.0391 18.9381 19.4142C18.5631 19.7893 18.0544 20 17.5239 20H6.52393C5.99349 20 5.48478 19.7893 5.10971 19.4142C4.73464 19.0391 4.52393 18.5304 4.52393 18V7C4.52393 6.46957 4.73464 5.96086 5.10971 5.58579C5.48478 5.21071 5.99349 5 6.52393 5H9.52393" stroke="#085E6B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </button>
-                  <div id="tooltip-edit-status" role="tooltip"
+                  <!-- <div id="tooltip-edit-status" role="tooltip"
                     class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
                     Edit Status
                     <div class="tooltip-arrow" data-popper-arrow></div>
-                  </div>
+                  </div> -->
                 </td>
                 <td>
                   <button 
+                    type="button"
                     data-modal-target="generateUserPasswordModal" data-modal-toggle="generateUserPasswordModal"
-                    data-tooltip-target="tooltip-generate-password" type="button" 
+                    data-tooltip-target="tooltip-generate-password"  
                     class="inline-flex items-center me-2 px-2.5 py-2 h-max tooltip-btn"
-                    (click)="generateUserPassword()">
+                    >
                     <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M18.8989 7.12489C18.8989 7.42157 18.811 7.71157 18.6461 7.95825C18.4813 8.20492 18.247 8.39718 17.973 8.51071C17.6989 8.62424 17.3973 8.65395 17.1063 8.59607C16.8153 8.53819 16.5481 8.39533 16.3383 8.18555C16.1285 7.97577 15.9856 7.7085 15.9278 7.41753C15.8699 7.12656 15.8996 6.82496 16.0131 6.55087C16.1266 6.27678 16.3189 6.04251 16.5656 5.87769C16.8123 5.71287 17.1023 5.62489 17.3989 5.62489C17.7968 5.62489 18.1783 5.78293 18.4596 6.06423C18.7409 6.34554 18.8989 6.72707 18.8989 7.12489ZM23.3989 9.25677C23.3254 11.2964 22.4656 13.2285 20.9996 14.6485C19.5336 16.0685 17.5752 16.8663 15.5342 16.8749H15.5239C14.7735 16.8761 14.0268 16.7694 13.3067 16.558L12.5699 17.2958C12.4653 17.4003 12.3412 17.4831 12.2046 17.5395C12.0681 17.596 11.9217 17.625 11.7739 17.6249H10.6489V18.7499C10.6489 19.0483 10.5304 19.3344 10.3194 19.5454C10.1084 19.7564 9.8223 19.8749 9.52393 19.8749H8.39893V20.9999C8.39893 21.2983 8.28041 21.5844 8.06943 21.7954C7.85845 22.0064 7.5723 22.1249 7.27393 22.1249H4.27393C3.77665 22.1249 3.29974 21.9273 2.94811 21.5757C2.59648 21.2241 2.39893 20.7472 2.39893 20.2499V17.5602C2.39827 17.3139 2.44648 17.0699 2.54078 16.8423C2.63509 16.6148 2.7736 16.4082 2.94831 16.2346L7.96581 11.2171C7.64801 10.1243 7.57085 8.97559 7.73964 7.85011C7.90843 6.72463 8.31916 5.6491 8.94354 4.6976C9.56792 3.7461 10.3911 2.94124 11.3564 2.33844C12.3217 1.73565 13.4062 1.34924 14.5352 1.20584C15.6642 1.06243 16.8109 1.16544 17.8963 1.50775C18.9816 1.85007 19.9799 2.42357 20.8223 3.18876C21.6648 3.95394 22.3313 4.89263 22.7762 5.94017C23.221 6.98772 23.4334 8.11922 23.3989 9.25677ZM19.5017 5.02208C18.959 4.47449 18.3087 4.04539 17.5917 3.76188C16.8748 3.47836 16.1069 3.34659 15.3364 3.37489C12.3364 3.46864 9.89893 5.98958 9.89893 8.98958C9.89663 9.70175 10.0303 10.4078 10.2927 11.0699C10.3811 11.2766 10.4056 11.505 10.363 11.7258C10.3204 11.9465 10.2127 12.1494 10.0536 12.3083L4.64893 17.7186V19.8749H6.14893V18.7499C6.14893 18.4515 6.26746 18.1654 6.47844 17.9544C6.68942 17.7434 6.97556 17.6249 7.27393 17.6249H8.39893V16.4999C8.39893 16.2015 8.51746 15.9154 8.72844 15.7044C8.93942 15.4934 9.22556 15.3749 9.52393 15.3749H11.3052L12.2099 14.4702C12.3689 14.311 12.5719 14.2031 12.7929 14.1605C13.0138 14.1179 13.2424 14.1425 13.4492 14.2311C14.1095 14.4931 14.8136 14.6267 15.5239 14.6249H15.5314C18.5314 14.6249 21.0505 12.1808 21.1461 9.18739C21.1744 8.4172 21.0429 7.6495 20.7599 6.93264C20.4769 6.21577 20.0485 5.56526 19.5017 5.02208Z" fill="#EF5C26"/>
-                      </svg>
-                      
+                    </svg>
                   </button>
-                  <div id="tooltip-generate-password" role="tooltip"
+                  <!-- <div id="tooltip-generate-password" role="tooltip"
                     class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
                     Generate Password
                     <div class="tooltip-arrow" data-popper-arrow></div>
-                  </div>
+                  </div> -->
                 </td>
               </tr>
             </td>
@@ -144,7 +142,6 @@
         </tbody>
       </table>
     </div>
-
   </div>
 </app-dashboard-container>
 
@@ -347,6 +344,7 @@
 <div
   id="editUserStatusModal"
   tabindex="-1"
+  aria-hidden="true"
   class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
 >
   <div class="relative p-4 w-full max-w-md max-h-full">
@@ -413,6 +411,7 @@
 <div
   id="generateUserPasswordModal"
   tabindex="-1"
+  aria-hidden="true"
   class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
 >
   <div class="relative p-4 w-full max-w-md max-h-full">

@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class StatusPipe implements PipeTransform {
 
   transform(value: boolean): string {
-    return value? 'Active' : 'Inactive';
+    return value? 'Active' : 'Disabled';
   }
 
 }
