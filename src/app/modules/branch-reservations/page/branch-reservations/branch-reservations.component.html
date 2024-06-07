@@ -3,12 +3,9 @@
   <div class="container flex-auto bg-white dark:bg-slate-800 rounded-xl shadow-md">
     <div class="px-10 py-10 relative overflow-x-auto">
       <div class="mb-5 flex justify-end">
-        <button 
-          id="filterDropdownButton" 
-          data-dropdown-toggle="filterDropdown"
+        <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
           class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-          type="button"
-          [ngClass]="">
+          type="button" [ngClass]="">
           <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-4 w-4 mr-2 text-gray-400"
             viewbox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd"
@@ -27,31 +24,33 @@
         <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Choose Status</h6>
         <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
           <li class="flex items-center">
-            <input id="all" type="radio" value="all" name="status" [(ngModel)]="selectedStatus" (change)="filterStatus()"
+            <input id="all" type="radio" value="all" name="status" [(ngModel)]="selectedStatus"
+              (change)="filterStatus()"
               class="w-4 h-4 text-orange-600 bg-gray-100 border-gray-300 focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
             <label for="inactive" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">All</label>
           </li>
           <li class="flex items-center">
-            <input id="scheduled" type="radio" value="Scheduled" name="status" [(ngModel)]="selectedStatus" (change)="filterStatus()"
+            <input id="scheduled" type="radio" value="Scheduled" name="status" [(ngModel)]="selectedStatus"
+              (change)="filterStatus()"
               class="w-4 h-4 text-orange-600 bg-gray-100 border-gray-300 focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
             <label for="scheduled" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Scheduled</label>
           </li>
           <li class="flex items-center">
-            <input id="expired" type="radio" value="Expired" name="status" [(ngModel)]="selectedStatus" (change)="filterStatus()"
+            <input id="expired" type="radio" value="Expired" name="status" [(ngModel)]="selectedStatus"
+              (change)="filterStatus()"
               class="w-4 h-4 text-orange-600 bg-gray-100 border-gray-300 focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
             <label for="expired" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Expired</label>
           </li>
           <li class="flex items-center">
-            <input id="done" type="radio" value="Done" name="status" [(ngModel)]="selectedStatus" (change)="filterStatus()"
+            <input id="done" type="radio" value="Done" name="status" [(ngModel)]="selectedStatus"
+              (change)="filterStatus()"
               class="w-4 h-4 text-orange-600 bg-gray-100 border-gray-300 focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
             <label for="done" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Done</label>
           </li>
         </ul>
       </div>
-      <table 
-        id="reservationTable"
-        class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400" datatable
-        [dtOptions]="dtoptions" [dtTrigger]="dttrigger">
+      <table id="reservationTable" class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+        datatable [dtOptions]="dtoptions" [dtTrigger]="dttrigger">
         <thead class="thead">
           <tr>
             <th scope="col" class="px-6 py-3"> #</th>
@@ -88,7 +87,7 @@
             <td class="px-6 py-4">{{ 'putra negara' | titlecase }}</td>
             <td class="px-6 py-4">$ 1,000.00</td>
             <td class="px-6 py-4">{{ reservationDate | date:'fullDate' }}</td>
-            <td class="px-6 py-4" >
+            <td class="px-6 py-4">
               <div class="scheduled">
                 <span class="leading-none">Scheduled</span>
               </div>
