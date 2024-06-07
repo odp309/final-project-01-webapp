@@ -13,6 +13,7 @@ export class BranchReservationsComponent implements OnInit {
   reservationTable: ReservationTable[] = [];
   dtoptions: Config = {};
   dttrigger: Subject<any> = new Subject<any>();
+  selectedStatus: string = 'all';
 
   constructor(private service: ReservationService) {}
 
@@ -60,5 +61,11 @@ export class BranchReservationsComponent implements OnInit {
       default:
         return '';
     }
+  }
+
+  filterStatus(): void {
+    const table = $('#reservationTable').DataTable();
+    const filterValue = this.selectedStatus === 'all' ? '' : this.selectedStatus;
+    table.column(5).search(filterValue, true, false).draw();
   }
 }
