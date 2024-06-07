@@ -40,7 +40,8 @@
 
       <table id="userTable"
         class="w-full text-sm text-left rtl:text-right row-border hover text-gray-500 dark:text-gray-400" datatable
-        [dtOptions]="dtoptions">
+        [dtOptions]="dtoptions"
+        [dtTrigger]="dttrigger">
         <thead class="thead">
           <tr>
             <th scope="col" class="px-6 py-3"> # </th>
@@ -53,25 +54,24 @@
           </tr>
         </thead>
         <tbody class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-          <!-- <tr *ngFor="let item of userTable ; let i = index" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          <tr *ngFor="let item of userTable ; let i = index" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
             <td class="px-6 py-3"> {{i+1}} </td>
             <td class="px-6 py-3"> {{item.email}} </td>
-            <td class="px-6 py-3"> {{item.firstName &&" "&& item.lastName }} </td>
-            <td class="px-6 py-3"> {{item.last_name}} </td>
+            <td class="px-6 py-3"> {{item.firstName + " " + item.lastName }} </td>
             <td class="px-6 py-3"> {{item.nip}} </td>
             <td class="px-6 py-3"> {{item.role}} </td>
             <td class="px-6 py-3"> 
-              <div [ngClass]="item.status === true ?
+              <div [ngClass]="item.isActive === true ?
               'bg-green-300 text-green-800  h-8 w-full font-normal flex justify-center items-center rounded-xl':
               'bg-gray-300 text-gray-800  h-8 w-full font-normal flex justify-center items-center rounded-xl'"
               class="px-2 py-1 rounded-full">
+            <span>
+              {{item.isActive | status}}
+            </span>
               </div>
-              <span>
-                {{item.status | status}}
-              </span>
             </td>
             <td class="px-6 py-3">
-              <tr flex justify-center items-center>
+              <tr class="flex justify-center items-center">
                 <td>
                   <button 
                     (click)="editUserStatus()"
@@ -109,7 +109,7 @@
                 </td>
               </tr>
             </td>
-          </tr> -->
+          </tr>
         </tbody>
       </table>
     </div>

@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Config } from 'datatables.net';
 import { AlluserService } from '../../../../core/services/datatable/users/alluser.service';
 import { UserTable } from '../../../../core/dto/datatable/userTable.dto';
 import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RoleDto } from '../../../../core/dto/user/role.dto';
-import { Router } from '@angular/router';
+import { RoleResponseDto } from '../../../../core/dto/user/roleResponse.dto';
 import { UsersService } from '../../../../core/services/users/users.service';
+import { Modal } from 'flowbite';
+import { StorageService } from '../../../../core/services/storage/storage.service';
+import { JwtDecoderService } from '../../../../core/services/jwt/jwt-decoder.service';
 
 @Component({
   selector: 'app-users',
@@ -18,7 +20,7 @@ export class UsersComponent implements OnInit {
   dtoptions: Config = {};
   dttrigger: Subject<any> = new Subject<any>();
   addNewUserForm!: FormGroup;
-  roles: RoleDto[] = [];
+  roles: RoleResponseDto[] = [];
   showAlert: boolean = false;
   alertType: 'success' | 'error' = 'success';
   alertTitle: string = '';
@@ -30,11 +32,14 @@ export class UsersComponent implements OnInit {
   constructor(
     private service: AlluserService,
     private formBuilder: FormBuilder,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private storageService: StorageService,
+    private jwtService: JwtDecoderService,
   ) {}
 
   ngOnInit(): void {
     (this.dtoptions = {
+      info: true,
       paging: true,
       pagingType: 'full_number',
       autoWidth: true,
@@ -53,19 +58,46 @@ export class UsersComponent implements OnInit {
       this.filterUsers(),
       this.resetFilter();
       this.getRoles();
+      
+      const editUserStatusModal = document.getElementById('editUserStatusModal');
+      if (editUserStatusModal) {
+        const modalInstance = new Modal(editUserStatusModal);
+      } else {
+        console.error('Modal element not found');
+      }
+
+      const generateUserPasswordModal = document.getElementById('generateUserPasswordModal');
+      if (generateUserPasswordModal) {
+        const modalInstance = new Modal(generateUserPasswordModal);
+      } else {
+        console.error('Modal element not found');
+      }
   }
 
 
   loadData() {
-    this.service.LoadData().subscribe(
-      (item) => {
-        // this.userTable = item;
-        this.dttrigger.next(null);
-      },
-      (error) => {
-        console.error('Error loading data', error);
-      }
-    );
+    const token = this.storageService.getToken();
+    const decodedToken: any = this.jwtService.decodeToken(token);
+    const branchName = decodedToken.branch;
+    
+    // Define a function to fetch data
+    const fetchData = () => {
+      this.service.LoadData(branchName).subscribe(
+        (item) => {
+          this.userTable = item;
+        },
+        (error) => {
+          console.error('Error loading data', error);
+        }
+      );
+    };
+  
+    // Fetch data initially
+    fetchData();
+  
+    // Set an interval to fetch data periodically (e.g., every 5 seconds)
+    setInterval(fetchData, 5000); // Adjust the interval as needed
+  
   }
 
   public onSubmitNewUser(): void {
@@ -94,8 +126,8 @@ export class UsersComponent implements OnInit {
         delete userData.role;
         this.usersService.createEmployeeTeller(userData).subscribe(
           (response) => {
-            console.log('Employee created successfully', response);
             this.addNewUserForm.reset();
+            this.showAlertMessage('success', 'Employee created successfully');
           },
           (error) => {
             console.error('Error creating employee', error);
@@ -125,7 +157,7 @@ export class UsersComponent implements OnInit {
       this.filteredUsers = [...this.userTable];
     } else {
       const isActive = this.statusFilter === 'active';
-      this.filteredUsers = this.userTable.filter(user => user.status === isActive);
+      this.filteredUsers = this.userTable.filter(user => user.isActive === isActive);
     }
   }
 

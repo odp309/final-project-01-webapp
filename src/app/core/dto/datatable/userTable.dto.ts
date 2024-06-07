@@ -4,5 +4,5 @@ export interface UserTable {
     lastName: string,
     nip : string,
     role : string,
-    status : boolean
+    isActive : boolean
 }
