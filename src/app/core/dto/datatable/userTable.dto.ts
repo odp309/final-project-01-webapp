@@ -3,6 +3,6 @@ export interface UserTable {
     firstName : string,
     lastName: string,
     nip : string,
-    role : string,
+    roleName : string,
     isActive : boolean
 }

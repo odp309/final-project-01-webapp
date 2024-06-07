@@ -83,12 +83,14 @@
           </tr>
         </thead>
         <tbody class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-          <tr *ngFor="let item of userTable ; let i = index" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          <tr *ngFor="let item of userTable ; let i = index" scope="row" class="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
             <td class="px-6 py-3"> {{i+1}} </td>
             <td class="px-6 py-3"> {{item.email}} </td>
-            <td class="px-6 py-3"> {{item.firstName + " " + item.lastName }} </td>
+            <td class="px-6 py-3"> {{item.firstName + " " + item.lastName | titlecase }} </td>
             <td class="px-6 py-3"> {{item.nip}} </td>
-            <td class="px-6 py-3"> {{item.role}} </td>
+            <td class="px-6 py-3">
+              {{ item.roleName === 'ADMIN_MGR' ? 'Admin Manager' : item.roleName | titlecase }} 
+            </td>
             <td class="px-6 py-3"> 
               <div [ngClass]="item.isActive === true ?
               'bg-green-300 text-green-800  h-8 w-full font-normal flex justify-center items-center rounded-xl':
