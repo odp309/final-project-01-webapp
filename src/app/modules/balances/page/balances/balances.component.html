@@ -10,6 +10,10 @@
         Balance Information
       </p>
       <table
+        id="balanceTable"
+        datatable
+        [dtOptions]="dtoptions"
+        [dtTrigger]="dttrigger"
         class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
       >
         <thead
@@ -21,77 +25,21 @@
             <th scope="col" class="px-6 py-3">Currency Name</th>
             <th scope="col" class="px-6 py-3">Balance</th>
             <th scope="col" class="px-6 py-3">Last Updated</th>
-            <th scope="col" class="px-6 py-3">Action</th>
+            <th *ngIf="role === 'ADMIN'" scope="col" class="px-6 py-3">Action</th>
           </tr>
         </thead>
         <tbody class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-          <!-- <tr *ngFor="let item of reservationTable ; let i = index" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" >
-                            <td class="px-6 py-4">{{ i + 1 }}</td>
-                            <td class="px-6 py-4">{{ item.currencyCode}}</td>
-                            <td class="px-6 py-4">{{ item.currencyName }}</td>
-                            <td class="px-6 py-4">{{ item.balance }}</td>
-                            <td class="px-6 py-4">{{ item.updatedAt}}</td>
-                            <td class="px-6 py-4">
-                            <button
-                              data-modal-target="addStockModal"
-                              data-modal-toggle="addStockModal"
-                              type="button"
-                              class="px-5 py-3 text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 shadow-lg shadow-orange-500/50 dark:shadow-lg dark:shadow-orange-800/80 font-medium rounded-xl text-center"
-                            >
-                              Add Stock
-                            </button>
-                          </td>  -->
-
           <tr
+            *ngFor="let item of balanceTable; let i = index"
             scope="row"
             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
           >
-            <td class="px-6 py-4">1</td>
-            <td class="px-6 py-4">USD</td>
-            <td class="px-6 py-4">United States dollar</td>
-            <td class="px-6 py-4">$ 1,000.00</td>
-            <td class="px-6 py-4">{{ updatedAt | date : "fullDate" }}</td>
-            <td class="px-6 py-4">
-              <button
-                data-modal-target="addStockModal"
-                data-modal-toggle="addStockModal"
-                type="button"
-                class="px-5 py-3 text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 shadow-lg shadow-orange-500/50 dark:shadow-lg dark:shadow-orange-800/80 font-medium rounded-xl text-center"
-              >
-                Add Stock
-              </button>
-            </td>
-          </tr>
-          <tr
-            scope="row"
-            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-          >
-            <td class="px-6 py-4">2</td>
-            <td class="px-6 py-4">SGD</td>
-            <td class="px-6 py-4">Singapore dollar</td>
-            <td class="px-6 py-4">$ 1,000.00</td>
-            <td class="px-6 py-4">{{ updatedAt | date : "fullDate" }}</td>
-            <td class="px-6 py-4">
-              <button
-                data-modal-target="addStockModal"
-                data-modal-toggle="addStockModal"
-                type="button"
-                class="px-5 py-3 text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 shadow-lg shadow-orange-500/50 dark:shadow-lg dark:shadow-orange-800/80 font-medium rounded-xl text-center"
-              >
-                Add Stock
-              </button>
-            </td>
-          </tr>
-          <tr
-            scope="row"
-            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-          >
-            <td class="px-6 py-4">3</td>
-            <td class="px-6 py-4">EUR</td>
-            <td class="px-6 py-4">Euro</td>
-            <td class="px-6 py-4">1,000.00 €</td>
-            <td class="px-6 py-4">{{ updatedAt | date : "fullDate" }}</td>
-            <td class="px-6 py-4">
+            <td class="px-6 py-4">{{ i + 1 }}</td>
+            <td class="px-6 py-4">{{ item.currencyCode }}</td>
+            <td class="px-6 py-4">{{ item.currencyName }}</td>
+            <td class="px-6 py-4">{{ item.balance }}</td>
+            <td class="px-6 py-4">{{ item.updatedAt }}</td>
+            <td *ngIf="role === 'ADMIN'" class="px-6 py-4">
               <button
                 data-modal-target="addStockModal"
                 data-modal-toggle="addStockModal"
