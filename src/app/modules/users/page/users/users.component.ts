@@ -6,7 +6,6 @@ import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RoleResponseDto } from '../../../../core/dto/user/roleResponse.dto';
 import { UsersService } from '../../../../core/services/users/users.service';
-import { Modal } from 'flowbite';
 import { StorageService } from '../../../../core/services/storage/storage.service';
 import { JwtDecoderService } from '../../../../core/services/jwt/jwt-decoder.service';
 
@@ -32,13 +31,14 @@ export class UsersComponent implements OnInit {
     private formBuilder: FormBuilder,
     private usersService: UsersService,
     private storageService: StorageService,
-    private jwtService: JwtDecoderService
+    private jwtService: JwtDecoderService,
   ) {}
 
   ngOnInit(): void {
     this.dtoptions = {
       info: true,
       paging: true,
+      destroy: true,
       pageLength: 10,
       pagingType: 'full_numbers',
       autoWidth: true,
@@ -55,22 +55,6 @@ export class UsersComponent implements OnInit {
         role: ['', Validators.required],
       }),
       this.getRoles();
-
-    const editUserStatusModal = document.getElementById('editUserStatusModal');
-    if (editUserStatusModal) {
-      const modalInstance = new Modal(editUserStatusModal);
-    } else {
-      console.error('Modal element not found');
-    }
-
-    const generateUserPasswordModal = document.getElementById(
-      'generateUserPasswordModal'
-    );
-    if (generateUserPasswordModal) {
-      const modalInstance = new Modal(generateUserPasswordModal);
-    } else {
-      console.error('Modal element not found');
-    }
   }
 
   loadData() {
@@ -83,6 +67,7 @@ export class UsersComponent implements OnInit {
       this.service.LoadData(branchName).subscribe(
         (item) => {
           this.userTable = item;
+            this.dttrigger.next(null);
         },
         (error) => {
           console.error('Error loading data', error);
@@ -136,12 +121,30 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  editUserStatus(): void {
-    console.log('edit user status');
+  openModal(modalId: string): void {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
   }
 
-  generateUserPassword(): void {
+  closeModal(modalId: string): void {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    }
+  }
+
+  editUserStatus(modalId: string): void {
+    console.log('edit user status');
+    this.closeModal(modalId);
+  }
+
+  generatePassword(modalId: string): void {
     console.log('request generate user password');
+    this.closeModal(modalId)
   }
 
   filterStatus(): void {
