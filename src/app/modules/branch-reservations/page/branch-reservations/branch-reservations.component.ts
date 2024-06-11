@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ReservationTable } from '../../../../core/dto/datatable/reservationTable.dto';
 import { Config } from 'datatables.net';
 import { Subject } from 'rxjs';
 import { ReservationService } from '../../../../core/services/datatable/reservations/reservation.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { StorageService } from '../../../../core/services/storage/storage.service';
 import { JwtDecoderService } from '../../../../core/services/jwt/jwt-decoder.service';
+import { Modal } from 'flowbite';
 
 @Component({
   selector: 'app-branch-reservations',
@@ -14,6 +15,7 @@ import { JwtDecoderService } from '../../../../core/services/jwt/jwt-decoder.ser
 })
 export class BranchReservationsComponent implements OnInit {
   reservationTable: ReservationTable[] = [];
+  updateStatusForm!: FormGroup;
   dtoptions: Config = {};
   dttrigger: Subject<any> = new Subject<any>();
   selectedStatus: string = 'all';
@@ -21,16 +23,31 @@ export class BranchReservationsComponent implements OnInit {
   accessToken?: any;
   user?: any;
 
+  @ViewChild('updateReservationModal') updateReservationModalRef!: ElementRef;
+  updateReservationModal!: Modal;
+  selectedReservation: ReservationTable | null = null;
+
   // get today date, delete this if the api response is valid
   reservationDate: Date = new Date();
 
   constructor(
     private service: ReservationService,
-    private formBuilder: FormBuilder,
+    private fb: FormBuilder,
     private storageService: StorageService,
     private jwtDecoderService: JwtDecoderService,
   ) {
     this.accessToken = localStorage.getItem('jwtToken')?.toString();
+    this.updateStatusForm = this.fb.group({
+      reservationNumber: [''],
+      customerName: [''],
+      accountNumber: [''],
+      currencyCode: [''],
+      amount: [''],
+      status: [''],
+      reservationDate: [''],
+      createdDate: ['']
+    });
+
   }
 
   ngOnInit(): void {
@@ -74,9 +91,6 @@ export class BranchReservationsComponent implements OnInit {
 
     // Fetch data initially
     fetchData();
-
-    // Set an interval to fetch data periodically (e.g., every 5 seconds)
-    setInterval(fetchData, 5000); // Adjust the interval as needed
   }
   
 
@@ -85,7 +99,7 @@ export class BranchReservationsComponent implements OnInit {
   }
 
   getStatusClass(status: string): string {
-    switch (status) {
+    switch (status.toLocaleLowerCase()) {
       case 'scheduled':
         return 'scheduled';
       case 'expired':
@@ -102,4 +116,53 @@ export class BranchReservationsComponent implements OnInit {
     const filterValue = this.selectedStatus === 'all' ? '' : this.selectedStatus;
     table.column(5).search(filterValue, true, false).draw();
   }
+
+  ngAfterViewInit(): void {
+    // Initialize modals
+      this.initModals();
+  }
+
+  private initModals(): void {
+    console.log('Initializing modals...');
+
+    if (this.updateReservationModalRef) {
+      const updateReservationModalElement = this.updateReservationModalRef.nativeElement;
+
+      console.log('Edit User Status Modal Element:', updateReservationModalElement);
+      
+      if (updateReservationModalElement) {
+        this.updateReservationModal = new Modal(updateReservationModalElement);
+        console.log('Modals initialized successfully.');
+      } else {
+        console.error('Modal elements are not found in the DOM.');
+      }
+    } else {
+      console.error('Modal ViewChild elements are not available.');
+    }
+  }
+
+  showUpdateReservationModal(reservation: ReservationTable): void {
+    if (this.updateReservationModal) {
+      this.updateStatusForm.patchValue({
+        reservationNumber: reservation.reservationNumber,
+        customerName: reservation.customerName,
+        accountNumber: reservation.accountNumber,
+        currencyCode: reservation.currencyCode,
+        amount: reservation.amount,
+        status: reservation.status,
+        reservationDate: reservation.reservationDate,
+        createdDate: reservation.createdDate
+      });
+      this.updateReservationModal.show();
+    } else {
+      console.error('Edit User Status Modal is not initialized.');
+    }
+  }
+
+  hideUpdateReservationModal(): void {
+    if (this.updateReservationModal) {
+      this.updateReservationModal.hide();
+    }
+  }
+
 }

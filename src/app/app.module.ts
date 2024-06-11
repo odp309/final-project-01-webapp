@@ -30,6 +30,7 @@ import { ChartsComponent } from './modules/dashboard/components/charts/charts.co
 import { AmountPipe } from './core/services/pipe/amount/amount.pipe';
 import { AlertComponent } from './shared/components/alert/alert.component';
 import { StatusPipe } from './core/services/pipe/status/status.pipe';
+import { ValasPipe } from './core/services/pipe/amount/valas.pipe';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { StatusPipe } from './core/services/pipe/status/status.pipe';
     AmountPipe,
     AlertComponent,
     StatusPipe,
+    ValasPipe,
   ],
   imports: [
     BrowserModule,
