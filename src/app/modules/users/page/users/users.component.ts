@@ -1,4 +1,12 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import { Config } from 'datatables.net';
 import { AlluserService } from '../../../../core/services/datatable/users/alluser.service';
 import { UserTable } from '../../../../core/dto/datatable/userTable.dto';
@@ -8,13 +16,14 @@ import { RoleResponseDto } from '../../../../core/dto/user/roleResponse.dto';
 import { UsersService } from '../../../../core/services/users/users.service';
 import { StorageService } from '../../../../core/services/storage/storage.service';
 import { JwtDecoderService } from '../../../../core/services/jwt/jwt-decoder.service';
+import { Modal } from 'flowbite';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrl: './users.component.css',
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, AfterViewInit {
   userTable: UserTable[] = [];
   dtoptions: Config = {};
   dttrigger: Subject<any> = new Subject<any>();
@@ -25,6 +34,13 @@ export class UsersComponent implements OnInit {
   alertTitle: string = '';
   alertMessage: string = '';
   selectedStatus: string = 'all';
+  @ViewChild('editUserStatusModal') editUserStatusModalRef!: ElementRef;
+  @ViewChild('generatePasswordModal') generatePasswordModalRef!: ElementRef;
+
+  editUserStatusModal!: Modal;
+  generatePasswordModal!: Modal;
+
+  selectedUser: UserTable | null = null;
 
   constructor(
     private service: AlluserService,
@@ -32,10 +48,11 @@ export class UsersComponent implements OnInit {
     private usersService: UsersService,
     private storageService: StorageService,
     private jwtService: JwtDecoderService,
+    private cdRef: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
-    this.dtoptions = {
+    (this.dtoptions = {
       info: true,
       paging: true,
       destroy: true,
@@ -45,16 +62,82 @@ export class UsersComponent implements OnInit {
       language: {
         searchPlaceholder: 'Search User',
       },
-    },
+    }),
       this.loadData(),
-      this.addNewUserForm = this.formBuilder.group({
+      (this.addNewUserForm = this.formBuilder.group({
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         nip: ['', Validators.required],
         role: ['', Validators.required],
-      }),
-      this.getRoles();
+      })),
+      this.getRoles()
+  }
+
+  ngAfterViewInit(): void {
+    // Initialize modals
+      this.initModals();
+      this.cdRef.detectChanges();
+  }
+
+  private initModals(): void {
+    console.log('Initializing modals...');
+
+    if (this.editUserStatusModalRef && this.generatePasswordModalRef) {
+      const editUserStatusModalElement = this.editUserStatusModalRef.nativeElement;
+      const generatePasswordModalElement = this.generatePasswordModalRef.nativeElement;
+
+      console.log('Edit User Status Modal Element:', editUserStatusModalElement);
+      console.log('Generate Password Modal Element:', generatePasswordModalElement);
+
+      if (editUserStatusModalElement && generatePasswordModalElement) {
+        this.editUserStatusModal = new Modal(editUserStatusModalElement);
+        this.generatePasswordModal = new Modal(generatePasswordModalElement);
+        console.log('Modals initialized successfully.');
+      } else {
+        console.error('Modal elements are not found in the DOM.');
+      }
+    } else {
+      console.error('Modal ViewChild elements are not available.');
+    }
+  }
+
+  showEditUserStatusModal(user: UserTable): void {
+    this.selectedUser = user;
+    if (this.editUserStatusModal) {
+      this.editUserStatusModal.show();
+    } else {
+      console.error('Edit User Status Modal is not initialized.');
+    }
+  }
+
+  hideEditUserStatusModal(): void {
+    if (this.editUserStatusModal) {
+      this.editUserStatusModal.hide();
+    }
+  }
+
+  showGeneratePasswordModal(user: UserTable): void {
+    this.selectedUser = user;
+    if (this.generatePasswordModal) {
+      this.generatePasswordModal.show();
+    } else {
+      console.error('Generate Password Modal is not initialized.');
+    }
+  }
+
+  hideGeneratePasswordModal(): void {
+    if (this.generatePasswordModal) {
+      this.generatePasswordModal.hide();
+    }
+  }
+
+  editUserStatus() : void {
+    console.log("change user status" )
+  }
+
+  generateUserPassword() : void {
+    console.log("generate user password" )
   }
 
   loadData() {
@@ -67,7 +150,7 @@ export class UsersComponent implements OnInit {
       this.service.LoadData(branchName).subscribe(
         (item) => {
           this.userTable = item;
-            this.dttrigger.next(null);
+          this.dttrigger.next(null);
         },
         (error) => {
           console.error('Error loading data', error);
@@ -79,7 +162,7 @@ export class UsersComponent implements OnInit {
     fetchData();
 
     // Set an interval to fetch data periodically (e.g., every 5 seconds)
-    setInterval(fetchData, 5000); // Adjust the interval as needed
+    // setInterval(fetchData, 5000); // Adjust the interval as needed
   }
 
   public onSubmitNewUser(): void {
@@ -119,32 +202,6 @@ export class UsersComponent implements OnInit {
     } else {
       console.log('Form is invalid');
     }
-  }
-
-  openModal(modalId: string): void {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    }
-  }
-
-  closeModal(modalId: string): void {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-      modal.classList.remove('flex');
-      modal.classList.add('hidden');
-    }
-  }
-
-  editUserStatus(modalId: string): void {
-    console.log('edit user status');
-    this.closeModal(modalId);
-  }
-
-  generatePassword(modalId: string): void {
-    console.log('request generate user password');
-    this.closeModal(modalId)
   }
 
   filterStatus(): void {
