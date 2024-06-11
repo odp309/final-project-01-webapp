@@ -8,6 +8,7 @@ import { RoleResponseDto } from '../../../../core/dto/user/roleResponse.dto';
 import { UsersService } from '../../../../core/services/users/users.service';
 import { StorageService } from '../../../../core/services/storage/storage.service';
 import { JwtDecoderService } from '../../../../core/services/jwt/jwt-decoder.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -32,6 +33,7 @@ export class UsersComponent implements OnInit {
     private usersService: UsersService,
     private storageService: StorageService,
     private jwtService: JwtDecoderService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -80,9 +82,6 @@ export class UsersComponent implements OnInit {
 
     // Fetch data initially
     fetchData();
-
-    // Set an interval to fetch data periodically (e.g., every 5 seconds)
-    setInterval(fetchData, 5000); // Adjust the interval as needed
   }
 
   public onSubmitNewUser(): void {
@@ -97,10 +96,14 @@ export class UsersComponent implements OnInit {
           (response) => {
             console.log('Employee created successfully', response);
             this.addNewUserForm.reset();
+            this.router.navigate(['/users']).then(() => {
+              window.location.reload();
+            });
             this.showAlertMessage('success', 'Employee created successfully');
           },
           (error) => {
             console.error('Error creating employee', error);
+            this.showAlertMessage('error', 'Error creating employee');
           }
         );
       } else {
@@ -112,10 +115,14 @@ export class UsersComponent implements OnInit {
         this.usersService.createEmployeeTeller(userData).subscribe(
           (response) => {
             this.addNewUserForm.reset();
+            this.router.navigate(['/users']).then(() => {
+              window.location.reload();
+            });
             this.showAlertMessage('success', 'Employee created successfully');
           },
           (error) => {
             console.error('Error creating employee', error);
+            this.showAlertMessage('error', 'Error creating employee');
           }
         );
       }
