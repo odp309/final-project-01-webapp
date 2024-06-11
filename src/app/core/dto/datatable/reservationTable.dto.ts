@@ -1,8 +1,10 @@
 export interface ReservationTable {
-    reservationNumber:number,
-    userName: string,
-    amount:string,
-    sellCurrency:string,
-    reservationDate: string,
+    reservationNumber:number
+    customerName: string
+    amount:string
+    sellCurrency:string
+    reservationDate: Date
     status: string
+    createdDate: Date
+    accountNumber: string
 }

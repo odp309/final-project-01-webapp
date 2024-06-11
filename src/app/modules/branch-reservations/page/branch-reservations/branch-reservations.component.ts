@@ -3,6 +3,9 @@ import { ReservationTable } from '../../../../core/dto/datatable/reservationTabl
 import { Config } from 'datatables.net';
 import { Subject } from 'rxjs';
 import { ReservationService } from '../../../../core/services/datatable/reservations/reservation.service';
+import { FormBuilder } from '@angular/forms';
+import { StorageService } from '../../../../core/services/storage/storage.service';
+import { JwtDecoderService } from '../../../../core/services/jwt/jwt-decoder.service';
 
 @Component({
   selector: 'app-branch-reservations',
@@ -14,35 +17,66 @@ export class BranchReservationsComponent implements OnInit {
   dtoptions: Config = {};
   dttrigger: Subject<any> = new Subject<any>();
   selectedStatus: string = 'all';
-
-  constructor(private service: ReservationService) {}
+  role?: any;
+  accessToken?: any;
+  user?: any;
 
   // get today date, delete this if the api response is valid
   reservationDate: Date = new Date();
 
+  constructor(
+    private service: ReservationService,
+    private formBuilder: FormBuilder,
+    private storageService: StorageService,
+    private jwtDecoderService: JwtDecoderService,
+  ) {
+    this.accessToken = localStorage.getItem('jwtToken')?.toString();
+  }
+
   ngOnInit(): void {
+    if (this.accessToken) {
+      const roles = localStorage.getItem('roles');
+      const getRoleName = roles ? JSON.parse(roles) : null;
+      this.role = getRoleName.name;
+    }
     this.dtoptions = {
-      columnDefs: [{ targets: '_all', className: 'dt-head-center' }],
       info: true,
       paging: true,
+      destroy: true,
+      pageLength: 10,
+      pagingType: 'full_numbers',
       autoWidth: true,
       language: {
-        searchPlaceholder: 'Search Exchange Rate',
+        searchPlaceholder: 'Search Balance',
       },
-    };
-    this.loadData();
+    },
+      this.loadData();
   }
 
   loadData() {
-    this.service.LoadData().subscribe(
-      (item) => {
-        this.reservationTable = item;
-        this.dttrigger.next(null);
-      },
-      (error) => {
-        console.error('Error loading data', error);
-      }
-    );
+    const token = this.storageService.getToken();
+    const decodedToken: any = this.jwtDecoderService.decodeToken(token);
+    const brachName = decodedToken.branchCode;
+
+    // Define a function to fetch data
+    const fetchData = () => {
+      this.service.LoadData(brachName).subscribe(
+        (item) => {
+          console.log('success');
+          this.reservationTable = item;
+            this.dttrigger.next(null);
+        },
+        (error) => {
+          console.error('Error loading data', error);
+        }
+      );
+    };
+
+    // Fetch data initially
+    fetchData();
+
+    // Set an interval to fetch data periodically (e.g., every 5 seconds)
+    setInterval(fetchData, 5000); // Adjust the interval as needed
   }
   
 
@@ -52,12 +86,12 @@ export class BranchReservationsComponent implements OnInit {
 
   getStatusClass(status: string): string {
     switch (status) {
-      case 'Scheduled':
+      case 'scheduled':
         return 'scheduled';
-      case 'Expired':
+      case 'expired':
         return 'expired';
-      case 'Done':
-        return 'done';
+      case 'success':
+        return 'success';
       default:
         return '';
     }

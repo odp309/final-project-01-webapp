@@ -70,6 +70,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
         email: ['', [Validators.required, Validators.email]],
         nip: ['', Validators.required],
         role: ['', Validators.required],
+        branchCode: [this.getBranchCode(), Validators.required],
       })),
       this.getRoles()
   }
@@ -139,15 +140,17 @@ export class UsersComponent implements OnInit, AfterViewInit {
   generateUserPassword() : void {
     console.log("generate user password" )
   }
-
-  loadData() {
+  private getBranchCode(): string {
     const token = this.storageService.getToken();
     const decodedToken: any = this.jwtService.decodeToken(token);
-    const branchName = decodedToken.branch;
+    return decodedToken.branchCode;
+  }
 
+
+  loadData() {
     // Define a function to fetch data
     const fetchData = () => {
-      this.service.LoadData(branchName).subscribe(
+      this.service.LoadData(this.getBranchCode()).subscribe(
         (item) => {
           this.userTable = item;
           this.dttrigger.next(null);

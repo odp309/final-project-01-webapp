@@ -4,4 +4,5 @@ export interface UserRequestDto {
     lastName: string;
     password: string;
     nip: string;
+    branchCode: string;
 }
