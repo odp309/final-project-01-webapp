@@ -13,8 +13,8 @@ export class ReservationService {
 
   constructor(private http:HttpClient) { }
 
-  LoadData(brachName: string): Observable<ReservationTable[]> {
-    const payload = { brachName: brachName };
+  LoadData(branchCode: string): Observable<ReservationTable[]> {
+    const payload = { branchCode: branchCode };
     return this.http.post<ReservationTable[]>(getReservationsApi, payload);
   }
 }
