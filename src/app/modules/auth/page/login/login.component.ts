@@ -23,6 +23,11 @@ export class LoginComponent implements OnInit {
   displayHidden = { display: 'none' };
   validCounter: number = 0;
   loadingIcon = faCircleNotch;
+  errorStatusCode?: number;
+  alertTitle: string = '';
+  alertMessage: string = '';
+  alertType: 'success' | 'error' = 'success';
+  showAlert: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -87,6 +92,21 @@ export class LoginComponent implements OnInit {
           this.errorMessageStyle = this.displayBlock;
           this.loadingStyle = this.displayHidden;
           this.validCounter = 0;
+          this.errorStatusCode = error.status;
+          switch (this.errorStatusCode) {
+            case 401:
+              this.showAlert = true;
+              this.alertType = 'error';
+              this.alertTitle = 'Sorry'
+              this.alertMessage = 'our email and password is incorrect. Please try again.';
+              break;
+            default:
+              this.showAlert = true;
+              this.alertType = 'error';
+              this.alertTitle = 'Sorry'
+              this.alertMessage = 'something went wrong. Please try again.';
+            break;
+          }
         },
         complete: () => {
           this.loadingStyle = this.displayHidden;
