@@ -89,8 +89,8 @@
                 <span>{{item.isActive | status}}</span>
               </div>
             </td>
-            <td class="px-6 py-3">
-              <div class="flex justify-center items-center">
+            <td class="px-6 py-3" >
+              <div class="flex justify-center items-center" *ngIf="item.roleName !== 'ADMIN_MGR'">
                 <!-- Button Edit Status -->
                 <div>
                   <button (click)="showEditUserStatusModal(item)" type="button"
