@@ -162,7 +162,10 @@ export class UsersComponent implements OnInit, AfterViewInit {
     fetchData();
 
     // Set an interval to fetch data periodically (e.g., every 5 seconds)
-    setInterval(fetchData, 5000); // Adjust the interval as needed
+    setInterval(() => {
+      fetchData();
+      this.initModals(); // Re-initialize modals after fetching new data
+    }, 5000);
   }
 
   public onSubmitNewUser(): void {
