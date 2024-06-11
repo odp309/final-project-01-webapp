@@ -56,7 +56,7 @@ export class BranchReservationsComponent implements OnInit {
   loadData() {
     const token = this.storageService.getToken();
     const decodedToken: any = this.jwtDecoderService.decodeToken(token);
-    const brachName = decodedToken.branch;
+    const brachName = decodedToken.branchCode;
 
     // Define a function to fetch data
     const fetchData = () => {

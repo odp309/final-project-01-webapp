@@ -13,8 +13,8 @@ export class AlluserService {
 
   constructor( private http:HttpClient) {}
 
-  LoadData(branchName: string): Observable<UserTable[]> {
-    const payload = { branchName: branchName };
+  LoadData(branchCode: string): Observable<UserTable[]> {
+    const payload = { branchCode: branchCode };
     return this.http.post<UserTable[]>(getEmployeeApi, payload);
   }
 

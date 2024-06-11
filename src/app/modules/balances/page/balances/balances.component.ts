@@ -57,11 +57,11 @@ export class BalancesComponent {
   loadData() {
     const token = this.storageService.getToken();
     const decodedToken: any = this.jwtDecoderService.decodeToken(token);
-    const branchName = decodedToken.branch;
+    const branchCode = decodedToken.branchCode;
 
     // Define a function to fetch data
     const fetchData = () => {
-      this.service.LoadData(branchName).subscribe(
+      this.service.LoadData(branchCode).subscribe(
         (item) => {
           this.balanceTable = item;
             this.dttrigger.next(null);
