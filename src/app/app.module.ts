@@ -47,7 +47,7 @@ import { StatusPipe } from './core/services/pipe/status/status.pipe';
     ChartsComponent,
     AmountPipe,
     AlertComponent,
-    StatusPipe
+    StatusPipe,
   ],
   imports: [
     BrowserModule,
