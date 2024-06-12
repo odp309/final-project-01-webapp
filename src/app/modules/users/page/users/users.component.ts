@@ -18,6 +18,7 @@ import { StorageService } from '../../../../core/services/storage/storage.servic
 import { JwtDecoderService } from '../../../../core/services/jwt/jwt-decoder.service';
 import { Router } from '@angular/router';
 import { Modal } from 'flowbite';
+import { UserRequestDto } from '../../../../core/dto/user/userRequest.dto';
 
 @Component({
   selector: 'app-users',
@@ -105,49 +106,11 @@ export class UsersComponent implements OnInit, AfterViewInit {
     }
   }
 
-  showEditUserStatusModal(user: UserTable): void {
-    this.selectedUser = user;
-    if (this.editUserStatusModal) {
-      this.editUserStatusModal.show();
-    } else {
-      console.error('Edit User Status Modal is not initialized.');
-    }
-  }
-
-  hideEditUserStatusModal(): void {
-    if (this.editUserStatusModal) {
-      this.editUserStatusModal.hide();
-    }
-  }
-
-  showGeneratePasswordModal(user: UserTable): void {
-    this.selectedUser = user;
-    if (this.generatePasswordModal) {
-      this.generatePasswordModal.show();
-    } else {
-      console.error('Generate Password Modal is not initialized.');
-    }
-  }
-
-  hideGeneratePasswordModal(): void {
-    if (this.generatePasswordModal) {
-      this.generatePasswordModal.hide();
-    }
-  }
-
-  editUserStatus() : void {
-    console.log("change user status" )
-  }
-
-  generateUserPassword() : void {
-    console.log("generate user password" )
-  }
   private getBranchCode(): string {
     const token = this.storageService.getToken();
     const decodedToken: any = this.jwtService.decodeToken(token);
     return decodedToken.branchCode;
   }
-
 
   loadData() {
     // Define a function to fetch data
@@ -239,5 +202,58 @@ export class UsersComponent implements OnInit, AfterViewInit {
     this.showAlert = true;
     this.alertType = type;
     this.alertMessage = message;
+  }
+
+  showEditUserStatusModal(user: UserTable): void {
+    this.selectedUser = user;
+    if (this.editUserStatusModal) {
+      this.editUserStatusModal.show();
+    } else {
+      console.error('Edit User Status Modal is not initialized.');
+    }
+  }
+
+  hideEditUserStatusModal(): void {
+    if (this.editUserStatusModal) {
+      this.editUserStatusModal.hide();
+    }
+  }
+
+  showGeneratePasswordModal(user: UserTable): void {
+    this.selectedUser = user;
+    if (this.generatePasswordModal) {
+      this.generatePasswordModal.show();
+    } else {
+      console.error('Generate Password Modal is not initialized.');
+    }
+  }
+
+  hideGeneratePasswordModal(): void {
+    if (this.generatePasswordModal) {
+      this.generatePasswordModal.hide();
+    }
+  }
+
+  editUserStatus() {
+    if (this.selectedUser) {
+      const userId= this.selectedUser.id;
+      this.usersService.activateEmployeeStatus(userId).subscribe(
+        (response) => {
+          console.log('User status changed', response);
+          this.hideEditUserStatusModal();
+          this.router.navigate(['/users']).then(() => {
+            window.location.reload();
+          });
+          this.showAlertMessage('success', 'Employee created successfully');
+        },
+        (error) => {
+          console.error('Error changing user status', error);
+        }
+      );
+    }
+  }
+
+  generateUserPassword() : void {
+    console.log("generate user password" )
   }
 }
