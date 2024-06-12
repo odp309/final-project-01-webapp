@@ -31,11 +31,6 @@ export class BalancesComponent implements OnInit, AfterViewInit {
   addStockBalanceModal!: Modal;
   selectedCurrency: any
 
-  showAlert: boolean = false;
-  alertType: 'success' | 'error' = 'success';
-  alertTitle: string = '';
-  alertMessage: string = '';
-
   constructor(
     private service: BalanceService,
     private formBuilder: FormBuilder,
@@ -108,12 +103,6 @@ export class BalancesComponent implements OnInit, AfterViewInit {
       this.initModals();
   }
 
-  showAlertMessage(type: 'success' | 'error', message: string): void {
-    this.showAlert = true;
-    this.alertType = type;
-    this.alertMessage = message;
-  }
-
   private initModals(): void {
     console.log('Initializing modals...');
 
@@ -147,14 +136,11 @@ export class BalancesComponent implements OnInit, AfterViewInit {
   }
 
   public addStockBalance():void{
-    console.log("test button save")
+    console.log("Perform Add Stock Balance")
     if (this.selectedCurrency && this.addStockBalanceForm.valid) {
-      console.log(this.selectedCurrency +" and " + this.addStockBalanceForm + " is valid ")
       const currencyCode= this.selectedCurrency.currencyCode;
       const balance= this.addStockBalanceForm.get('balance')?.value;
       const branchCode= this.addStockBalanceForm.get('branchCode')?.value;
-      const payload = { branchCode,currencyCode, balance };
-      console.log('Submitting payload:', payload);
       this.balanceService.AddStock(branchCode, currencyCode,balance ).subscribe(
         (response) => {
           console.log('Stock Balance Added ', response);
@@ -162,14 +148,13 @@ export class BalancesComponent implements OnInit, AfterViewInit {
           this.router.navigate(['/balances']).then(() => {
             window.location.reload();
           });
-          this.showAlertMessage('success', 'Stock Balance added successfully');
         },
         (error) => {
           console.error('Error update balance', error);
         }
       ); 
     } else {
-      console.log('Form is invalid or selectedCurrency is not set'); // Debugging line
+      console.log('Form is invalid or selectedCurrency is not set');
     }
   }
 }
