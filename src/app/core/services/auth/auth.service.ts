@@ -5,6 +5,7 @@ import { BehaviorSubject, shareReplay } from 'rxjs';
 import Login from '../../dto/auth/login.dto';
 import { StorageService } from '../storage/storage.service';
 import { env } from '../../../env';
+import { RefreshTokenDto } from '../../dto/auth/refreshToken.dto';
 
 const AUTH_API = env.base_url + '/api/v1/public/employee';
 
@@ -61,24 +62,7 @@ export class AuthService {
     return isMatch;
   }
 
-  // login(login: Login) {
-  //   this.http
-  //     .post(AUTH_API + 'signin', login, HTTP_OPTIONS)
-  //     .pipe(shareReplay())
-  //     .subscribe({
-  //       next: (response) => {
-  //         console.log(response);
-  //       },
-  //       error: (e) => {
-  //         this.loggedIn.next(false);
-  //         this.router.navigate(['/login']);
-  //       },
-  //     });
-  // }
-
-  // logout() {
-  //   this.loggedIn.next(false);
-  //   localStorage.removeItem('token');
-  //   this.router.navigate(['/login']);
-  // }
+  public relogin(refreshToken: string) {
+    return this.http.post<RefreshTokenDto[]>(AUTH_API + '/refresh-token', refreshToken, HTTP_NO_AUTH);
+  }
 }

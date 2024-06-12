@@ -77,6 +77,7 @@ export class LoginComponent implements OnInit {
 
           this.storageService.setRoles(user.role);
           this.storageService.setToken(response.accessToken);
+          this.storageService.setRefreshToken(response.refreshToken);
 
           // const role = user.role[0].roleName;
 
