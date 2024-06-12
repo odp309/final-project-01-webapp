@@ -206,7 +206,7 @@
         </button>
       </div>
       <!-- Modal body -->
-      <form [formGroup]="updateStatusForm" id="updteStatusForm" class="p-4 md:p-5">
+      <form [formGroup]="updateStatusForm" (ngSubmit)="updateStatusReservationOnSubmit()" id="updteStatusForm" class="p-4 md:p-5">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <div class="col-span-2 mb-4">
@@ -349,12 +349,14 @@
             </div>
           </div>
         </div>
-        <button
-          type="button"
-          class="all-button mt-10"
-        >
-          Process
-        </button>
+        <div *ngIf="reservationStatus === 'scheduled'">
+          <button
+            type="submit"
+            class="all-button mt-10"
+          >
+            Process
+          </button>
+        </div>
       </form>
     </div>
   </div>

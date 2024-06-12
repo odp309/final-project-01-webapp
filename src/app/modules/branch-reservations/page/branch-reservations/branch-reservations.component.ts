@@ -7,6 +7,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { StorageService } from '../../../../core/services/storage/storage.service';
 import { JwtDecoderService } from '../../../../core/services/jwt/jwt-decoder.service';
 import { Modal } from 'flowbite';
+import { BranchReservationsService } from '../../../../core/services/branch-reservations/branch-reservations.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-branch-reservations',
@@ -22,6 +24,7 @@ export class BranchReservationsComponent implements OnInit {
   role?: any;
   accessToken?: any;
   user?: any;
+  reservationStatus?: any;
 
   @ViewChild('updateReservationModal') updateReservationModalRef!: ElementRef;
   updateReservationModal!: Modal;
@@ -35,6 +38,8 @@ export class BranchReservationsComponent implements OnInit {
     private fb: FormBuilder,
     private storageService: StorageService,
     private jwtDecoderService: JwtDecoderService,
+    private router: Router,
+    private branchReservationsService: BranchReservationsService,
   ) {
     this.accessToken = localStorage.getItem('jwtToken')?.toString();
     this.updateStatusForm = this.fb.group({
@@ -45,7 +50,7 @@ export class BranchReservationsComponent implements OnInit {
       amount: [''],
       status: [''],
       reservationDate: [''],
-      createdDate: ['']
+      createdDate: [''],
     });
 
   }
@@ -141,18 +146,19 @@ export class BranchReservationsComponent implements OnInit {
     }
   }
 
-  showUpdateReservationModal(reservation: ReservationTable): void {
+  showUpdateReservationModal(item: ReservationTable): void {
     if (this.updateReservationModal) {
       this.updateStatusForm.patchValue({
-        reservationNumber: reservation.reservationNumber,
-        customerName: reservation.customerName,
-        accountNumber: reservation.accountNumber,
-        currencyCode: reservation.currencyCode,
-        amount: reservation.amount,
-        status: reservation.status,
-        reservationDate: reservation.reservationDate,
-        createdDate: reservation.createdDate
+        reservationNumber: item.reservationNumber,
+        customerName: item.customerName,
+        accountNumber: item.accountNumber,
+        currencyCode: item.currencyCode,
+        amount: item.amount,
+        status: item.status,
+        reservationDate: item.reservationDate,
+        createdDate: item.createdDate,
       });
+      this.getReservationStatus();
       this.updateReservationModal.show();
     } else {
       console.error('Edit User Status Modal is not initialized.');
@@ -162,6 +168,38 @@ export class BranchReservationsComponent implements OnInit {
   hideUpdateReservationModal(): void {
     if (this.updateReservationModal) {
       this.updateReservationModal.hide();
+    }
+  }
+
+  getReservationStatus() {
+    return this.reservationStatus = this.updateStatusForm.get('status')?.value.toLowerCase();
+  }
+
+  public updateStatusReservationOnSubmit(): void {
+    if (this.updateStatusForm.valid) {
+        const branchReservationData = { ...this.updateStatusForm.value };
+        delete branchReservationData.customerName;
+        delete branchReservationData.accountNumber;
+        delete branchReservationData.currencyCode;
+        delete branchReservationData.amount;
+        delete branchReservationData.status;
+        delete branchReservationData.reservationDate;
+        delete branchReservationData.createdDate;
+        this.branchReservationsService.updateReservationStatus(branchReservationData).subscribe(
+          (response) => {
+            console.log('updated successfully', response);
+            this.router.navigate(['/branch-reservations']).then(() => {
+              window.location.reload();
+            });
+            // this.showAlertMessage('success', 'Employee created successfully');
+          },
+          (error) => {
+            console.error('Error creating employee', error);
+            // this.showAlertMessage('error', 'Error creating employee');
+          }
+        );
+    } else {
+      console.log('Form is invalid');
     }
   }
 
