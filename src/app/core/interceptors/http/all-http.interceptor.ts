@@ -47,7 +47,7 @@ export const allHttpInterceptor: HttpInterceptorFn = (request, next) => {
   return next(authRequest).pipe(
     catchError((err: any) => {
       if (err instanceof HttpErrorResponse) {
-        switch (err.status) {
+        switch (err.error.status) {
           case 401:
             console.error('Bad credential request:', err);
             router.navigate(['/login']);

@@ -63,6 +63,7 @@ export class AuthService {
   }
 
   public relogin(refreshToken: string) {
-    return this.http.post<RefreshTokenDto[]>(AUTH_API + '/refresh-token', refreshToken, HTTP_NO_AUTH);
+    const payload = { refreshToken: refreshToken };
+    return this.http.post<RefreshTokenDto[]>(AUTH_API + '/refresh-token', payload, HTTP_NO_AUTH);
   }
 }
