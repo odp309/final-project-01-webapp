@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
-import { InstanceOptions, Modal, ModalInterface, ModalOptions } from 'flowbite';
+import { initFlowbite } from 'flowbite';
 import { AuthService } from '../../../../core/services/auth/auth.service';
 import { StorageService } from '../../../../core/services/storage/storage.service';
 import { JwtDecoderService } from '../../../../core/services/jwt/jwt-decoder.service';
@@ -23,6 +23,11 @@ export class LoginComponent implements OnInit {
   displayHidden = { display: 'none' };
   validCounter: number = 0;
   loadingIcon = faCircleNotch;
+  errorStatusCode?: number;
+  alertTitle: string = '';
+  alertMessage: string = '';
+  alertType: 'success' | 'error' = 'success';
+  showAlert: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -38,7 +43,7 @@ export class LoginComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    initFlowbite();
   }
 
   onSubmitLogin() {
@@ -65,13 +70,14 @@ export class LoginComponent implements OnInit {
 
       this.authService.login(this.form.value).subscribe({
         next: (response: any) => {
-          const user: any = this.jwtService.decodeToken(response.token);
+          const user: any = this.jwtService.decodeToken(response.accessToken);
 
           this.errorMessageStyle = this.displayHidden;
           this.validCounter = 0;
 
           this.storageService.setRoles(user.role);
-          this.storageService.setToken(response.token);
+          this.storageService.setToken(response.accessToken);
+          this.storageService.setRefreshToken(response.refreshToken);
 
           // const role = user.role[0].roleName;
 
@@ -87,6 +93,21 @@ export class LoginComponent implements OnInit {
           this.errorMessageStyle = this.displayBlock;
           this.loadingStyle = this.displayHidden;
           this.validCounter = 0;
+          this.errorStatusCode = error.status;
+          switch (this.errorStatusCode) {
+            case 401:
+              this.showAlert = true;
+              this.alertType = 'error';
+              this.alertTitle = 'Sorry'
+              this.alertMessage = 'our email and password is incorrect. Please try again.';
+              break;
+            default:
+              this.showAlert = true;
+              this.alertType = 'error';
+              this.alertTitle = 'Sorry'
+              this.alertMessage = 'something went wrong. Please try again.';
+            break;
+          }
         },
         complete: () => {
           this.loadingStyle = this.displayHidden;

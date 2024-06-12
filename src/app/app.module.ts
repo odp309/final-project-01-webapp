@@ -20,6 +20,17 @@ import { DashboardNavbarComponent } from './shared/components/dashboard-navbar/d
 import { DashboardContainerComponent } from './shared/components/dashboard-container/dashboard-container.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { DashboardComponent } from './modules/dashboard/page/dashboard/dashboard.component';
+import { DataTablesModule } from 'angular-datatables';
+import { UsersRoutingModule } from './modules/users/users-routing.module';
+import { UsersComponent } from './modules/users/page/users/users.component';
+import { BalancesComponent } from './modules/balances/page/balances/balances.component';
+import { ExchangeRatesComponent } from './modules/exchange-rates/page/exchange-rates/exchange-rates.component';
+import { BranchReservationsComponent } from './modules/branch-reservations/page/branch-reservations/branch-reservations.component';
+import { ChartsComponent } from './modules/dashboard/components/charts/charts.component';
+import { AmountPipe } from './core/services/pipe/amount/amount.pipe';
+import { AlertComponent } from './shared/components/alert/alert.component';
+import { StatusPipe } from './core/services/pipe/status/status.pipe';
+import { ValasPipe } from './core/services/pipe/amount/valas.pipe';
 
 @NgModule({
   declarations: [
@@ -29,7 +40,16 @@ import { DashboardComponent } from './modules/dashboard/page/dashboard/dashboard
     DashboardNavbarComponent,
     DashboardContainerComponent,
     FooterComponent,
-    DashboardComponent
+    DashboardComponent,
+    UsersComponent,
+    BalancesComponent,
+    ExchangeRatesComponent,
+    BranchReservationsComponent,
+    ChartsComponent,
+    AmountPipe,
+    AlertComponent,
+    StatusPipe,
+    ValasPipe,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +59,8 @@ import { DashboardComponent } from './modules/dashboard/page/dashboard/dashboard
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    UsersRoutingModule,
+    DataTablesModule,
   ],
   providers: [
     provideHttpClient(withInterceptors([allHttpInterceptor])),

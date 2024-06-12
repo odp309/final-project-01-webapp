@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { initFlowbite } from 'flowbite';
 import { JwtDecoderService } from '../../../core/services/jwt/jwt-decoder.service';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-navbar',
@@ -11,11 +12,24 @@ export class DashboardNavbarComponent implements OnInit {
 
   user?: any;
   role?: any;
+  accessToken?: any;
+  currentRoute?: any;
+  currentRouteName?: any;
 
-  constructor(private jwtDecoderService: JwtDecoderService) { }
+  constructor(private jwtDecoderService: JwtDecoderService, private router: Router) {
+    this.accessToken = localStorage.getItem('jwtToken')?.toString();
+    this.currentRoute = this.router.url;
+    this.currentRouteName = this.currentRoute.replace("/", "");
+  }
 
   ngOnInit(): void {
     initFlowbite();
+
+    if (!localStorage.getItem('jwtToken')) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
 
     //------------------------------ Fuck it here we go DARK MODE! ------------------------------//
 
@@ -76,14 +90,19 @@ export class DashboardNavbarComponent implements OnInit {
       }
     });
     
-    const token = localStorage.getItem('jwtToken')?.toString();
-    if (token) {
-      this.user = this.jwtDecoderService.decodeToken(token);
+    if (this.accessToken) {
+      this.user = this.jwtDecoderService.decodeToken(this.accessToken);
       const roles = localStorage.getItem('roles');
       const getRoleName = roles ? JSON.parse(roles) : null;
-      this.role = getRoleName[0].roleName;
+      this.role = getRoleName.name;
     }
 
+  }
+
+  onLogoutSubmit() {
+    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('roles');
+    this.router.navigate(['/login']);
   }
 
 }

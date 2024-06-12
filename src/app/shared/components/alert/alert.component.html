@@ -1,0 +1,31 @@
+<div
+    *ngIf="isVisible"
+    [ngClass]="{
+    'bg-green-100 dark:bg-green-900 border-green-400 dark:border-green-500 text-green-700 dark:text-green-500': type === 'success',
+    'bg-red-100 dark:bg-red-400 border-red-400 dark:border-red-700 text-red-700': type === 'error',
+  }"
+  class="border px-4 py-3 relative flex items-center justify-between rounded-2xl"
+  role="alert"
+>
+  <div class="ml-5 flex items-center space-x-2">
+    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+    </svg>
+    <strong class="font-bold">{{ title }}</strong>
+    <span class="block sm:inline">{{ message }}</span>
+  </div>
+  <span class="flex-shrink-0 px-4 py-3">
+    <svg
+      (click)="hideAlert()"
+      class="fill-current h-6 w-6 text-black cursor-pointer"
+      role="button"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 20 20"
+    >
+      <title>Close</title>
+      <path
+        d="M14.348 14.849c-.469.469-1.229.469-1.697 0l-2.651-2.651-2.652 2.652c-.468.469-1.228.469-1.697 0-.469-.469-.469-1.229 0-1.697l2.652-2.651-2.652-2.652c-.469-.469-.469-1.229 0-1.697.469-.469 1.229-.469 1.697 0l2.652 2.652 2.651-2.652c.469-.469 1.229-.469 1.697 0 .469.469.469 1.229 0 1.697l-2.651 2.652 2.651 2.651c.469.469.469 1.229 0 1.697z"
+      />
+    </svg>
+  </span>
+</div>

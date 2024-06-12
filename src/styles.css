@@ -5,3 +5,23 @@
 .active-link {
   @apply md:text-blue-700 md:dark:text-blue-500;
 }
+
+.thead {
+  @apply text-sm text-center font-normal text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400
+}
+
+.all-button {
+  @apply w-full px-5 py-3 text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 shadow-lg shadow-orange-500/50 dark:shadow-lg dark:shadow-orange-800/80 font-medium rounded-xl text-center
+}
+
+.scheduled{
+  @apply bg-yellow-300 rounded-xl text-white h-8 w-full font-normal flex justify-center items-center
+}
+
+.expired{
+  @apply bg-red-500 rounded-xl text-white h-8 w-full font-normal flex justify-center items-center
+}
+
+.success{
+  @apply bg-green-400 rounded-xl text-white h-8 w-full font-normal flex justify-center items-center
+}

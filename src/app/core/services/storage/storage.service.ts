@@ -18,10 +18,19 @@ export class StorageService {
   public setToken(jwtToken: string) {
     localStorage.setItem('jwtToken', jwtToken);
   }
-
   public getToken(): string {
     return localStorage.getItem('jwtToken')!;
   }
+
+  
+  public setRefreshToken(refreshToken: string) {
+    localStorage.setItem('refreshToken', refreshToken);
+  }
+
+  public getRefreshToken(): string {
+    return localStorage.getItem('refreshToken')!;
+  }
+
 
   public clear() {
     localStorage.clear();

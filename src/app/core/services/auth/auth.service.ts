@@ -4,8 +4,10 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, shareReplay } from 'rxjs';
 import Login from '../../dto/auth/login.dto';
 import { StorageService } from '../storage/storage.service';
+import { env } from '../../../env';
+import { RefreshTokenDto } from '../../dto/auth/refreshToken.dto';
 
-const AUTH_API = 'http://156.67.214.127:8080/api/v1/public/user';
+const AUTH_API = env.base_url + '/api/v1/public/employee';
 
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -60,24 +62,8 @@ export class AuthService {
     return isMatch;
   }
 
-  // login(login: Login) {
-  //   this.http
-  //     .post(AUTH_API + 'signin', login, HTTP_OPTIONS)
-  //     .pipe(shareReplay())
-  //     .subscribe({
-  //       next: (response) => {
-  //         console.log(response);
-  //       },
-  //       error: (e) => {
-  //         this.loggedIn.next(false);
-  //         this.router.navigate(['/login']);
-  //       },
-  //     });
-  // }
-
-  // logout() {
-  //   this.loggedIn.next(false);
-  //   localStorage.removeItem('token');
-  //   this.router.navigate(['/login']);
-  // }
+  public relogin(refreshToken: string) {
+    const payload = { refreshToken: refreshToken };
+    return this.http.post<RefreshTokenDto[]>(AUTH_API + '/refresh-token', payload, HTTP_NO_AUTH);
+  }
 }
