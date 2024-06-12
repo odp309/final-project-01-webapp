@@ -349,7 +349,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf="reservationStatus === 'scheduled'">
+        <div *ngIf="reservationStatus === 'scheduled' && role !== 'ADMIN_MGR' && role !== 'ADMIN'">
           <button
             type="submit"
             class="all-button mt-10"
