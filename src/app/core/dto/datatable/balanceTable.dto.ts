@@ -3,4 +3,5 @@ export interface BalanceTable {
     currencyName: string;
     balance: number;
     updatedAt: number;
+    updatedBy: string;
 }

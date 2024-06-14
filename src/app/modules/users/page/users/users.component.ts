@@ -244,7 +244,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
           this.router.navigate(['/users']).then(() => {
             window.location.reload();
           });
-          this.showAlertMessage('success', 'Employee created successfully');
         },
         (error) => {
           console.error('Error changing user status', error);

@@ -97,20 +97,28 @@ export class BranchReservationsComponent implements OnInit {
     // Fetch data initially
     fetchData();
   }
-  
-
-  reservationDetails(){
-    console.log("open reservation details page")
-  }
 
   getStatusClass(status: string): string {
-    switch (status.toLocaleLowerCase()) {
-      case 'scheduled':
+    switch (status) {
+      case 'Terjadwal':
         return 'scheduled';
-      case 'expired':
+      case 'Kadaluarsa':
         return 'expired';
-      case 'success':
+      case 'Sukses':
         return 'success';
+      default:
+        return '';
+    }
+  }
+
+  getTranslatedStatus(status: string): string {
+    switch (status) {
+      case 'Terjadwal':
+        return 'Scheduled';
+      case 'Kadaluarsa':
+        return 'Expired';
+      case 'Sukses':
+        return 'Success';
       default:
         return '';
     }
