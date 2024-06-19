@@ -165,6 +165,7 @@ export class BranchReservationsComponent implements OnInit {
         status: this.getTranslatedStatus(item.status),
         reservationDate: item.reservationDate,
         createdDate: item.createdDate,
+        doneBy: item.doneBy
       });
       this.getReservationStatus();
       this.updateReservationModal.show();
