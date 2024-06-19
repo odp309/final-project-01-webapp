@@ -1,69 +1,88 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import Chart from 'chart.js/auto';
+import { DashboardService } from '../../../../core/services/datatable/dashboard/dashboard.service';
+import { StorageService } from '../../../../core/services/storage/storage.service';
+import { JwtDecoderService } from '../../../../core/services/jwt/jwt-decoder.service';
+import { DashboardTable } from '../../../../core/dto/datatable/dashboardTable.dto';
 
 @Component({
   selector: 'app-charts',
   templateUrl: './charts.component.html',
-  styleUrl: './charts.component.css'
+  styleUrls: ['./charts.component.css']
 })
 export class ChartsComponent implements OnInit {
-  private chart: any;
+  @ViewChild('barChart') barChart!: ElementRef<HTMLCanvasElement>;
+  dashboardChart: DashboardTable | undefined;
 
-  private salesData = [
-    { currencyCode: 'USD', currencyName: 'United States dollar', totalSales: 65, totalPurchase: 28 },
-    { currencyCode: 'SGD', currencyName: 'Singapore dollar', totalSales: 59, totalPurchase: 48 },
-    { currencyCode: 'JPY', currencyName: 'Japanese yen', totalSales: 80, totalPurchase: 40 },
-    { currencyCode: 'EUR', currencyName: 'Euro', totalSales: 81, totalPurchase: 19 },
-    { currencyCode: 'GBP', currencyName: 'Pound sterling', totalSales: 56, totalPurchase: 86 },
-    { currencyCode: 'AUD', currencyName: 'Australian dollar', totalSales: 55, totalPurchase: 27 },
-    { currencyCode: 'MYR', currencyName: 'Malaysian ringgit', totalSales: 40, totalPurchase: 90 },
-    { currencyCode: 'NZD', currencyName: 'New Zealand dollar', totalSales: 70, totalPurchase: 50 },
-    { currencyCode: 'THB', currencyName: 'Thai baht', totalSales: 65, totalPurchase: 30 },
-    { currencyCode: 'CNY', currencyName: 'Chinese yuan', totalSales: 75, totalPurchase: 60 },
-    { currencyCode: 'CAD', currencyName: 'Canadian dollar', totalSales: 60, totalPurchase: 40 },
-    { currencyCode: 'CHF', currencyName: 'Swiss Franc', totalSales: 55, totalPurchase: 45 },
-    { currencyCode: 'HKD', currencyName: 'Hong Kong dollar', totalSales: 70, totalPurchase: 35 }
-  ];
+  constructor(
+    private service: DashboardService,
+    private storageService: StorageService,
+    private jwtDecoderService: JwtDecoderService
+  ) {}
 
   ngOnInit(): void {
-      this.createBarChart();
+    this.loadData();
   }
 
-  createBarChart() {
-    const ctx = document.getElementById('barChart') as HTMLCanvasElement;
-    const labels = this.salesData.map(data => data.currencyCode);
-    const totalSales = this.salesData.map(data => data.totalSales);
-    const totalPurchases = this.salesData.map(data => data.totalPurchase);
+  loadData(): void {
+    const token = this.storageService.getToken();
+    const decodedToken: any = this.jwtDecoderService.decodeToken(token);
+    const branchCode = decodedToken.branchCode;
+
+    this.service.LoadData(branchCode, '2024').subscribe(
+      (item: DashboardTable) => {
+        this.dashboardChart = item;
+        this.createBarChart();
+      },
+      (error) => {
+        console.error('Error loading data', error);
+        // Handle error loading data, show error message, etc.
+      }
+    );
+  }
+
+  createBarChart(): void {
+    if (!this.dashboardChart) {
+      console.error('Dashboard chart data is not available');
+      return;
+    }
+
+    if (!this.dashboardChart.month || !this.dashboardChart.month[0]?.june) {
+      console.error('Invalid dashboard chart data structure');
+      return;
+    }
+
+    const ctx = this.barChart.nativeElement.getContext('2d');
+    if (!ctx) {
+      console.error('Failed to get 2D context from canvas element');
+      return;
+    }
+
+    const labels = this.dashboardChart.month[0].june.map(data => data.currencyCode);
+    const totalWithdrawal = this.dashboardChart.month[0].june.map(data => data.totalAmount);
 
     const chart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [
-                {
-                    label: 'Total Sales',
-                    data: totalSales,
-                    backgroundColor: 'rgba(0, 83, 93, 0.75)',
-                },
-                {
-                    label: 'Total Purchase',
-                    data: totalPurchases,
-                    backgroundColor: 'rgba(255, 102, 0, 0.75)',
-                }
-            ]
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Total Withdrawal',
+          data: totalWithdrawal,
+          backgroundColor: 'rgba(255, 102, 0, 0.75)',
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
         },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
-            plugins: {
-                legend: {
-                    position: 'bottom'
-                }
-            }
+        plugins: {
+          legend: {
+            position: 'bottom'
+          }
         }
+      }
     });
   }
 }
