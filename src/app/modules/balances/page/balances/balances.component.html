@@ -23,7 +23,7 @@
             <td class="px-6 py-4">{{ i + 1 }}</td>
             <td class="px-6 py-4">{{ item.currencyCode }}</td>
             <td class="px-6 py-4">{{ item.currencyName }}</td>
-            <td class="px-6 py-4">{{ item.balance | number: '1.2-2' }}</td>
+            <td class="px-6 py-4">{{ item.balance | valas : item.currencyCode }}</td>
             <td class="px-6 py-4">{{ item.updatedAt | date:'yyyy-MM-dd HH:mm:ss' }}</td>
             <td *ngIf="role === 'ADMIN'" class="px-6 py-4">
               <button (click)="showAddStockBalanceModal(item)" data-modal-target="addStockModal"
