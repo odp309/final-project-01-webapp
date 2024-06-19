@@ -134,15 +134,17 @@ export class UsersComponent implements OnInit, AfterViewInit {
     if (this.addNewUserForm.valid) {
       if (this.addNewUserForm.value.role === 'ADMIN') {
         const userData = { ...this.addNewUserForm.value };
-        if (!userData.password) {
-          userData.password = '12345678';
-        }
+        // if (!userData.password) {
+        //   userData.password = '12345678';
+        // }
         delete userData.role;
+        delete userData.branchCode;
         this.usersService.createEmployeeAdmin(userData).subscribe(
           (response) => {
             console.log('Employee created successfully', response);
             this.addNewUserForm.reset();
             this.router.navigate(['/users']).then(() => {
+              this.resetState();
               window.location.reload();
             });
             this.showAlertMessage('success', 'Employee created successfully');
@@ -154,14 +156,17 @@ export class UsersComponent implements OnInit, AfterViewInit {
         );
       } else {
         const userData = { ...this.addNewUserForm.value };
-        if (!userData.password) {
-          userData.password = '12345678';
-        }
+        // if (!userData.password) {
+        //   userData.password = '12345678';
+        // }
+        delete userData.branchCode;
         delete userData.role;
         this.usersService.createEmployeeTeller(userData).subscribe(
           (response) => {
+            console.log('Employee created successfully', response);
             this.addNewUserForm.reset();
             this.router.navigate(['/users']).then(() => {
+              this.resetState();
               window.location.reload();
             });
             this.showAlertMessage('success', 'Employee created successfully');
@@ -242,7 +247,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
           console.log('User status changed', response);
           this.hideEditUserStatusModal();
           this.router.navigate(['/users']).then(() => {
-            window.location.reload();
+            this.resetState();
           });
         },
         (error) => {
@@ -255,4 +260,9 @@ export class UsersComponent implements OnInit, AfterViewInit {
   generateUserPassword() : void {
     console.log("generate user password" )
   }
+
+  resetState() : void {
+    this.loadData();
+  }
+
 }
