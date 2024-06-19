@@ -162,9 +162,10 @@ export class BranchReservationsComponent implements OnInit {
         accountNumber: item.accountNumber,
         currencyCode: item.currencyCode,
         amount: item.amount,
-        status: item.status,
+        status: this.getTranslatedStatus(item.status),
         reservationDate: item.reservationDate,
         createdDate: item.createdDate,
+        doneBy: item.doneBy
       });
       this.getReservationStatus();
       this.updateReservationModal.show();

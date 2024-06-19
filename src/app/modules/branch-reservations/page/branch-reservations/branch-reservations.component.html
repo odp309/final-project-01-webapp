@@ -277,7 +277,7 @@
                 readonly
               />
             </div>
-            <div class="col-span-2 mb-4" *ngIf="reservationStatus==='sukses'">
+            <div class="col-span-2 mb-4" *ngIf="reservationStatus==='success'">
               <label
                 for="status"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -366,7 +366,7 @@
 
           </div>
         </div>
-        <div *ngIf="reservationStatus === 'terjadwal' && role !== 'ADMIN_MGR' && role !== 'ADMIN'">
+        <div *ngIf="reservationStatus === 'scheduled' && role !== 'ADMIN_MGR' && role !== 'ADMIN'">
           <button
             type="submit"
             class="all-button mt-10"
