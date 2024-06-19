@@ -4,7 +4,7 @@
     class="container flex-auto bg-white dark:bg-slate-800 rounded-xl shadow-md"
   >
     <div class="px-16 py-20 relative overflow-x-auto">
-      <p class="text-center text-3xl py-8 font-sans font-medium text-gray-950 dark:text-white">Total Sales in a Week</p>
+      <p class="text-center text-3xl py-8 font-sans font-bold text-gray-950 dark:text-white">Total Withdrawal in <span>{{ currentMonth | date:'MMMM' }}</span>&nbsp;<span>{{ currentYear | date:'YYYY' }}</span></p>
       <app-charts></app-charts>
     </div>
   </div>
@@ -13,6 +13,7 @@
     class="container flex-auto bg-white dark:bg-slate-800 rounded-xl shadow-md mt-16 py-20"
   >
     <div class="px-10 py-10 relative overflow-x-auto">
+      <p class="text-center text-3xl py-8 font-sans font-bold text-gray-950 dark:text-white">Table Total Withdrawal in <span>{{ currentMonth | date:'MMMM' }}</span>&nbsp;<span>{{ currentYear | date:'YYYY' }}</span></p>
       <table
         datatable
         [dtOptions]="dtoptions"
@@ -25,22 +26,18 @@
           <tr>
             <th scope="col" class="px-6 py-3">#</th>
             <th scope="col" class="px-6 py-3">Currency Code</th>
-            <th scope="col" class="px-6 py-3">Currency Name</th>
-            <th scope="col" class="px-6 py-3">Total Sales</th>
             <th scope="col" class="px-6 py-3">Total Purchase</th>
           </tr>
         </thead>
-        <tbody class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+        <tbody class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" *ngIf="dashboardTable && dashboardTable.month && dashboardTable.month[0]?.june">
           <tr
-            *ngFor="let item of dashboardTable; let i = index"
+            *ngFor="let item of dashboardTable.month[0].june ?? []; let i = index"
             scope="row"
             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
           >
             <td class="px-6 py-4">{{ i + 1 }}</td>
-            <td class="px-6 py-4">{{ item.currencyCode }}</td>
-            <td class="px-6 py-4">{{ item.currencyName }}</td>
-            <td class="px-6 py-4">{{ item.totalSales }}</td>
-            <td class="px-6 py-4">{{ item.totalPurchase }}</td>
+            <td class="px-6 py-4 text-center">{{ item.currencyCode }}</td>
+            <td class="px-6 py-4">{{ item.totalAmount | valas:item.currencyCode }}</td>
           </tr>
         </tbody>
       </table>
