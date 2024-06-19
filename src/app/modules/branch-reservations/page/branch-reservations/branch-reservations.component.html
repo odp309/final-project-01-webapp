@@ -145,7 +145,7 @@
             <td class="px-6 py-4">
               {{ item.amount | valas : item.currencyCode }}
             </td>
-            <td class="px-6 py-4">{{ item.reservationDate | date }}</td>
+            <td class="px-6 py-4">{{ item.reservationDate | date:'fullDate' }}</td>
             <td class="px-6 py-4">
               <div [ngClass]="getStatusClass(item.status)">
                 <span class="leading-none">{{ getTranslatedStatus(item.status) | uppercase }}</span>
