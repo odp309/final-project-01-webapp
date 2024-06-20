@@ -11,6 +11,7 @@ const getRoleApi = env.base_url + '/api/v1/private/role/get-all';
 const createEmployeeAdminApi = env.base_url + '/api/v1/private/employee/for-admin-mgr/register/admin';
 const createEmployeeTellerApi = env.base_url + '/api/v1/private/employee/for-admin-mgr/register/teller';
 const activateEmployeeStatusApi = env.base_url + '/api/v1/private/employee/for-admin-mgr/activate-employee';
+const resetPasswordApi = env.base_url + '/api/v2/private/employee/for-admin-mgr/invoke-password-reset';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,11 @@ export class UsersService {
 
   public activateEmployeeStatus(userId: string): Observable<any>{
     const req = new HttpRequest('POST', activateEmployeeStatusApi, {id : userId});
+    return this.http.request(req);
+  }
+
+  public resetPasswordEmployee(userId: string): Observable<any>{
+    const req = new HttpRequest('POST', resetPasswordApi, {employeeId : userId});
     return this.http.request(req);
   }
 

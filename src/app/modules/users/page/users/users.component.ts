@@ -113,7 +113,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
   }
 
   loadData() {
-    // Define a function to fetch data
     const fetchData = () => {
       this.service.LoadData(this.getBranchCode()).subscribe(
         (item) => {
@@ -126,7 +125,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
       );
     };
 
-    // Fetch data initially
     fetchData();
   }
 
@@ -134,9 +132,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
     if (this.addNewUserForm.valid) {
       if (this.addNewUserForm.value.role === 'ADMIN') {
         const userData = { ...this.addNewUserForm.value };
-        // if (!userData.password) {
-        //   userData.password = '12345678';
-        // }
         delete userData.role;
         delete userData.branchCode;
         this.usersService.createEmployeeAdmin(userData).subscribe(
@@ -259,6 +254,21 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   generateUserPassword() : void {
     console.log("generate user password" )
+    if (this.selectedUser) {
+      const userId= this.selectedUser.id;
+      this.usersService.resetPasswordEmployee(userId).subscribe(
+        (response) => {
+          console.log('Passwor has been reset', response);
+          this.hideEditUserStatusModal();
+          this.router.navigate(['/users']).then(() => {
+            this.resetState();
+          });
+        },
+        (error) => {
+          console.error('Error changing user status', error);
+        }
+      );
+    }
   }
 
   resetState() : void {
