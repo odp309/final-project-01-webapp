@@ -19,8 +19,8 @@ export class BalanceService {
     return this.http.post<BalanceTable[]>(getBalanceApi, payload);
   }
 
-  AddStock(branchCode: string, currencyCode:string, balance:number): Observable<any> {
-    const payload = {branchCode,currencyCode, balance};
+  AddStock(branchCode: string, currencyCode:string, amount:number): Observable<any> {
+    const payload = {branchCode,currencyCode, amount};
     return this.http.post(postAddStockApi, payload)
   }
 

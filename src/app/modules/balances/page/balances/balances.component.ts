@@ -139,9 +139,9 @@ export class BalancesComponent implements OnInit, AfterViewInit {
     console.log("Perform Add Stock Balance")
     if (this.selectedCurrency && this.addStockBalanceForm.valid) {
       const currencyCode= this.selectedCurrency.currencyCode;
-      const balance= this.addStockBalanceForm.get('balance')?.value;
+      const amount= this.addStockBalanceForm.get('balance')?.value;
       const branchCode= this.addStockBalanceForm.get('branchCode')?.value;
-      this.balanceService.AddStock(branchCode, currencyCode,balance ).subscribe(
+      this.balanceService.AddStock(branchCode, currencyCode,amount ).subscribe(
         (response) => {
           console.log('Stock Balance Added ', response);
           this.hideAddStockBalanceModal();
