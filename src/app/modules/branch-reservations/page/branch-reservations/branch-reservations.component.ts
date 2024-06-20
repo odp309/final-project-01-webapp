@@ -70,7 +70,7 @@ export class BranchReservationsComponent implements OnInit {
       pagingType: 'full_numbers',
       autoWidth: true,
       language: {
-        searchPlaceholder: 'Search Balance',
+        searchPlaceholder: 'Search Reservations',
       },
     },
       this.loadData();
