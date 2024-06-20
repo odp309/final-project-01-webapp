@@ -22,11 +22,80 @@ export const allHttpInterceptor: HttpInterceptorFn = (request, next) => {
     return next(request.clone()).pipe(
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse) {
-          if (err.status === 401) {
-            console.error('Bad credential request:', err);
-            router.navigate(['/login']);
-          } else {
-            console.error('HTTP error:', err);
+          switch (err.status) {
+            case 401:
+              // console.error('Bad credential request:', err);
+              // router.navigate(['/login']);
+              switch (err.error.status) {
+                case 401:
+                  console.error('Bad credential request:', err);
+                  storageService.clear() ;
+                  router.navigate(['/login']);
+                  break;
+                case 403:
+                  console.log('refresh token generated');
+                  const refreshToken = storageService.getRefreshToken();
+                  authService.relogin(refreshToken).subscribe({
+                    next: (response: any) => {
+                      const user: any = jwtService.decodeToken(response.accessToken);
+            
+                      storageService.setRoles(user.role);
+                      storageService.setToken(response.accessToken);
+                      storageService.setRefreshToken(response.refreshToken);
+            
+                      router.navigate([currentRoute]);
+                    },
+                    error: (error) => {
+                      if (error.access_denied_reason === 'access_denied_reason') {
+                        storageService.clear() ;
+                        router.navigate(['/login']);
+                      }
+                      console.error('HTTP error:', error);
+                    }});
+                break;
+                case 500:
+                  console.error('Internal Server Error:', err);
+                  router.navigate([currentRoute]);
+                  break;
+                default:
+                  console.error('Bad credential request:', err);
+                  storageService.clear() ;
+                  router.navigate(['/login']);
+                  break;
+              }
+              break;
+            case 403:
+              console.log('refresh token generated');
+              const refreshToken = storageService.getRefreshToken();
+              authService.relogin(refreshToken).subscribe({
+                next: (response: any) => {
+                  const user: any = jwtService.decodeToken(response.accessToken);
+        
+                  storageService.setRoles(user.role);
+                  storageService.setToken(response.accessToken);
+                  storageService.setRefreshToken(response.refreshToken);
+        
+                  router.navigate([currentRoute]);
+                },
+                error: (error) => {
+                  if (error.access_denied_reason === 'access_denied_reason') {
+                    storageService.clear() ;
+                    router.navigate(['/login']);
+                  }
+                  console.error('HTTP error:', error);
+                    storageService.clear() ;
+                    router.navigate(['/login']);
+                }});
+            break;
+            case 500:
+                  console.error('Internal Server Error:', err);
+                  router.navigate([currentRoute]);
+                  break;
+            default:
+              console.error('Bad credential request:', err);
+                storageService.clear() ;
+                  router.navigate(['/login']);
+              break;
           }
         } else {
           console.error('An error occurred:', err);
@@ -71,6 +140,7 @@ export const allHttpInterceptor: HttpInterceptorFn = (request, next) => {
                     router.navigate([currentRoute]);
                   },
                   error: (error) => {
+                    console.log(error.access_denied_reason);
                     if (error.access_denied_reason === 'access_denied_reason') {
                       storageService.clear() ;
                       router.navigate(['/login']);

@@ -51,6 +51,7 @@ export class BranchReservationsComponent implements OnInit {
       status: [''],
       reservationDate: [''],
       createdDate: [''],
+      doneBy: [''],
     });
 
   }
@@ -194,6 +195,7 @@ export class BranchReservationsComponent implements OnInit {
         delete branchReservationData.status;
         delete branchReservationData.reservationDate;
         delete branchReservationData.createdDate;
+        delete branchReservationData.doneBy;
         this.branchReservationsService.updateReservationStatus(branchReservationData).subscribe(
           (response) => {
             console.log('updated successfully', response);
