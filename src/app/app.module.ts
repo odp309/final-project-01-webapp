@@ -31,6 +31,7 @@ import { AmountPipe } from './core/services/pipe/amount/amount.pipe';
 import { AlertComponent } from './shared/components/alert/alert.component';
 import { StatusPipe } from './core/services/pipe/status/status.pipe';
 import { ValasPipe } from './core/services/pipe/amount/valas.pipe';
+import { ResetPasswordComponent } from './modules/auth/page/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ValasPipe } from './core/services/pipe/amount/valas.pipe';
     AlertComponent,
     StatusPipe,
     ValasPipe,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

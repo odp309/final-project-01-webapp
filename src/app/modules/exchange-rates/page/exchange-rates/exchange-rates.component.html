@@ -18,8 +18,8 @@
         <thead class="thead">
           <tr>
             <th scope="col" class="px-6 py-3 w-0">#</th>
-            <th scope="col" class="px-6 py-3">Currency Code</th>
             <th scope="col" class="px-6 py-3">Currency Name</th>
+            <th scope="col" class="px-6 py-3">Currency Code</th>
             <th scope="col" class="px-6 py-3">Rate</th>
             <th scope="col" class="px-6 py-3">Sell Rate</th>
           </tr>
@@ -31,8 +31,10 @@
             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
           >
             <td class="px-6 py-4 text-left w-0">{{ i + 1 }}</td>
-            <td class="px-6 py-4 text-center">{{ item.currencyCode }}</td>
-            <td class="px-6 py-4 text-center">{{ item.currencyName }}</td>
+            <td class="px-6 py-4 flex justify-items-center">
+              <span class="pl-10"> <img [src]="item.flagIcon" class="w-8 h-8"/> </span>
+              <span class="pl-5"> {{ item.currencyName }} </span></td>
+            <td class="px-6 py-4 text-center">{{item.currencyCode }}</td>
             <td class="px-6 py-4 text-center">
               {{ item.buyRate | amount : item.currencyCode }}
             </td>

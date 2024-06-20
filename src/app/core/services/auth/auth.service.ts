@@ -6,6 +6,7 @@ import Login from '../../dto/auth/login.dto';
 import { StorageService } from '../storage/storage.service';
 import { env } from '../../../env';
 import { RefreshTokenDto } from '../../dto/auth/refreshToken.dto';
+import { ResetPasswordDto } from '../../dto/auth/reset-password.dto';
 
 const AUTH_API = env.base_url + '/api/v1/public/employee';
 
@@ -30,6 +31,11 @@ export class AuthService {
   public login(login: Login) {
     // no need to pass token in header
     return this.http.post(AUTH_API + '/login', login, HTTP_NO_AUTH);
+  }
+
+  public resetPassword(resetPassword: ResetPasswordDto) {
+    // no need to pass token in header
+    return this.http.post(AUTH_API + '/password-reset', resetPassword, HTTP_NO_AUTH);
   }
 
   // public forUser() {

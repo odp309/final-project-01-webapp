@@ -7,4 +7,5 @@ export interface ReservationTable {
     status: string
     createdDate: Date
     accountNumber: string
+    doneBy : string
 }

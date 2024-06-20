@@ -51,6 +51,7 @@ export class BranchReservationsComponent implements OnInit {
       status: [''],
       reservationDate: [''],
       createdDate: [''],
+      doneBy: [''],
     });
 
   }
@@ -69,7 +70,7 @@ export class BranchReservationsComponent implements OnInit {
       pagingType: 'full_numbers',
       autoWidth: true,
       language: {
-        searchPlaceholder: 'Search Balance',
+        searchPlaceholder: 'Search Reservations',
       },
     },
       this.loadData();
@@ -97,20 +98,28 @@ export class BranchReservationsComponent implements OnInit {
     // Fetch data initially
     fetchData();
   }
-  
-
-  reservationDetails(){
-    console.log("open reservation details page")
-  }
 
   getStatusClass(status: string): string {
-    switch (status.toLocaleLowerCase()) {
-      case 'scheduled':
+    switch (status) {
+      case 'Terjadwal':
         return 'scheduled';
-      case 'expired':
+      case 'Kadaluarsa':
         return 'expired';
-      case 'success':
+      case 'Sukses':
         return 'success';
+      default:
+        return '';
+    }
+  }
+
+  getTranslatedStatus(status: string): string {
+    switch (status) {
+      case 'Terjadwal':
+        return 'Scheduled';
+      case 'Kadaluarsa':
+        return 'Expired';
+      case 'Sukses':
+        return 'Success';
       default:
         return '';
     }
@@ -154,9 +163,10 @@ export class BranchReservationsComponent implements OnInit {
         accountNumber: item.accountNumber,
         currencyCode: item.currencyCode,
         amount: item.amount,
-        status: item.status,
+        status: this.getTranslatedStatus(item.status),
         reservationDate: item.reservationDate,
         createdDate: item.createdDate,
+        doneBy: item.doneBy
       });
       this.getReservationStatus();
       this.updateReservationModal.show();
@@ -185,6 +195,7 @@ export class BranchReservationsComponent implements OnInit {
         delete branchReservationData.status;
         delete branchReservationData.reservationDate;
         delete branchReservationData.createdDate;
+        delete branchReservationData.doneBy;
         this.branchReservationsService.updateReservationStatus(branchReservationData).subscribe(
           (response) => {
             console.log('updated successfully', response);

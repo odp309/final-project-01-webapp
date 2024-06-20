@@ -33,6 +33,7 @@ export class StorageService {
 
 
   public clear() {
+    localStorage.setItem('color-theme', 'light');
     localStorage.clear();
   }
 

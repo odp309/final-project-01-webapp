@@ -3,6 +3,8 @@ import { DashboardService } from '../../../../core/services/datatable/dashboard/
 import { Config } from 'datatables.net';
 import { Subject } from 'rxjs';
 import { DashboardTable } from '../../../../core/dto/datatable/dashboardTable.dto';
+import { StorageService } from '../../../../core/services/storage/storage.service';
+import { JwtDecoderService } from '../../../../core/services/jwt/jwt-decoder.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,28 +12,22 @@ import { DashboardTable } from '../../../../core/dto/datatable/dashboardTable.dt
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent implements OnInit {
-  // dashboardTable: DashboardTable[] = [];
+  dashboardTable: DashboardTable | undefined;
   dtoptions: Config = {};
   dttrigger: Subject<any> = new Subject<any>();
+  currentMonth: Date = new Date();
+  currentYear: Date = new Date();
 
-  constructor(private service: DashboardService) {}
-
-  public dashboardTable: DashboardTable[] = [
-    { currencyCode: 'USD', currencyName: 'United States dollar', totalSales: 65, totalPurchase: 28 },
-    { currencyCode: 'SGD', currencyName: 'Singapore dollar', totalSales: 59, totalPurchase: 48 },
-    { currencyCode: 'JPY', currencyName: 'Japanese yen', totalSales: 80, totalPurchase: 40 },
-    { currencyCode: 'EUR', currencyName: 'Euro', totalSales: 81, totalPurchase: 19 },
-    { currencyCode: 'GBP', currencyName: 'Pound sterling', totalSales: 56, totalPurchase: 86 },
-    { currencyCode: 'AUD', currencyName: 'Australian dollar', totalSales: 55, totalPurchase: 27 },
-    { currencyCode: 'MYR', currencyName: 'Malaysian ringgit', totalSales: 40, totalPurchase: 90 },
-    { currencyCode: 'NZD', currencyName: 'New Zealand dollar', totalSales: 70, totalPurchase: 50 },
-    { currencyCode: 'THB', currencyName: 'Thai baht', totalSales: 65, totalPurchase: 30 },
-    { currencyCode: 'CNY', currencyName: 'Chinese yuan', totalSales: 75, totalPurchase: 60 },
-    { currencyCode: 'CAD', currencyName: 'Canadian dollar', totalSales: 60, totalPurchase: 40 },
-    { currencyCode: 'CHF', currencyName: 'Swiss Franc', totalSales: 55, totalPurchase: 45 },
-    { currencyCode: 'HKD', currencyName: 'Hong Kong dollar', totalSales: 70, totalPurchase: 35 }
-  ];
-
+  constructor(
+    private service: DashboardService,
+    private storageService: StorageService,
+    private jwtDecoderService: JwtDecoderService,
+  ) {
+  }
+  getYear(): number {
+    return this.currentYear.getFullYear();
+  }
+  
   ngOnInit(): void {
     this.dtoptions = {
       columnDefs: [{ targets: '_all', className: 'dt-head-center' }],
@@ -46,21 +42,27 @@ export class DashboardComponent implements OnInit {
   }
 
   loadData() {
-    this.service.LoadData().subscribe(
-      (item: DashboardTable) => {
-        // Check if the response is valid JSON
-        try {
-          const parsedItem = JSON.parse(JSON.stringify(item));
-          this.dashboardTable.push(parsedItem);
-          this.dttrigger.next(null);
-        } catch (error) {
-          console.error('Invalid JSON response:', error);
+    const token = this.storageService.getToken();
+    const decodedToken: any = this.jwtDecoderService.decodeToken(token);
+    const branchCode = decodedToken.branchCode;
+
+    // Define a function to fetch data
+    const fetchData = () => {
+      this.service.LoadData(branchCode, this.getYear()).subscribe(
+        (item: DashboardTable) => {
+          console.log('success', item);
+          console.log('success', item.month[0]?.june);
+          this.dashboardTable = item;
+            this.dttrigger.next(null);
+        },
+        (error) => {
+          console.error('Error loading data', error);
         }
-      },
-      (error) => {
-        console.error('Error loading data', error);
-      }
-    );
+      );
+    };
+
+    // Fetch data initially
+    fetchData();
   }
   
 
