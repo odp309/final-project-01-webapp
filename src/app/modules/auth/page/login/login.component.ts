@@ -70,24 +70,27 @@ export class LoginComponent implements OnInit {
 
       this.authService.login(this.form.value).subscribe({
         next: (response: any) => {
-          const user: any = this.jwtService.decodeToken(response.accessToken);
 
-          this.errorMessageStyle = this.displayHidden;
-          this.validCounter = 0;
+          if (response.resetToken !== null) {
+            // console.log(response.resetToken);
+            // console.log('Navigation path:', `/reset-password?token=${response.resetToken}`);
+            this.router.navigate(['/reset-password'], { queryParams: { token: response.resetToken } });
+          } else {
 
-          this.storageService.setRoles(user.role);
-          this.storageService.setToken(response.accessToken);
-          this.storageService.setRefreshToken(response.refreshToken);
+            const user: any = this.jwtService.decodeToken(response.accessToken);
 
-          // const role = user.role[0].roleName;
+            this.errorMessageStyle = this.displayHidden;
+            this.validCounter = 0;
+  
+            localStorage.setItem('color-theme', 'light');
+            this.storageService.setRoles(user.role);
+            this.storageService.setToken(response.accessToken);
+            this.storageService.setRefreshToken(response.refreshToken);
+  
+            this.router.navigate(['/dashboard']);
+            
+          }
 
-          // if (role === 'Admin') {
-          //   this.router.navigate(['/admin']);
-          // } else {
-          //   this.router.navigate(['/user']);
-          // }
-
-          this.router.navigate(['/dashboard']);
         },
         error: (error) => {
           this.errorMessageStyle = this.displayBlock;
