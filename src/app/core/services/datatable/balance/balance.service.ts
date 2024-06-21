@@ -4,8 +4,8 @@ import { BalanceTable } from '../../../dto/datatable/balanceTable.dto';
 import { Observable } from 'rxjs';
 import { env } from '../../../../env';
 
-const getBalanceApi = env.base_url + '/api/v1/private/branch-reserve/get';
-const postAddStockApi = env.base_url + '/api/v1/private/branch-reserve/add-stock';
+const getBalanceApi = env.base_url + '/api/v2/private/branch-reserve/get';
+const postAddStockApi = env.base_url + '/api/v2/private/branch-reserve/add-stock';
 
 @Injectable({
   providedIn: 'root'

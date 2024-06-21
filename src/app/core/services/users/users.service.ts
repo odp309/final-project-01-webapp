@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
 import { UserRequestDto } from '../../dto/user/userRequest.dto';
 
 const getRoleApi = env.base_url + '/api/v1/private/role/get-all';
-const createEmployeeAdminApi = env.base_url + '/api/v1/private/employee/for-admin-mgr/register/admin';
-const createEmployeeTellerApi = env.base_url + '/api/v1/private/employee/for-admin-mgr/register/teller';
-const activateEmployeeStatusApi = env.base_url + '/api/v1/private/employee/for-admin-mgr/activate-employee';
+const createEmployeeAdminApi = env.base_url + '/api/v2/private/employee/for-admin-mgr/register/admin';
+const createEmployeeTellerApi = env.base_url + '/api/v2/private/employee/for-admin-mgr/register/teller';
+const activateEmployeeStatusApi = env.base_url + '/api/v2/private/employee/for-admin-mgr/activate-employee';
 const resetPasswordApi = env.base_url + '/api/v2/private/employee/for-admin-mgr/invoke-password-reset';
 
 @Injectable({

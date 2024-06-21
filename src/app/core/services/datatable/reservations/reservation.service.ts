@@ -4,7 +4,7 @@ import { ReservationTable } from '../../../dto/datatable/reservationTable.dto';
 import { Observable } from 'rxjs';
 import { env } from '../../../../env';
 
-const getReservationsApi = env.base_url + '/api/v1/private/reservation-list/get';
+const getReservationsApi = env.base_url + '/api/v2/private/reservation-list/get';
 
 @Injectable({
   providedIn: 'root'

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { DashboardTable } from '../../../dto/datatable/dashboardTable.dto';
 import { env } from '../../../../env';
 
-const getWithdrawalReportApi = env.base_url + '/api/v1/private/withdrawal/get-report';
+const getWithdrawalReportApi = env.base_url + '/api/v2/private/withdrawal/get-report';
 
 @Injectable({
   providedIn: 'root'

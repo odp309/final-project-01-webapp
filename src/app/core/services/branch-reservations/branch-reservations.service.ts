@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { UserRequestDto } from '../../dto/user/userRequest.dto';
 import { BranchReservationRequestDto } from '../../dto/branch-reservations/branchReservationRequest.dto';
 
-const updateReservationStatusApi = env.base_url + '/api/v1/private/reservation-list/update-status';
+const updateReservationStatusApi = env.base_url + '/api/v2/private/reservation-list/update-status';
 
 @Injectable({
   providedIn: 'root'

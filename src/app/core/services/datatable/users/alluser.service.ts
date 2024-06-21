@@ -4,7 +4,7 @@ import { UserTable } from '../../../dto/datatable/userTable.dto';
 import { Observable } from 'rxjs';
 import { env } from '../../../../env';
 
-const getEmployeeApi = env.base_url + '/api/v1/private/employee/for-admin-mgr/get-all-employees';
+const getEmployeeApi = env.base_url + '/api/v2/private/employee/for-admin-mgr/get-all-employees';
 
 @Injectable({
   providedIn: 'root'
