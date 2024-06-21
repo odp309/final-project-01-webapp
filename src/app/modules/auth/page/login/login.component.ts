@@ -74,6 +74,10 @@ export class LoginComponent implements OnInit {
           if (response.resetToken !== null) {
             // console.log(response.resetToken);
             // console.log('Navigation path:', `/reset-password?token=${response.resetToken}`);
+            this.showAlert = true;
+            this.alertType = 'success';
+            this.alertTitle = 'Please'
+            this.alertMessage = 'please change your password first.';
             this.router.navigate(['/reset-password'], { queryParams: { token: response.resetToken } });
           } else {
 
