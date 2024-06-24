@@ -273,6 +273,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   resetState() : void {
     this.loadData();
+    window.location.reload();
   }
 
 }
