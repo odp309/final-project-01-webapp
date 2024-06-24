@@ -75,12 +75,14 @@ export class UsersComponent implements OnInit, AfterViewInit {
         role: ['', Validators.required],
         branchCode: [this.getBranchCode(), Validators.required],
       })),
-      this.getRoles()
+      this.getRoles();
+      this.initModals();
   }
 
   ngAfterViewInit(): void {
     // Initialize modals
       this.initModals();
+      this.loadData();
       this.cdRef.detectChanges();
   }
 
@@ -273,7 +275,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   resetState() : void {
     this.loadData();
-    window.location.reload();
   }
 
 }

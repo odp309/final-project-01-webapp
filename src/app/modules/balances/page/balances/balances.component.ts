@@ -65,6 +65,7 @@ export class BalancesComponent implements OnInit, AfterViewInit {
       branchCode: [this.getBranchCode(), Validators.required],
     }),
       this.loadData();
+      this.initModals();
   }
 
   loadData() {
@@ -101,6 +102,7 @@ export class BalancesComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // Initialize modals
       this.initModals();
+      this.loadData();
   }
 
   private initModals(): void {

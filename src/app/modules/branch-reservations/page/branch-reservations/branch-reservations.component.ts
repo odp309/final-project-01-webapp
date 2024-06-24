@@ -74,6 +74,7 @@ export class BranchReservationsComponent implements OnInit {
       },
     },
       this.loadData();
+      this.initModals();
   }
 
   loadData() {
@@ -134,6 +135,7 @@ export class BranchReservationsComponent implements OnInit {
   ngAfterViewInit(): void {
     // Initialize modals
       this.initModals();
+      this.loadData();
   }
 
   private initModals(): void {
