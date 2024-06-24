@@ -47,7 +47,7 @@ export const allHttpInterceptor: HttpInterceptorFn = (request, next) => {
                       router.navigate([currentRoute]);
                     },
                     error: (error) => {
-                      if (error.access_denied_reason === 'Refresh Token Invalid') {
+                      if (error.access_denied_reason === 'Refresh Token Invalid' || error.access_denied_reason === 'Refresh token expired') {
                         storageService.clear() ;
                         router.navigate(['/login']);
                       }
