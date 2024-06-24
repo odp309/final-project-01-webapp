@@ -1,7 +1,7 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 import { StorageService } from '../../services/storage/storage.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { JwtDecoderService } from '../../services/jwt/jwt-decoder.service';
@@ -13,6 +13,7 @@ export const allHttpInterceptor: HttpInterceptorFn = (request, next) => {
   const storageService: StorageService = inject(StorageService);
   const authService: AuthService = inject(AuthService);
   const jwtService: JwtDecoderService = inject(JwtDecoderService);
+  const route: ActivatedRoute = inject(ActivatedRoute);
 
   const currentRoute: string = router.url;
 
@@ -46,7 +47,7 @@ export const allHttpInterceptor: HttpInterceptorFn = (request, next) => {
                       router.navigate([currentRoute]);
                     },
                     error: (error) => {
-                      if (error.access_denied_reason === 'access_denied_reason') {
+                      if (error.access_denied_reason === 'Refresh Token Invalid' || error.access_denied_reason === 'Refresh token expired') {
                         storageService.clear() ;
                         router.navigate(['/login']);
                       }
@@ -88,8 +89,15 @@ export const allHttpInterceptor: HttpInterceptorFn = (request, next) => {
                 }});
             break;
             case 500:
-                  console.error('Internal Server Error:', err);
-                  router.navigate([currentRoute]);
+                if(err.url === 'https://valasplus.cloud/api/v1/public/employee/password-reset') {
+                    const urlParams = new URLSearchParams(currentRoute.split('?')[1]);
+                    const resetToken = urlParams.get('token');
+                    console.error('Internal Server Error:', err);
+                    router.navigate(['/reset-password'], { queryParams: { token: resetToken } });
+                  } else {
+                    console.error('Internal Server Error:', err);
+                    router.navigate([currentRoute]);
+                  }
                   break;
             default:
               console.error('Bad credential request:', err);
